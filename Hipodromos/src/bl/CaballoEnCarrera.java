@@ -77,16 +77,6 @@ public class CaballoEnCarrera {
                 && caballo != null;
     }
 
-    public boolean pagar() {
-        for (Apuesta a : apuestas) {
-            Jugador j = a.getJugador();
-            float ganancia = a.getMonto() * dividendo;
-            
-            j.sumarSaldo(ganancia);
-        }
-        return true;
-    }
-
     public boolean agregarApuesta(Apuesta apuesta) {
         return apuestas.add(apuesta);
     }
@@ -98,9 +88,19 @@ public class CaballoEnCarrera {
         }
         return total;
     }
-    
+
     public float getMontoPagado() {
         return getMontoApostado() * dividendo;
+    }
+
+    public boolean pagar() {
+        for (Apuesta a : apuestas) {
+            Jugador j = a.getJugador();
+            float ganancia = a.getMonto() * dividendo;
+
+            j.sumarSaldo(ganancia);
+        }
+        return true;
     }
 
     @Override

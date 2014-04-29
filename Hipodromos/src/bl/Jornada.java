@@ -69,11 +69,6 @@ public class Jornada implements Comparable<Jornada> {
         return null;
     }
 
-    public int getSiguienteNumeroDeCarrera() {
-        Carrera ultima = carreras.get(carreras.size() - 1);
-        return ultima.getNumero();
-    }
-
     public boolean abrirCarrera(Carrera c) {
         Carrera anterior = carreras.get(carreras.indexOf(c) - 1);
         if (anterior.getEstado() == Carrera.EstadoCarrera.FINALIZADA) {
@@ -84,6 +79,11 @@ public class Jornada implements Comparable<Jornada> {
 
     public boolean cerrarCarrera(Carrera c) {
         return c.cerrar();
+    }
+
+    private int getSiguienteNumeroDeCarrera() {
+        Carrera ultima = carreras.get(carreras.size() - 1);
+        return ultima.getNumero();
     }
 
     @Override

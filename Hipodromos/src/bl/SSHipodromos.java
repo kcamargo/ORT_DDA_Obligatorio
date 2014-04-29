@@ -37,30 +37,6 @@ public class SSHipodromos {
         return retorno;
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Métodos privados">
-    private boolean estaDisponible(Caballo caballo, Date fecha) {
-        boolean disp = true;
-        while (disp) {
-            int i = 0;
-            Hipodromo h = hipodromos.get(i);
-            if (!h.estaDisponible(caballo, fecha)) {
-                disp = false;
-            }
-            i++;
-        }
-        return disp;
-    }
-    
-    private Hipodromo buscarHipodromo(String nombre) {
-        for (Hipodromo h : hipodromos) {
-            if (h.getNombre().equals(nombre)) {
-                return h;
-            }
-        }
-        return null;
-    }
-    //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Operaciones con carreras delegadas a Hipodromo">
     public boolean agregarCarrera(Hipodromo hipodromo, Carrera carrera) {
         Hipodromo h = buscarHipodromo(hipodromo.getNombre());
@@ -90,6 +66,30 @@ public class SSHipodromos {
     public boolean cerrarCarrera(Hipodromo hipodromo, Carrera carrera) {
         Hipodromo h = buscarHipodromo(hipodromo.getNombre());
         return h.cerrarCarrera(carrera);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Métodos privados">
+    private boolean estaDisponible(Caballo caballo, Date fecha) {
+        boolean disp = true;
+        while (disp) {
+            int i = 0;
+            Hipodromo h = hipodromos.get(i);
+            if (!h.estaDisponible(caballo, fecha)) {
+                disp = false;
+            }
+            i++;
+        }
+        return disp;
+    }
+
+    private Hipodromo buscarHipodromo(String nombre) {
+        for (Hipodromo h : hipodromos) {
+            if (h.getNombre().equals(nombre)) {
+                return h;
+            }
+        }
+        return null;
     }
     //</editor-fold>
 }

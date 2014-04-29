@@ -50,13 +50,6 @@ public class Hipodromo {
                 && jornadas != null;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        Hipodromo h = (Hipodromo) o;
-        return nombre.equals(h.getNombre())
-                && direccion.equals(h.getDireccion());
-    }
-
     public boolean estaDisponible(Caballo caballo, Date fecha) {
         boolean disponible = false;
         Jornada j = buscarJornada(fecha);
@@ -132,5 +125,12 @@ public class Hipodromo {
             return jornadas.add(j);
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Hipodromo h = (Hipodromo) o;
+        return nombre.equals(h.getNombre())
+                && direccion.equals(h.getDireccion());
     }
 }
