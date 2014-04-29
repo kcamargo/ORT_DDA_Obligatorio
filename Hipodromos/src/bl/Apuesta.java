@@ -3,8 +3,7 @@ package bl;
 public class Apuesta {
 
     private Float monto;
-    private CaballoEnCarrera caballo;
-    private Usuario apostador;
+    private Jugador jugador;
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public Float getMonto() {
@@ -15,26 +14,23 @@ public class Apuesta {
         this.monto = monto;
     }
 
-    public CaballoEnCarrera getCaballo() {
-        return caballo;
+    public Jugador getJugador() {
+        return jugador;
     }
 
-    public void setCaballo(CaballoEnCarrera caballo) {
-        this.caballo = caballo;
+    public void setJugador(Jugador apostador) {
+        this.jugador = apostador;
     }
+    //</editor-fold>
 
-    public Usuario getApostador() {
-        return apostador;
-    }
-
-    public void setApostador(Usuario apostador) {
-        this.apostador = apostador;
+    //<editor-fold defaultstate="collapsed" desc="Constructores">
+    public Apuesta(Float monto, Jugador apostador) {
+        this.monto = monto;
+        this.jugador = apostador;
     }
     //</editor-fold>
 
     public boolean validar() {
-        return monto > 0
-                && caballo != null
-                && apostador != null;
+        return monto > 0 && jugador != null;
     }
 }
