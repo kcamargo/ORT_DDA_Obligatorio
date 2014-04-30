@@ -30,10 +30,6 @@ public class Fachada extends Observable {
         return ssHipodromos.getActual();
     }
 
-    public void setActual(Hipodromo actual) {
-        ssHipodromos.setActual(actual);
-    }
-
     public boolean agregarHipodromo(Hipodromo hipodromo) {
         return ssHipodromos.agregarHipodromo(hipodromo);
     }

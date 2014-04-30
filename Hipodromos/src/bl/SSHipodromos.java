@@ -18,10 +18,6 @@ public class SSHipodromos {
         return actual;
     }
 
-    public void setActual(Hipodromo actual) {
-        this.actual = actual;
-    }
-
     public boolean agregarHipodromo(Hipodromo hipodromo) {
         if (!hipodromos.contains(hipodromo)) {
             return hipodromos.add(hipodromo);
@@ -76,6 +72,10 @@ public class SSHipodromos {
             }
         }
         return null;
+    }
+
+    private void setActual(Hipodromo actual) {
+        this.actual = actual;
     }
     //</editor-fold>
 }
