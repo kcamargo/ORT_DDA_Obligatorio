@@ -7,10 +7,19 @@ public class SSHipodromos {
 
     private ArrayList<Hipodromo> hipodromos;
     private ArrayList<Caballo> caballos;
+    private Hipodromo actual;
 
     public SSHipodromos() {
         hipodromos = new ArrayList<>();
         caballos = new ArrayList<>();
+    }
+
+    public Hipodromo getActual() {
+        return actual;
+    }
+
+    public void setActual(Hipodromo actual) {
+        this.actual = actual;
     }
 
     public boolean agregarHipodromo(Hipodromo hipodromo) {
@@ -18,6 +27,15 @@ public class SSHipodromos {
             return hipodromos.add(hipodromo);
         }
         return false;
+    }
+
+    public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
+        Hipodromo seleccionado = buscarHipodromo(hipodromo.getNombre());
+        if (seleccionado != null) {
+            setActual(seleccionado);
+            return seleccionado;
+        }
+        return null;
     }
 
     public boolean agregarCaballo(Caballo caballo) {
@@ -36,38 +54,6 @@ public class SSHipodromos {
         }
         return retorno;
     }
-
-    //<editor-fold defaultstate="collapsed" desc="Operaciones con carreras delegadas a Hipodromo">
-    public boolean agregarCarrera(Hipodromo hipodromo, Carrera carrera) {
-        Hipodromo h = buscarHipodromo(hipodromo.getNombre());
-        return h.agregarCarrera(carrera);
-    }
-
-    public ArrayList<Carrera> getCarreras(Hipodromo hipodromo, Date fecha) {
-        Hipodromo h = buscarHipodromo(hipodromo.getNombre());
-        return h.getCarreras(fecha);
-    }
-
-    public ArrayList<Carrera> getCarrerasAbiertas(Hipodromo hipodromo) {
-        Hipodromo h = buscarHipodromo(hipodromo.getNombre());
-        return h.getCarrerasAbiertas();
-    }
-
-    public Carrera getSiguienteCarrera(Hipodromo hipodromo) {
-        Hipodromo h = buscarHipodromo(hipodromo.getNombre());
-        return h.getSiguienteCarrera();
-    }
-
-    public boolean abrirCarrera(Hipodromo hipodromo, Carrera carrera) {
-        Hipodromo h = buscarHipodromo(hipodromo.getNombre());
-        return h.abrirCarrera(carrera);
-    }
-
-    public boolean cerrarCarrera(Hipodromo hipodromo, Carrera carrera) {
-        Hipodromo h = buscarHipodromo(hipodromo.getNombre());
-        return h.cerrarCarrera(carrera);
-    }
-    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Métodos privados">
     private boolean estaDisponible(Caballo caballo, Date fecha) {

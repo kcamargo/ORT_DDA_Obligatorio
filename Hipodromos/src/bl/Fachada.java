@@ -2,11 +2,13 @@ package bl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import util.Observable;
 
-public class Fachada {
+public class Fachada extends Observable {
 
     private SSHipodromos ssHipodromos;
     private SSUsuarios ssUsuarios;
+    
     //<editor-fold defaultstate="collapsed" desc="Singleton">
     private static Fachada Instancia;
 
@@ -23,47 +25,47 @@ public class Fachada {
     }
     //</editor-fold>
 
-    public boolean agregarHipodromo(Hipodromo h) {
-        return ssHipodromos.agregarHipodromo(h);
+    //<editor-fold defaultstate="collapsed" desc="SSHipodromos">
+    public Hipodromo getActual() {
+        return ssHipodromos.getActual();
     }
 
-    public boolean agregarCaballo(Caballo c) {
-        return ssHipodromos.agregarCaballo(c);
+    public void setActual(Hipodromo actual) {
+        ssHipodromos.setActual(actual);
     }
 
-    public boolean agregarUsuario(Usuario u) {
-        return ssUsuarios.agregarUsuario(u);
+    public boolean agregarHipodromo(Hipodromo hipodromo) {
+        return ssHipodromos.agregarHipodromo(hipodromo);
     }
 
-    public boolean agregarCarrera(Hipodromo h, Carrera c) {
-        return ssHipodromos.agregarCarrera(h, c);
+    public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
+        return ssHipodromos.seleccionarHipodromo(hipodromo);
     }
 
-    public boolean abrirCarrera(Hipodromo h, Carrera c) {
-        return ssHipodromos.abrirCarrera(h, c);
-    }
-
-    public boolean cerrarCarrera(Hipodromo h, Carrera c) {
-        return ssHipodromos.cerrarCarrera(h, c);
-    }
-
-    public boolean login(Usuario u) {
-        return ssUsuarios.login(u);
-    }
-
-    public ArrayList<Carrera> getCarreras(Hipodromo h, Date fecha) {
-        return ssHipodromos.getCarreras(h, fecha);
-    }
-
-    public ArrayList<Carrera> getCarrerasAbiertas(Hipodromo h) {
-        return ssHipodromos.getCarrerasAbiertas(h);
-    }
-
-    public Carrera getSiguienteCarrera(Hipodromo h) {
-        return ssHipodromos.getSiguienteCarrera(h);
+    public boolean agregarCaballo(Caballo caballo) {
+        return ssHipodromos.agregarCaballo(caballo);
     }
 
     public ArrayList<Caballo> getCaballosDisponibles(Date fecha) {
         return ssHipodromos.getCaballosDisponibles(fecha);
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="SSUsuarios">
+    public Administrador login(Administrador admin) {
+        return ssUsuarios.login(admin);
+    }
+
+    public Jugador login(Jugador jugador) {
+        return ssUsuarios.login(jugador);
+    }
+
+    public boolean agregarAdministrador(Administrador a) {
+        return ssUsuarios.agregarAdministrador(a);
+    }
+
+    public boolean agregarJugador(Jugador j) {
+        return ssUsuarios.agregarJugador(j);
+    }
+    //</editor-fold>
 }
