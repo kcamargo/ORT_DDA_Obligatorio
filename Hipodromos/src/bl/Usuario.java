@@ -40,6 +40,11 @@ public class Usuario {
         this.apellido = apellido;
     }
     //</editor-fold>
+    
+    public Usuario(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public boolean validar() {
         return username != null && !username.isEmpty()
