@@ -5,6 +5,11 @@ public class Caballo {
     private String nombre;
     private String nombreResponsable;
 
+    public Caballo(String nombre, String nombreResponsable) {
+        this.nombre = nombre;
+        this.nombreResponsable = nombreResponsable;
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public String getNombre() {
         return nombre;

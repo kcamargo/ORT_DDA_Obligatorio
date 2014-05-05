@@ -7,6 +7,11 @@ public class SSUsuarios {
     private ArrayList<Administrador> admins;
     private ArrayList<Jugador> jugadores;
 
+    public SSUsuarios() {
+        admins = new ArrayList<>();
+        jugadores = new ArrayList<>();
+    }
+
     public Administrador login(Administrador admin) {
         for (Administrador a : admins) {
             if (a.equals(admin)) {
