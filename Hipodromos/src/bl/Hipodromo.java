@@ -26,10 +26,6 @@ public class Hipodromo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public ArrayList<Jornada> getCarreras() {
-        return jornadas;
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Constructores">
