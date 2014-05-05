@@ -17,6 +17,7 @@ public class Carrera implements Comparable<Carrera> {
     private Date fecha;
     private EstadoCarrera estado;
     private ArrayList<CaballoEnCarrera> caballos;
+    private CaballoEnCarrera ganador;
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public String getNombre() {
@@ -76,6 +77,13 @@ public class Carrera implements Comparable<Carrera> {
     public ArrayList<CaballoEnCarrera> getCaballos() {
         return caballos;
     }
+    
+    public void setGanador(Caballo caballo) {
+        CaballoEnCarrera c = buscarCaballo(caballo);
+        c.setGanador(true);
+        this.ganador = c;
+        setEstado(EstadoCarrera.FINALIZADA);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Constructores">
@@ -131,12 +139,6 @@ public class Carrera implements Comparable<Carrera> {
             return true;
         }
         return false;
-    }
-
-    public void setGanador(Caballo caballo) {
-        CaballoEnCarrera c = buscarCaballo(caballo);
-        c.setGanador(true);
-        setEstado(EstadoCarrera.FINALIZADA);
     }
 
     private CaballoEnCarrera buscarCaballo(Caballo caballo) {
