@@ -32,7 +32,7 @@ public class SSHipodromos {
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
         Hipodromo seleccionado = buscarHipodromo(hipodromo.getNombre());
         if (seleccionado != null) {
-            setActual(seleccionado);
+            setHipodromoActual(seleccionado);
             return seleccionado;
         }
         return null;
@@ -78,7 +78,7 @@ public class SSHipodromos {
         return null;
     }
 
-    private void setActual(Hipodromo actual) {
+    private void setHipodromoActual(Hipodromo actual) {
         this.actual = actual;
     }
     //</editor-fold>
