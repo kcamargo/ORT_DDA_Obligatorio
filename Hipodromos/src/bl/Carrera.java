@@ -47,6 +47,28 @@ public class Carrera implements Comparable<Carrera> {
         return estado;
     }
 
+    public String getEstadoString() {
+        String ret = null;
+
+        switch (estado) {
+            case DEFINIDA:
+                ret = "DEFINIDA";
+                break;
+            case ABIERTA:
+                ret = "ABIERTA";
+                break;
+            case CERRADA:
+                ret = "CERRADA";
+                break;
+            case FINALIZADA:
+                ret = "FINALIZADA";
+                break;
+            default:
+                return null;
+        }
+        return ret;
+    }
+
     public void setEstado(EstadoCarrera estado) {
         this.estado = estado;
     }
