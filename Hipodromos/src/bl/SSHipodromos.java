@@ -7,7 +7,7 @@ public class SSHipodromos {
 
     private ArrayList<Hipodromo> hipodromos;
     private ArrayList<Caballo> caballos;
-    private Hipodromo actual;
+    private Hipodromo hipodromoActual;
 
     public SSHipodromos() {
         hipodromos = new ArrayList<>();
@@ -19,7 +19,7 @@ public class SSHipodromos {
     }
 
     public Hipodromo getHipodromoActual() {
-        return actual;
+        return hipodromoActual;
     }
 
     public boolean agregarHipodromo(Hipodromo hipodromo) {
@@ -79,7 +79,7 @@ public class SSHipodromos {
     }
 
     private void setHipodromoActual(Hipodromo actual) {
-        this.actual = actual;
+        this.hipodromoActual = actual;
     }
     //</editor-fold>
 }
