@@ -60,14 +60,14 @@ public class Hipodromo {
     }
 
     public boolean agregarCarrera(Carrera c) {
+        Jornada j;
         if (buscarJornada(c.getFecha()) != null) {
-            Jornada j = buscarJornada(c.getFecha());
-            return j.agregarCarrera(c);
+            j = buscarJornada(c.getFecha());
         } else {
-            Jornada j = new Jornada(c.getFecha());
+            j = new Jornada(c.getFecha());
             agregarJornada(j);
-            return agregarCarrera(c);
         }
+        return j.agregarCarrera(c);
     }
 
     public ArrayList<Carrera> getCarreras(Date fecha) {
@@ -88,9 +88,14 @@ public class Hipodromo {
     }
 
     public Carrera getSiguienteCarrera() {
-        Collections.sort(jornadas);
-        Jornada j = jornadas.get(jornadas.size() - 1);
-        return j.getSiguienteCarrera();
+        //TODO: Validar esta lógica.
+        if (jornadas.size() > 0) {
+            Collections.sort(jornadas);
+            Jornada j = jornadas.get(jornadas.size() - 1);
+            return j.getSiguienteCarrera();
+        } else {
+            return null;
+        }
     }
 
     public boolean abrirCarrera(Carrera c) {
@@ -132,5 +137,10 @@ public class Hipodromo {
         Hipodromo h = (Hipodromo) o;
         return nombre.equals(h.getNombre())
                 && direccion.equals(h.getDireccion());
+    }
+
+    @Override
+    public String toString() {
+        return getNombre();
     }
 }

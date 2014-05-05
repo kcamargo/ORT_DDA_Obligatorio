@@ -8,7 +8,6 @@ public class Fachada extends Observable {
 
     private SSHipodromos ssHipodromos;
     private SSUsuarios ssUsuarios;
-    
     //<editor-fold defaultstate="collapsed" desc="Singleton">
     private static Fachada Instancia;
 
@@ -21,13 +20,13 @@ public class Fachada extends Observable {
         if (Fachada.Instancia == null) {
             Fachada.Instancia = new Fachada();
         }
-        return getInstancia();
+        return Fachada.Instancia;
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="SSHipodromos">
-    public Hipodromo getActual() {
-        return ssHipodromos.getActual();
+    public Hipodromo getHipodromoActual() {
+        return ssHipodromos.getHipodromoActual();
     }
 
     public boolean agregarHipodromo(Hipodromo hipodromo) {
@@ -44,6 +43,10 @@ public class Fachada extends Observable {
 
     public ArrayList<Caballo> getCaballosDisponibles(Date fecha) {
         return ssHipodromos.getCaballosDisponibles(fecha);
+    }
+
+    public ArrayList<Hipodromo> getHipodromos() {
+        return ssHipodromos.getHipodromos();
     }
     //</editor-fold>
 
