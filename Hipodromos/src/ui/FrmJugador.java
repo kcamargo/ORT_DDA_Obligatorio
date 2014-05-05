@@ -26,20 +26,138 @@ public class FrmJugador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblNumeroCarrera = new javax.swing.JLabel();
+        lblNombreCarrera = new javax.swing.JLabel();
+        lblEstadoCarrera = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JButton();
+        btnApostar = new javax.swing.JButton();
+        txtUsuario = new javax.swing.JTextField();
+        txtPass = new javax.swing.JPasswordField();
+        cmbHipodromo = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        txtMonto = new javax.swing.JFormattedTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1.setText("Usuario:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(60, 20, 60, 20);
 
-        pack();
+        jLabel2.setText("Contraseña");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(60, 50, 60, 20);
+
+        jLabel3.setText("Hipódromo:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(120, 110, 55, 30);
+
+        jLabel4.setText("Información de la carrera actual:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(130, 170, 157, 20);
+
+        jLabel5.setText("Número:");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(110, 210, 60, 20);
+
+        jLabel6.setText("Nombre:");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(110, 250, 60, 20);
+
+        jLabel7.setText("Estado:");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(110, 290, 60, 20);
+        getContentPane().add(lblNumeroCarrera);
+        lblNumeroCarrera.setBounds(180, 210, 130, 20);
+        getContentPane().add(lblNombreCarrera);
+        lblNombreCarrera.setBounds(180, 250, 130, 20);
+        getContentPane().add(lblEstadoCarrera);
+        lblEstadoCarrera.setBounds(180, 290, 130, 20);
+
+        jLabel11.setText("Caballos participantes:");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(160, 340, 109, 20);
+
+        jLabel12.setText("Monto a apostar:");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(120, 640, 83, 20);
+
+        btnConsultar.setLabel("Consultar");
+        getContentPane().add(btnConsultar);
+        btnConsultar.setBounds(310, 30, 100, 30);
+
+        btnApostar.setText("Apostar");
+        getContentPane().add(btnApostar);
+        btnApostar.setBounds(150, 680, 130, 40);
+        getContentPane().add(txtUsuario);
+        txtUsuario.setBounds(130, 20, 150, 20);
+        getContentPane().add(txtPass);
+        txtPass.setBounds(130, 50, 150, 20);
+
+        cmbHipodromo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione hipódromo..." }));
+        getContentPane().add(cmbHipodromo);
+        cmbHipodromo.setBounds(180, 110, 160, 30);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Número", "Nombre", "Dividendo", "Ganador"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jTable1.getColumnModel().getColumn(3).setResizable(false);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 370, 410, 250);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(20, 320, 410, 10);
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(20, 90, 410, 10);
+        getContentPane().add(txtMonto);
+        txtMonto.setBounds(210, 640, 109, 20);
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(20, 160, 410, 10);
+
+        setBounds(0, 0, 469, 786);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -77,5 +195,28 @@ public class FrmJugador extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApostar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JComboBox cmbHipodromo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblEstadoCarrera;
+    private javax.swing.JLabel lblNombreCarrera;
+    private javax.swing.JLabel lblNumeroCarrera;
+    private javax.swing.JFormattedTextField txtMonto;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
