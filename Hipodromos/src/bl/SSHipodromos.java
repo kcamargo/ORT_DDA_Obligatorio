@@ -14,7 +14,11 @@ public class SSHipodromos {
         caballos = new ArrayList<>();
     }
 
-    public Hipodromo getActual() {
+    public ArrayList<Hipodromo> getHipodromos() {
+        return hipodromos;
+    }
+
+    public Hipodromo getHipodromoActual() {
         return actual;
     }
 
