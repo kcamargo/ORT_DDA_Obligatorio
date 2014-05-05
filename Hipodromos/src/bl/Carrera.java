@@ -83,18 +83,16 @@ public class Carrera implements Comparable<Carrera> {
         this.caballos = new ArrayList<>();
     }
 
-    public Carrera(String nombre, int numero) {
+    public Carrera(String nombre) {
         this();
         this.nombre = nombre;
-        this.numero = numero;
         this.fecha = new Date();
         this.estado = EstadoCarrera.DEFINIDA;
     }
 
-    public Carrera(String nombre, int numero, Date fecha) {
+    public Carrera(String nombre, Date fecha) {
         this();
         this.nombre = nombre;
-        this.numero = numero;
         this.fecha = fecha;
         this.estado = EstadoCarrera.DEFINIDA;
     }

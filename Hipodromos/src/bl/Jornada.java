@@ -45,6 +45,7 @@ public class Jornada implements Comparable<Jornada> {
 
     public boolean agregarCarrera(Carrera c) {
         if (!carreras.contains(c)) {
+            c.setNumero(getSiguienteNumeroDeCarrera());
             return carreras.add(c);
         }
         return false;
@@ -82,8 +83,12 @@ public class Jornada implements Comparable<Jornada> {
     }
 
     private int getSiguienteNumeroDeCarrera() {
-        Carrera ultima = carreras.get(carreras.size() - 1);
-        return ultima.getNumero();
+        if (carreras.size() > 0) {
+            Carrera ultima = carreras.get(carreras.size() - 1);
+            return ultima.getNumero();
+        } else {
+            return 0;
+        }
     }
 
     @Override
