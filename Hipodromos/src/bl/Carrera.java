@@ -77,7 +77,7 @@ public class Carrera implements Comparable<Carrera> {
     public ArrayList<CaballoEnCarrera> getCaballos() {
         return caballos;
     }
-    
+
     public void setGanador(Caballo caballo) {
         CaballoEnCarrera c = buscarCaballo(caballo);
         c.setGanador(true);
@@ -117,8 +117,8 @@ public class Carrera implements Comparable<Carrera> {
         return buscarCaballo(caballo) == null;
     }
 
-    public float getMontoApostado() {
-        float total = 0;
+    public double getMontoApostado() {
+        double total = 0;
         for (CaballoEnCarrera c : caballos) {
             total += c.getMontoApostado();
         }
@@ -148,6 +148,20 @@ public class Carrera implements Comparable<Carrera> {
             }
         }
         return null;
+    }
+
+    public boolean agregarCaballo(Caballo c, int numero, double dividendo) {
+        CaballoEnCarrera caballo = new CaballoEnCarrera(numero, dividendo, c);
+        return caballos.add(caballo);
+    }
+
+    public boolean quitarCaballo(Caballo c) {
+        CaballoEnCarrera caballo = buscarCaballo(c);
+        if (caballo != null) {
+            return caballos.remove(caballo);
+        } else {
+            return false;
+        }
     }
 
     @Override

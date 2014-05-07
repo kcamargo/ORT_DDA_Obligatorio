@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CaballoEnCarrera {
 
     private int numero;
-    private float dividendo;
+    private double dividendo;
     private boolean ganador;
     private Caballo caballo;
     private Carrera carrera;
@@ -16,7 +16,7 @@ public class CaballoEnCarrera {
         this.numero = numero;
     }
 
-    public void setDividendo(float dividendo) {
+    public void setDividendo(double dividendo) {
         this.dividendo = dividendo;
     }
 
@@ -40,7 +40,7 @@ public class CaballoEnCarrera {
         return numero;
     }
 
-    public float getDividendo() {
+    public double getDividendo() {
         return dividendo;
     }
 
@@ -62,7 +62,7 @@ public class CaballoEnCarrera {
         this.apuestas = new ArrayList<>();
     }
 
-    public CaballoEnCarrera(int numero, float dividendo, Caballo caballo) {
+    public CaballoEnCarrera(int numero, double dividendo, Caballo caballo) {
         this();
         this.numero = numero;
         this.dividendo = dividendo;
@@ -81,22 +81,22 @@ public class CaballoEnCarrera {
         return apuestas.add(apuesta);
     }
 
-    public float getMontoApostado() {
-        float total = 0;
+    public double getMontoApostado() {
+        double total = 0;
         for (Apuesta a : apuestas) {
             total += a.getMonto();
         }
         return total;
     }
 
-    public float getMontoPagado() {
+    public double getMontoPagado() {
         return getMontoApostado() * dividendo;
     }
 
     public boolean pagar() {
         for (Apuesta a : apuestas) {
             Jugador j = a.getJugador();
-            float ganancia = a.getMonto() * dividendo;
+            double ganancia = a.getMonto() * dividendo;
 
             j.sumarSaldo(ganancia);
         }

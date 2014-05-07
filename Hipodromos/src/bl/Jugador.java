@@ -1,22 +1,22 @@
 package bl;
 
 public class Jugador extends Usuario{
-    private float saldo;
+    private double saldo;
 
-    public Jugador(float saldo, String username, String password) {
+    public Jugador(double saldo, String username, String password) {
         super(username, password);
         this.saldo = saldo;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void sumarSaldo(float cant) {
+    public void sumarSaldo(double cant) {
         saldo += cant;
     }
     
-    public void descontarSaldo(float cant) {
+    public void descontarSaldo(double cant) {
         saldo -= cant;
     }
 }
