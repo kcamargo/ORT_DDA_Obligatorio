@@ -47,7 +47,8 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstCaballos = new javax.swing.JList();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Jugador");
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -203,11 +204,12 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
             mostrarCaballosParticipantes(c.getCaballos());
         } else {
             limpiarDatosDeCarrera();
+            limpiarDatosDeCaballos();
         }
     }
 
     private void mostrarCaballosParticipantes(ArrayList<CaballoEnCarrera> caballos) {
-        this.lstCaballos.setListData(formatearListaDeCaballos(caballos));
+        lstCaballos.setListData(formatearListaDeCaballos(caballos));
     }
 
     private Object[] formatearListaDeCaballos(ArrayList<CaballoEnCarrera> caballos) {
@@ -240,5 +242,9 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
         this.lblNombreCarrera.setText("");
         this.lblNumeroCarrera.setText("");
         this.lblEstadoCarrera.setText("");
+    }
+
+    private void limpiarDatosDeCaballos() {
+        this.lstCaballos.setListData(new Object[0]);
     }
 }
