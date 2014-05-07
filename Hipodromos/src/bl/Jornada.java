@@ -63,7 +63,7 @@ public class Jornada implements Comparable<Jornada> {
 
     public Carrera getSiguienteCarrera() {
         for (Carrera c : carreras) {
-            if (c.getEstado() == Carrera.EstadoCarrera.DEFINIDA) {
+            if (c.getEstado() == Carrera.EstadoCarrera.ABIERTA) {
                 return c;
             }
         }
@@ -87,7 +87,7 @@ public class Jornada implements Comparable<Jornada> {
             Carrera ultima = carreras.get(carreras.size() - 1);
             return ultima.getNumero();
         } else {
-            return 0;
+            return 1;
         }
     }
 
