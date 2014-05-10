@@ -32,6 +32,9 @@ public class Fachada extends Observable {
     public boolean agregarHipodromo(Hipodromo hipodromo) {
         return ssHipodromos.agregarHipodromo(hipodromo);
     }
+    public int crearHipodromo(Hipodromo hipodromo){
+        return ssHipodromos.crearHipodromo(hipodromo);
+    }
 
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
         return ssHipodromos.seleccionarHipodromo(hipodromo);

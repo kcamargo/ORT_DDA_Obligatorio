@@ -26,7 +26,25 @@ public class SSHipodromos {
         if (!hipodromos.contains(hipodromo)) {
             return hipodromos.add(hipodromo);
         }
+        for(Hipodromo h: hipodromos){
+            System.out.println(h.getNombre());
+            System.out.println(h.getDireccion());
+        }
         return false;
+        
+    }
+    public int crearHipodromo(Hipodromo hipodromo){
+        int retorno =1;
+        for(Hipodromo h : hipodromos){
+            if( h.getNombre().equals(hipodromo.getNombre()) ){
+                retorno= 0;
+            }
+            if( h.getDireccion().equals(hipodromo.getDireccion()) ){
+                retorno= -1;
+            }
+        }
+        if(retorno ==1 ) hipodromos.add(hipodromo);
+        return retorno;
     }
 
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
@@ -49,6 +67,7 @@ public class SSHipodromos {
         ArrayList<Caballo> retorno = new ArrayList<>();
         for (Caballo c : caballos) {
             if (estaDisponible(c, fecha)) {
+                
                 retorno.add(c);
             }
         }

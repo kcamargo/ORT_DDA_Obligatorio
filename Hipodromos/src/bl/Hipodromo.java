@@ -35,8 +35,10 @@ public class Hipodromo {
 
     public Hipodromo(String nombre, String direccion) {
         this();
-        this.nombre = nombre;
-        this.direccion = direccion;
+        if ( this.validarIngreso(nombre, direccion)){
+            this.nombre = nombre;
+            this.direccion = direccion;
+        }
     }
     //</editor-fold>
 
@@ -44,6 +46,15 @@ public class Hipodromo {
         return nombre != null && !nombre.isEmpty()
                 && direccion != null && !direccion.isEmpty()
                 && jornadas != null;
+                
+    }
+    public boolean validarIngreso(String nombre, String direccion){
+      return nombre != null && !nombre.isEmpty()
+            && direccion != null && !direccion.isEmpty();
+    }
+    public int vaidarCampos(String pNombre, String pDireccion){
+        int retorno = 1;
+        return retorno;
     }
 
     public boolean estaDisponible(Caballo caballo, Date fecha) {
@@ -128,15 +139,17 @@ public class Hipodromo {
         return false;
     }
 
-    @Override
-    public boolean equals(Object o) {
+
+    //@Override
+    /*public boolean equals(Object o) {
         Hipodromo h = (Hipodromo) o;
         return nombre.equals(h.getNombre())
                 && direccion.equals(h.getDireccion());
-    }
+    }*/
 
     @Override
     public String toString() {
         return getNombre();
     }
+
 }

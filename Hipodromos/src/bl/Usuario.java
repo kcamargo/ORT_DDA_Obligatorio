@@ -45,6 +45,7 @@ public class Usuario {
         this.username = username;
         this.password = password;
     }
+    public Usuario(){}
 
     public boolean validar() {
         return username != null && !username.isEmpty()
@@ -52,13 +53,25 @@ public class Usuario {
                 && nombre != null && nombre.isEmpty()
                 && apellido != null && apellido.isEmpty();
     }
+    
+    public boolean validarCamposLogin(String pUser, String pPass){
+        boolean retorno = false;
+        if(pUser != null && !pUser.isEmpty() && pPass != null && !pPass.isEmpty() ){
+            retorno = true;
+        }
+        if(retorno){
+            this.setUsername(pUser);
+            this.setPassword(pPass);
+        }
+        return retorno;
+    }
 
     @Override
     public boolean equals(Object o) {
         Usuario u = (Usuario) o;
         return username.equals(u.getUsername())
-                && password.equals(u.getPassword())
-                && nombre.equals(u.getNombre())
-                && apellido.equals(u.getApellido());
+                && password.equals(u.getPassword());
+               // && nombre.equals(u.getNombre())
+               // && apellido.equals(u.getApellido());
     }
 }
