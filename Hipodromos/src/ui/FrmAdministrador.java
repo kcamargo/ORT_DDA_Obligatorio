@@ -3,52 +3,59 @@
  * and open the template in the editor.
  */
 package ui;
-
 import bl.Administrador;
 import bl.Caballo;
 import bl.Fachada;
+import bl.Carrera;
 import bl.Hipodromo;
-import bl.Jugador;
-
-
+import java.util.ArrayList;
 
 /**
  *
- * @author Bruno
+ * @author Fossemale
  */
-public class FrmAdministrador extends javax.swing.JFrame {
+public class FrmMenuAdministrador extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmAdministrador
+     * Creates new form FrmMenuAdministrador
      */
     Fachada fac = Fachada.getInstancia();
-    public FrmAdministrador() {
+    public FrmMenuAdministrador(Administrador a ) {
         initComponents();
-        fac.agregarAdministrador(new Administrador("Admin", "111"));
-        fac.agregarAdministrador(new Administrador("aaa", "111"));
+        if(a != null ){
+            lblBienvenida.setText(a.getUsername());
+            System.out.println(a.getUsername());
+            cargarMenu();
+            ArrayList<Hipodromo> hipodromos = fac.getHipodromos();
+            for(Hipodromo h:hipodromos){
+                cmbHipodromos.addItem(h);
+            }
+            System.out.println("GET ITEM");
+            cmbHipodromos.getItemAt(1);
+        }
         
-        fac.agregarJugador(new Jugador(0 ,"Pedro", "222"));
-        fac.agregarJugador(new Jugador(10 ,"Juan", "333"));
-        fac.agregarJugador(new Jugador(20 ,"Ana", "444"));
-        fac.agregarJugador(new Jugador(30 ,"Jose", "555"));
-        fac.agregarJugador(new Jugador(40 ,"Maria", "666"));
-        
-        fac.agregarCaballo(new Caballo("Chispazo","Adrian"));
-        fac.agregarCaballo(new Caballo("Alegre","Adrian"));
-        fac.agregarCaballo(new Caballo("Retonto","Adrian"));
-        fac.agregarCaballo(new Caballo("El Manco","Jorge"));
-        fac.agregarCaballo(new Caballo("Negro","Jorge"));
-        fac.agregarCaballo(new Caballo("Diente","Jorge"));
-        fac.agregarCaballo(new Caballo("El Corto","Esteban"));
-        fac.agregarCaballo(new Caballo("Revelde","Esteban"));
-        fac.agregarCaballo(new Caballo("Tornado","Esteban"));
-        fac.agregarCaballo(new Caballo("El Rayo","Esteban"));
-        
-        fac.agregarHipodromo(new Hipodromo("Maroñas","General Flores"));
-        fac.agregarHipodromo(new Hipodromo("Colonia","Calle 1243"));
-        fac.agregarHipodromo(new Hipodromo("Paysandu","Ruta 15 "));
-        fac.agregarHipodromo(new Hipodromo("Artigas","Av Brasil"));
-        
+    }
+    private void crearHipodromo(){
+        String nombre = txtNombreHipodromo.getText();
+        String direccion = txtDireccionHipodromo.getText();
+        Hipodromo h = new Hipodromo(nombre, direccion);
+        if ( null != h.getNombre() ) {
+            int res = fac.crearHipodromo(h);
+            if( res == 1 ){
+                System.out.println("Hipodromo Creado");
+                lblMensajeCrear.setText("Hipodromo Creado");
+            }else if(res == 0){
+                System.out.println("Nombre de hipodromo repetido");
+                lblMensajeCrear.setText("Nombre de hipodromo repetido");
+            }else{
+                System.out.println("Direccion repetida");
+                lblMensajeCrear.setText("Direccion de Hipodromo ya ingresada");
+            }
+            
+        }else{
+            System.out.println("Todos los campos son requeridos.");
+            lblMensajeCrear.setText("Todos los campos son requerdos.");
+        }
         
     }
 
@@ -62,26 +69,45 @@ public class FrmAdministrador extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        lblBienvenida = new javax.swing.JLabel();
+        cmbHipodromos = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        txtPass = new javax.swing.JTextField();
-        btnLogin = new javax.swing.JButton();
-        lblLoginMensaje = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        txtNombreHipodromo = new javax.swing.JTextField();
+        txtDireccionHipodromo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnAgregarHipodromo = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblMensajeCrear = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Usuario :");
+        jLabel1.setText("Bienvenido");
 
-        txtUsuario.setText("Admin");
-
-        jLabel2.setText("Contraseña :");
-
-        txtPass.setText("111");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        cmbHipodromos.setToolTipText("");
+        cmbHipodromos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                cmbHipodromosActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Seleccione un Hipodromo :");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hipodromos", "Carreras", "Emular Termina de Usuario", "Salir" }));
+
+        jLabel3.setText("Crear un Hipodrormmo");
+
+        jLabel4.setText("Nombre : ");
+
+        jLabel5.setText("Direccion  :");
+
+        btnAgregarHipodromo.setText("Crear Hipodromo");
+        btnAgregarHipodromo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarHipodromoActionPerformed(evt);
             }
         });
 
@@ -92,63 +118,92 @@ public class FrmAdministrador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                        .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbHipodromos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(40, 40, 40)
-                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblBienvenida))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnLogin)
-                                    .addComponent(txtPass)))))
+                                    .addComponent(txtNombreHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDireccionHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAgregarHipodromo))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(lblLoginMensaje)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addGap(176, 176, 176)
+                        .addComponent(lblMensajeCrear))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(159, Short.MAX_VALUE))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addComponent(btnLogin)
-                .addGap(18, 18, 18)
-                .addComponent(lblLoginMensaje)
-                .addContainerGap(93, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(lblBienvenida))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbHipodromos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtNombreHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(txtDireccionHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(btnAgregarHipodromo)))
+                .addGap(161, 161, 161)
+                .addComponent(lblMensajeCrear)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void cmbHipodromosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHipodromosActionPerformed
         // TODO add your handling code here:
-        String user = txtUsuario.getText();
-        String pass = txtPass.getText();
-        Administrador admin = new Administrador();
-        if(admin.validarCamposLogin(user, pass)){
-            admin = fac.login(admin);
-            if(admin != null){
-                this.setVisible(false);
-                FrmMenuAdministrador menuAdmin = new  FrmMenuAdministrador(admin);
-                menuAdmin.setVisible(true);
-               
-            }else{
-                lblLoginMensaje.setText("Nombre de usuario o contraseña incorrecta.");
-            }
-        }else {
-            lblLoginMensaje.setText("Nombre de usuario o contraseña incorrecta.");
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
+        Hipodromo h = (Hipodromo)cmbHipodromos.getItemAt(cmbHipodromos.getSelectedIndex());
+        fac.seleccionarHipodromo(h);
+        System.out.println(fac.getHipodromoActual().getNombre() +  " --"+ fac.getHipodromoActual().getDireccion());
+        
+
+        
+    }//GEN-LAST:event_cmbHipodromosActionPerformed
+
+    private void btnAgregarHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHipodromoActionPerformed
+        // TODO add your handling code here:
+        crearHipodromo();
+    }//GEN-LAST:event_btnAgregarHipodromoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,29 +222,41 @@ public class FrmAdministrador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAdministrador().setVisible(true);
+              //  new FrmMenuAdministrador().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnAgregarHipodromo;
+    private javax.swing.JComboBox cmbHipodromos;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lblLoginMensaje;
-    private javax.swing.JTextField txtPass;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblBienvenida;
+    private javax.swing.JLabel lblMensajeCrear;
+    private javax.swing.JTextField txtDireccionHipodromo;
+    private javax.swing.JTextField txtNombreHipodromo;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarMenu( ) {
+        
+    }
 }

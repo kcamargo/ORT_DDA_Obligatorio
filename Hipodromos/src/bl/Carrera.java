@@ -78,10 +78,14 @@ public class Carrera implements Comparable<Carrera> {
         return caballos;
     }
 
-    public void setGanador(Caballo caballo) {
-        CaballoEnCarrera c = buscarCaballo(caballo);
-        c.setGanador(true);
-        this.ganador = c;
+    public CaballoEnCarrera getGanador() {
+        return ganador;
+    }
+
+    public void setGanador(CaballoEnCarrera caballo) {
+        caballo.setGanador(true);
+        this.ganador = caballo;
+        caballo.pagar();
         setEstado(EstadoCarrera.FINALIZADA);
     }
     //</editor-fold>
@@ -150,9 +154,14 @@ public class Carrera implements Comparable<Carrera> {
         return null;
     }
 
-    public boolean agregarCaballo(Caballo c, int numero, double dividendo) {
+    public CaballoEnCarrera agregarCaballo(Caballo c, int numero, double dividendo) {
         CaballoEnCarrera caballo = new CaballoEnCarrera(numero, dividendo, c);
-        return caballos.add(caballo);
+        caballo.setCarrera(this);
+
+        if (caballos.add(caballo)) {
+            return caballo;
+        }
+        return null;
     }
 
     public boolean quitarCaballo(Caballo c) {

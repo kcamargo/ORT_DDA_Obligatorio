@@ -78,6 +78,8 @@ public class CaballoEnCarrera {
     }
 
     public boolean agregarApuesta(Apuesta apuesta) {
+        apuesta.setCaballo(this);
+        apuesta.getJugador().agregarApuesta(apuesta);
         return apuestas.add(apuesta);
     }
 
@@ -99,6 +101,7 @@ public class CaballoEnCarrera {
             double ganancia = a.getMonto() * dividendo;
 
             j.sumarSaldo(ganancia);
+            a.setGanado(ganancia);
         }
         return true;
     }
