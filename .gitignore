@@ -2,3 +2,4 @@
 *.~ml
 /Hipodromos/build/
 /Hipodromos/dist/
+Hipodromos/nbproject/project.properties
