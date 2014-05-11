@@ -1,51 +1,55 @@
 package ui;
+
 import bl.Administrador;
 import bl.Caballo;
 import bl.Fachada;
 import bl.Carrera;
+import bl.enums.ErroresHipodromo;
 import bl.Hipodromo;
 import java.util.ArrayList;
 
 public class FrmAdministrador extends javax.swing.JFrame {
 
     Fachada fac = Fachada.getInstancia();
-    public FrmAdministrador(Administrador a ) {
+
+    public FrmAdministrador(Administrador a) {
         initComponents();
-        if(a != null ){
+        if (a != null) {
             lblBienvenida.setText(a.getUsername());
-            System.out.println(a.getUsername());
             cargarMenu();
             ArrayList<Hipodromo> hipodromos = fac.getHipodromos();
-            for(Hipodromo h:hipodromos){
+            for (Hipodromo h : hipodromos) {
                 cmbHipodromos.addItem(h);
             }
-            System.out.println("GET ITEM");
             cmbHipodromos.getItemAt(1);
         }
-        
     }
-    private void crearHipodromo(){
+
+    private void crearHipodromo() {
         String nombre = txtNombreHipodromo.getText();
         String direccion = txtDireccionHipodromo.getText();
         Hipodromo h = new Hipodromo(nombre, direccion);
-        if ( null != h.getNombre() ) {
-            int res = fac.crearHipodromo(h);
-            if( res == 1 ){
-                System.out.println("Hipodromo Creado");
-                lblMensajeCrear.setText("Hipodromo Creado");
-            }else if(res == 0){
-                System.out.println("Nombre de hipodromo repetido");
-                lblMensajeCrear.setText("Nombre de hipodromo repetido");
-            }else{
-                System.out.println("Direccion repetida");
-                lblMensajeCrear.setText("Direccion de Hipodromo ya ingresada");
+        if (null != h.getNombre()) {
+            ErroresHipodromo res = fac.agregarHipodromo(h);
+            switch (res) {
+                case OK:
+                    lblMensajeCrear.setText("Hipodromo Creado");
+                    break;
+                case NombreDup:
+                    lblMensajeCrear.setText("Nombre de hipodromo repetido");
+                    break;
+                case DireccionDup:
+                    lblMensajeCrear.setText("Direccion de Hipodromo ya ingresada");
+                    break;
+                case ErrorGenerico:
+                    lblMensajeCrear.setText("Error inesperado");
+                default:
+                    throw new AssertionError();
             }
-            
-        }else{
-            System.out.println("Todos los campos son requeridos.");
+        } else {
             lblMensajeCrear.setText("Todos los campos son requerdos.");
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -176,19 +180,14 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
     private void cmbHipodromosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHipodromosActionPerformed
         // TODO add your handling code here:
-        Hipodromo h = (Hipodromo)cmbHipodromos.getItemAt(cmbHipodromos.getSelectedIndex());
+        Hipodromo h = (Hipodromo) cmbHipodromos.getItemAt(cmbHipodromos.getSelectedIndex());
         fac.seleccionarHipodromo(h);
-        System.out.println(fac.getHipodromoActual().getNombre() +  " --"+ fac.getHipodromoActual().getDireccion());
-        
-
-        
     }//GEN-LAST:event_cmbHipodromosActionPerformed
 
     private void btnAgregarHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHipodromoActionPerformed
         // TODO add your handling code here:
         crearHipodromo();
     }//GEN-LAST:event_btnAgregarHipodromoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarHipodromo;
     private javax.swing.JComboBox cmbHipodromos;
@@ -206,7 +205,6 @@ public class FrmAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreHipodromo;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarMenu( ) {
-        
+    private void cargarMenu() {
     }
 }
