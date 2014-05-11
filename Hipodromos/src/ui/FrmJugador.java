@@ -1,11 +1,13 @@
 package ui;
 
+import bl.Apuesta;
 import bl.CaballoEnCarrera;
 import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
 import bl.Jugador;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import util.Observable;
 import util.Observador;
 
@@ -15,9 +17,14 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     public FrmJugador() {
         initComponents();
+        this.setLocationRelativeTo(null);
         fachada = Fachada.getInstancia();
         fachada.agregarObservador(this);
         cargarHipodromos();
+    }
+
+    public Hipodromo getHipodromoSeleccionado() {
+        return (Hipodromo) cmbHipodromo.getSelectedItem();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -155,10 +162,17 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     }//GEN-LAST:event_cmbHipodromoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        Jugador j = new Jugador(0, txtUsuario.getText().toString(), txtPass.getPassword().toString());
+        Jugador j = fachada.login(new Jugador(0, txtUsuario.getText().toString(), new String(txtPass.getPassword())));
 
-        if (fachada.login(j) != null) {
-            //TODO Consultar saldo y ultima apuesta.
+        if (j != null) {
+            Apuesta ultima = j.getUltimaApuesta();
+            if (ultima != null) {
+                new DlgConsultaJugador(this, true, j, ultima).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "El jugador no tiene apuestas");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Login incorrecto");
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -195,6 +209,17 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void actualizar(Observable origen, Object param) {
+        //TODO Actualizar FrmJugador cuando cambie la fachada
+    }
+
+    private void cargarHipodromos() {
+        for (Hipodromo h : fachada.getHipodromos()) {
+            cmbHipodromo.addItem(h);
+        }
+    }
+
     private void mostrarInfoDeCarrera(Carrera c) {
         if (c != null) {
             this.lblNombreCarrera.setText(c.getNombre());
@@ -225,17 +250,6 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
         }
 
         return ret;
-    }
-
-    @Override
-    public void actualizar(Observable origen, Object param) {
-        //TODO Actualizar FrmJugador cuando cambie la fachada
-    }
-
-    private void cargarHipodromos() {
-        for (Hipodromo h : fachada.getHipodromos()) {
-            cmbHipodromo.addItem(h);
-        }
     }
 
     private void limpiarDatosDeCarrera() {
