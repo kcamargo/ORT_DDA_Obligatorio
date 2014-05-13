@@ -6,6 +6,7 @@ import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
 import bl.Jugador;
+import bl.enums.ErroresApuesta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import util.Observable;
@@ -14,6 +15,7 @@ import util.Observador;
 public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     private Fachada fachada;
+    private Carrera carreraSeleccionada;
 
     public FrmJugador() {
         initComponents();
@@ -158,11 +160,13 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     private void cmbHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHipodromoActionPerformed
         fachada.seleccionarHipodromo((Hipodromo) cmbHipodromo.getSelectedItem());
-        mostrarInfoDeCarrera(fachada.getHipodromoActual().getSiguienteCarrera());
+        carreraSeleccionada = fachada.getHipodromoActual().getSiguienteCarrera();
+        mostrarInfoDeCarrera(carreraSeleccionada);
     }//GEN-LAST:event_cmbHipodromoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        Jugador j = fachada.login(new Jugador(0, txtUsuario.getText().toString(), new String(txtPass.getPassword())));
+        Jugador j = new Jugador(0, txtUsuario.getText().toString(), new String(txtPass.getPassword()));
+        j = fachada.login(j);
 
         if (j != null) {
             Apuesta ultima = j.getUltimaApuesta();
@@ -177,10 +181,34 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApostarActionPerformed
-        Jugador j = new Jugador(0, txtUsuario.getText().toString(), txtPass.getPassword().toString());
+        Jugador j = new Jugador(0, txtUsuario.getText().toString(), txtPass.getText().toString());
+        j = fachada.login(j);
 
-        if (fachada.login(j) != null) {
-            // TODO Apostar
+        if (j != null) {
+            if (validarMonto()) {
+                CaballoEnCarrera caballo = (CaballoEnCarrera) lstCaballos.getSelectedValue();
+                Apuesta a = new Apuesta(Integer.parseInt(txtMonto.getText()), j);
+                if (a.validar()) {
+                    ErroresApuesta ret = caballo.agregarApuesta(a);
+                    switch (ret) {
+                        case OK:
+                            messageBox("OK");
+                            break;
+                        case SaldoInsuficiente:
+                            messageBox("Saldo insuficiente");
+                            break;
+                        case ErrorGenerico:
+                            messageBox("Error inesperado");
+                            break;
+                    }
+                } else {
+                    messageBox("El monto debe ser mayor que cero");
+                }
+            } else {
+                messageBox("El monto debe ser numérico");
+            }
+        } else {
+            messageBox("Login incorrecto");
         }
     }//GEN-LAST:event_btnApostarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -234,22 +262,7 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     }
 
     private void mostrarCaballosParticipantes(ArrayList<CaballoEnCarrera> caballos) {
-        lstCaballos.setListData(formatearListaDeCaballos(caballos));
-    }
-
-    private Object[] formatearListaDeCaballos(ArrayList<CaballoEnCarrera> caballos) {
-        Object[] ret = new Object[caballos.size()];
-
-        for (int i = 0; i < caballos.size(); i++) {
-            CaballoEnCarrera c = caballos.get(i);
-            ret[i] = "(" + c.getNumero() + ") " + c.getCaballo().getNombre() + " - " + c.getDividendo();
-
-            if (c.isGanador()) {
-                ret[i] += " ***GANADOR***";
-            }
-        }
-
-        return ret;
+        lstCaballos.setListData(caballos.toArray());
     }
 
     private void limpiarDatosDeCarrera() {
@@ -260,5 +273,18 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     private void limpiarDatosDeCaballos() {
         this.lstCaballos.setListData(new Object[0]);
+    }
+
+    private boolean validarMonto() {
+        try {
+            Integer.parseInt(txtMonto.getText());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void messageBox(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 }

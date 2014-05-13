@@ -32,6 +32,7 @@ public class Jugador extends Usuario {
     }
 
     public boolean agregarApuesta(Apuesta a) {
+        descontarSaldo(a.getMonto());
         return apuestas.add(a);
     }
     

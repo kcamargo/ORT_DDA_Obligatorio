@@ -1,5 +1,6 @@
 package bl;
 
+import bl.enums.ErroresApuesta;
 import java.util.ArrayList;
 
 public class CaballoEnCarrera {
@@ -77,10 +78,18 @@ public class CaballoEnCarrera {
                 && caballo != null;
     }
 
-    public boolean agregarApuesta(Apuesta apuesta) {
+    public ErroresApuesta agregarApuesta(Apuesta apuesta) {
         apuesta.setCaballo(this);
-        apuesta.getJugador().agregarApuesta(apuesta);
-        return apuestas.add(apuesta);
+        if (apuesta.getJugador().getSaldo() >= apuesta.getMonto()) {
+            apuesta.getJugador().agregarApuesta(apuesta);
+            if (apuestas.add(apuesta)) {
+                return ErroresApuesta.OK;
+            } else {
+                return ErroresApuesta.ErrorGenerico;
+            }
+        } else {
+            return ErroresApuesta.SaldoInsuficiente;
+        }
     }
 
     public double getMontoApostado() {
@@ -113,5 +122,14 @@ public class CaballoEnCarrera {
                 && dividendo == c.getDividendo()
                 && caballo.equals(c.getCaballo())
                 && carrera.equals(c.getCarrera());
+    }
+
+    @Override
+    public String toString() {
+        String ret = "(" + numero + ") " + caballo.getNombre() + " - " + dividendo;
+        if (ganador) {
+            ret += "***GANADOR***";
+        }
+        return ret;
     }
 }

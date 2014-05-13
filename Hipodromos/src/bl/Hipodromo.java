@@ -35,7 +35,7 @@ public class Hipodromo {
 
     public Hipodromo(String nombre, String direccion) {
         this();
-        if ( this.validarIngreso(nombre, direccion)){
+        if (this.validarIngreso(nombre, direccion)) {
             this.nombre = nombre;
             this.direccion = direccion;
         }
@@ -46,13 +46,15 @@ public class Hipodromo {
         return nombre != null && !nombre.isEmpty()
                 && direccion != null && !direccion.isEmpty()
                 && jornadas != null;
-                
+
     }
-    public boolean validarIngreso(String nombre, String direccion){
-      return nombre != null && !nombre.isEmpty()
-            && direccion != null && !direccion.isEmpty();
+
+    public boolean validarIngreso(String nombre, String direccion) {
+        return nombre != null && !nombre.isEmpty()
+                && direccion != null && !direccion.isEmpty();
     }
-    public int vaidarCampos(String pNombre, String pDireccion){
+
+    public int validarCampos(String pNombre, String pDireccion) {
         int retorno = 1;
         return retorno;
     }
@@ -98,11 +100,14 @@ public class Hipodromo {
         //TODO: Validar esta lógica.
         if (jornadas.size() > 0) {
             Collections.sort(jornadas);
-            Jornada j = jornadas.get(jornadas.size() - 1);
-            return j.getSiguienteCarrera();
-        } else {
-            return null;
+            for (Jornada j : jornadas) {
+                Carrera c = j.getSiguienteCarrera();
+                if (c != null) {
+                    return c;
+                }
+            }
         }
+        return null;
     }
 
     public boolean abrirCarrera(Carrera c) {
@@ -139,17 +144,14 @@ public class Hipodromo {
         return false;
     }
 
-
     //@Override
     /*public boolean equals(Object o) {
-        Hipodromo h = (Hipodromo) o;
-        return nombre.equals(h.getNombre())
-                && direccion.equals(h.getDireccion());
-    }*/
-
+     Hipodromo h = (Hipodromo) o;
+     return nombre.equals(h.getNombre())
+     && direccion.equals(h.getDireccion());
+     }*/
     @Override
     public String toString() {
         return getNombre();
     }
-
 }
