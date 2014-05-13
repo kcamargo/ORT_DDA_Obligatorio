@@ -24,16 +24,21 @@ public class SSHipodromos {
     }
 
     public ErroresHipodromo agregarHipodromo(Hipodromo hipodromo) {
+        ErroresHipodromo ret = ErroresHipodromo.OK;
+
         for (Hipodromo h : hipodromos) {
             if (h.getNombre().equals(hipodromo.getNombre())) {
-                return ErroresHipodromo.NombreDup;
+                ret = ErroresHipodromo.NombreDup;
             } else if (h.getDireccion().equals(hipodromo.getDireccion())) {
-                return ErroresHipodromo.DireccionDup;
-            } else if (hipodromos.add(h)) {
-                return ErroresHipodromo.OK;
+                ret = ErroresHipodromo.DireccionDup;
             }
         }
-        return ErroresHipodromo.ErrorGenerico;
+
+        if (ret == ErroresHipodromo.OK) {
+            ret = hipodromos.add(hipodromo) ? 
+                    ErroresHipodromo.OK : ErroresHipodromo.ErrorGenerico;
+        }
+        return ret;
     }
 
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
