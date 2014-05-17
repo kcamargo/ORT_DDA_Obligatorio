@@ -9,6 +9,9 @@ public class Fachada extends Observable {
 
     private SSHipodromos ssHipodromos;
     private SSUsuarios ssUsuarios;
+    public enum Evento {
+        agregarHipodromo
+    }
     //<editor-fold defaultstate="collapsed" desc="Singleton">
     private static Fachada Instancia;
 
