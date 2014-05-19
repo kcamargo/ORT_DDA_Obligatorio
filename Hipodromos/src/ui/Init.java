@@ -19,7 +19,7 @@ public class Init {
 
     private static void datosPrueba() {
         Fachada fac = Fachada.getInstancia();
-        
+
         Hipodromo h1 = new Hipodromo("Maroñas", "General Flores");
         Hipodromo h2 = new Hipodromo("Colonia", "Calle 1243");
         Hipodromo h3 = new Hipodromo("Paysandu", "Ruta 15 ");
@@ -29,7 +29,7 @@ public class Init {
         fac.agregarHipodromo(h2);
         fac.agregarHipodromo(h3);
         fac.agregarHipodromo(h4);
-        
+
         fac.agregarAdministrador(new Administrador("Admin", "111"));
         fac.agregarAdministrador(new Administrador("aaa", "111"));
 
@@ -62,6 +62,22 @@ public class Init {
         Carrera c5 = new Carrera("Carrera 5", new Date(2014, 2, 23));
         Carrera c6 = new Carrera("Carrera 6", new Date(2014, 2, 5));
         Carrera c7 = new Carrera("Carrera 7", new Date(2014, 7, 7));
+
+        fac.agregarCaballo(cab1);
+        fac.agregarCaballo(cab2);
+        fac.agregarCaballo(cab3);
+        fac.agregarCaballo(cab4);
+        fac.agregarCaballo(cab5);
+        fac.agregarCaballo(cab6);
+        fac.agregarCaballo(cab7);
+        fac.agregarCaballo(cab8);
+        fac.agregarCaballo(cab9);
+        fac.agregarCaballo(cab10);
+        fac.agregarCaballo(cab11);
+        fac.agregarCaballo(cab12);
+        fac.agregarCaballo(cab13);
+        fac.agregarCaballo(cab14);
+        fac.agregarCaballo(cab15);
         
         c1.agregarCaballo(cab1, 1, 1.10);
         c1.agregarCaballo(cab2, 2, 1.20);
