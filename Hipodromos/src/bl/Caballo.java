@@ -33,4 +33,10 @@ public class Caballo {
         Caballo c = (Caballo) o;
         return nombre.equals(c.getNombre());
     }
+
+    @Override
+    public String toString() {
+        return nombre; 
+    }
+    
 }

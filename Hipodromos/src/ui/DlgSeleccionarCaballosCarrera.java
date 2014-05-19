@@ -148,7 +148,9 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.out.println(lstDisponibles.getSelectedValue()); 
+        
+        Caballo c = (Caballo)lstDisponibles.getSelectedValue();
+        System.out.println(c.getNombreResponsable() + " " + c.getNombre());
      
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -160,7 +162,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         
         }
         
-        lstDisponibles.setListData(listado.toArray());
+        lstDisponibles.setListData(fac.getCaballosDisponibles(carrera.getFecha()).toArray());
     }
     /**
      * @param args the command line arguments
