@@ -101,6 +101,8 @@ public class Carrera implements Comparable<Carrera> {
         this.nombre = nombre;
         this.fecha = new Date();
         this.estado = EstadoCarrera.DEFINIDA;
+        this.caballos = new ArrayList<>();
+        
     }
 
     public Carrera(String nombre, Date fecha) {
@@ -108,6 +110,7 @@ public class Carrera implements Comparable<Carrera> {
         this.nombre = nombre;
         this.fecha = fecha;
         this.estado = EstadoCarrera.DEFINIDA;
+        this.caballos = new ArrayList<>();
     }
     //</editor-fold>
 
@@ -127,7 +130,6 @@ public class Carrera implements Comparable<Carrera> {
         cal.set(Calendar.DATE, day);
         Date fch = cal.getTime();
         Date now = new Date();
-        System.out.println(fch);
         if (now.after(fch)){
             ret = false;
         } else {

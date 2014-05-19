@@ -26,6 +26,9 @@ public class Hipodromo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public ArrayList<Jornada> getJornadas(){
+        return jornadas;
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Constructores">
@@ -53,7 +56,18 @@ public class Hipodromo {
         return nombre != null && !nombre.isEmpty()
                 && direccion != null && !direccion.isEmpty();
     }
-
+    public boolean validarDatosCarrera(Carrera c){
+        boolean ret =true;
+        for(Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas){
+            for (Carrera carrera : j.getCarreras()){
+                if(carrera.getNombre().equals(c.getNombre())){
+                    ret = false;
+                }
+            }
+        }
+    
+        return ret;
+    }
     public int validarCampos(String pNombre, String pDireccion) {
         int retorno = 1;
         return retorno;

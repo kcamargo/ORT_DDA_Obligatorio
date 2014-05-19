@@ -74,13 +74,20 @@ public class SSHipodromos {
     //<editor-fold defaultstate="collapsed" desc="Métodos privados">
     private boolean estaDisponible(Caballo caballo, Date fecha) {
         boolean disp = true;
-        while (disp) {
+        boolean salida = true;
+        int count = 0;
+        while (salida) {
             int i = 0;
             Hipodromo h = hipodromos.get(i);
-            if (!h.estaDisponible(caballo, fecha)) {
+            if (!h.estaDisponible(caballo, fecha) ) {
                 disp = false;
+               
+            }
+            if(count == hipodromos.size()){
+                salida = false;
             }
             i++;
+            count++;
         }
         return disp;
     }
