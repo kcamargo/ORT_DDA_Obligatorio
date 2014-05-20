@@ -5,6 +5,7 @@
 package ui;
 
 import bl.Caballo;
+import bl.CaballoEnCarrera;
 import bl.Carrera;
 import bl.Fachada;
 import java.util.ArrayList;
@@ -20,14 +21,12 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
      */
     Fachada fac = Fachada.getInstancia();
     Carrera carrera;
+    ArrayList<CaballoEnCarrera> caballosCarrera = new ArrayList();
     public DlgSeleccionarCaballosCarrera(java.awt.Frame parent, boolean modal, Carrera c) {
         super(parent, modal);
         initComponents();
         carrera = c;
-        System.out.println(c.getFecha() + "/// " + c.getNombre());
-        listarCaballosDisponibles();
-                
-             
+        listarCaballosDisponibles();                             
     }
 
     /**
@@ -49,14 +48,29 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         lblMensaje = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        txtNumeroCaballo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        txtDividendo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        lblMensajee = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jScrollPane1.setViewportView(lstDisponibles);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 80, 170, 130);
+
         jScrollPane2.setViewportView(lstSeleccionados);
 
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(380, 80, 155, 130);
+
         jLabel1.setText("Seleccionar caballos ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(220, 20, 139, 14);
 
         jButton1.setText("Finalizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -64,134 +78,133 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(440, 230, 94, 23);
 
         jLabel2.setText("Disponibles");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(30, 60, 130, 14);
 
         jLabel3.setText("Seleccionados");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(390, 60, 113, 14);
+        getContentPane().add(lblMensaje);
+        lblMensaje.setBounds(145, 302, 192, 0);
 
-        jButton2.setText("Seleccionar");
+        jButton2.setText("Seleccionar      >>");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(200, 140, 170, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(119, 119, 119))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(lblMensaje)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        txtNumeroCaballo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroCaballoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNumeroCaballo);
+        txtNumeroCaballo.setBounds(260, 80, 110, 20);
 
-        pack();
+        jLabel4.setText("Numero :");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(200, 80, 60, 20);
+
+        jButton3.setText("<<  Quitar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(200, 170, 170, 23);
+        getContentPane().add(txtDividendo);
+        txtDividendo.setBounds(260, 110, 110, 20);
+
+        jLabel7.setText("Dividendo");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(200, 110, 50, 14);
+        getContentPane().add(lblMensajee);
+        lblMensajee.setBounds(200, 220, 180, 14);
+
+        setBounds(0, 0, 577, 317);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        boolean ret;
-        ret = fac.getHipodromoActual().agregarCarrera(carrera);
-        if(ret){
-            lblMensaje.setText("La carrera se ingreso correctamente");
-        } else { 
-            lblMensaje.setText("No se pudo ingresar la carrera");
-        }
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        Caballo c = (Caballo)lstDisponibles.getSelectedValue();
-        System.out.println(c.getNombreResponsable() + " " + c.getNombre());
-     
+        try {
+            int numero = Integer.parseInt(txtNumeroCaballo.getText());
+            double dividendo = Double.parseDouble( txtDividendo.getText());
+            Caballo c = (Caballo)lstDisponibles.getSelectedValue();
+            if (c != null){   
+               CaballoEnCarrera caballoCarrera = new CaballoEnCarrera(numero, dividendo, c);
+               if(!carrera.existeNumeroCaballo(caballoCarrera)){
+                   if(caballoCarrera.validar()){
+                       caballoCarrera= carrera.agregarCaballo(c, numero,dividendo);    
+                       caballosCarrera.add(caballoCarrera);
+                       lstSeleccionados.setListData(caballosCarrera.toArray());
+                   } else {
+                       lblMensajee.setText("Los datos ingresados no son correctos.");
+                   }
+              } else { 
+                       lblMensajee.setText("Ya existe el nuemero de caballo");
+               }
+            } else {
+                lblMensajee.setText("Seleccione un caballo.");
+            }
+        } catch (Exception ex){
+            lblMensajee.setText("Complete los campos.");
+        }
+       
+        listarCaballosDisponibles();
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtNumeroCaballoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCaballoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroCaballoActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try{
+            CaballoEnCarrera c = (CaballoEnCarrera)lstSeleccionados.getSelectedValue();
+            if(c != null){
+                caballosCarrera.remove(c);
+                lstSeleccionados.setListData(caballosCarrera.toArray());
+            }
+        }catch (Exception ex){
+            lblMensajee.setText("No hay caballos para quitar.");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
     private void listarCaballosDisponibles(){
         ArrayList<String> listado = new ArrayList();
         
         for(Caballo c :fac.getCaballosDisponibles(carrera.getFecha()) ){
-            listado.add(c.getNombre());
-        
-        }
-        
+            listado.add(c.getNombre());        
+        }        
         lstDisponibles.setListData(fac.getCaballosDisponibles(carrera.getFecha()).toArray());
     }
-    /**
-     * @param args the command line arguments
-     */
-    /*public static void main(String args[]) {
-       
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DlgSeleccionarCaballosCarrera dialog = new DlgSeleccionarCaballosCarrera(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblMensajee;
     private javax.swing.JList lstDisponibles;
     private javax.swing.JList lstSeleccionados;
+    private javax.swing.JTextField txtDividendo;
+    private javax.swing.JTextField txtNumeroCaballo;
     // End of variables declaration//GEN-END:variables
 }

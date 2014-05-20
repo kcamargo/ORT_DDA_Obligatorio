@@ -164,6 +164,18 @@ public class Carrera implements Comparable<Carrera> {
         }
         return false;
     }
+    public boolean existeNumeroCaballo(CaballoEnCarrera caballoCarrera){
+        boolean res= false;
+        for(CaballoEnCarrera c : caballos){
+            if(c.getNumero() == caballoCarrera.getNumero()){
+                res = true;
+            }
+        }
+        if(caballos.size() ==0){
+            res=false;
+        }
+        return res;
+    }
 
     private CaballoEnCarrera buscarCaballo(Caballo caballo) {
         for (CaballoEnCarrera c : caballos) {
@@ -175,11 +187,11 @@ public class Carrera implements Comparable<Carrera> {
     }
 
     public CaballoEnCarrera agregarCaballo(Caballo c, int numero, double dividendo) {
-        CaballoEnCarrera caballo = new CaballoEnCarrera(numero, dividendo, c);
-        caballo.setCarrera(this);
+        CaballoEnCarrera caballoEnCarrera = new CaballoEnCarrera(numero, dividendo, c);
+        caballoEnCarrera.setCarrera(this);
 
-        if (caballos.add(caballo)) {
-            return caballo;
+        if (caballos.add(caballoEnCarrera)) {
+            return caballoEnCarrera;
         }
         return null;
     }

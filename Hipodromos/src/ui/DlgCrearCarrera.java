@@ -64,12 +64,20 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
 
         jLabel3.setText("Nombre :");
 
+        txtDay.setText("6");
+
+        txtNombre.setText("AAAA");
+
         btnCrearCarrera.setText("Continuar");
         btnCrearCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearCarreraActionPerformed(evt);
             }
         });
+
+        txtMonth.setText("6");
+
+        txtYear.setText("2014");
 
         jLabel4.setText("dd/mm/yyyy");
 
