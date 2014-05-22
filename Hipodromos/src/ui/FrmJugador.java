@@ -15,7 +15,7 @@ import util.Observador;
 public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     private Fachada fachada;
-    private Carrera carreraSeleccionada;
+    private Carrera carreraAbierta;
 
     public FrmJugador() {
         initComponents();
@@ -160,8 +160,15 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     private void cmbHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHipodromoActionPerformed
         fachada.seleccionarHipodromo((Hipodromo) cmbHipodromo.getSelectedItem());
-        carreraSeleccionada = fachada.getHipodromoActual().getSiguienteCarrera();
-        mostrarInfoDeCarrera(carreraSeleccionada);
+        carreraAbierta = fachada.getHipodromoActual().getCarreraAbierta();
+
+        if (carreraAbierta == null) {
+            messageBox("No hay carreras abiertas");
+        } else {
+            limpiarDatosDeCarrera();
+            limpiarDatosDeCaballos();
+            mostrarInfoDeCarrera(carreraAbierta);
+        }
     }//GEN-LAST:event_cmbHipodromoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
@@ -249,15 +256,13 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     }
 
     private void mostrarInfoDeCarrera(Carrera c) {
-        if (c != null) {
+        if (c.getEstado() != Carrera.EstadoCarrera.ABIERTA) {
+            messageBox("La carrera no está abierta");
+        } else {
             this.lblNombreCarrera.setText(c.getNombre());
             this.lblNumeroCarrera.setText(String.valueOf(c.getNumero()));
             this.lblEstadoCarrera.setText(c.getEstadoString());
-
             mostrarCaballosParticipantes(c.getCaballos());
-        } else {
-            limpiarDatosDeCarrera();
-            limpiarDatosDeCaballos();
         }
     }
 
