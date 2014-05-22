@@ -110,11 +110,11 @@ public class Hipodromo {
                 && direccion != null && !direccion.isEmpty();
     }
 
-    public boolean validarDatosCarrera(Carrera c) {
-        boolean ret = true;
-        for (Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas) {
-            for (Carrera carrera : j.getCarreras()) {
-                if (carrera.getNombre().equals(c.getNombre())) {
+    public boolean validarDatosCarrera(Carrera c){
+        boolean ret =true;
+        for(Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas){
+            for (Carrera carrera : j.getCarreras()){
+               if( carrera.getNombre().equals(c.getNombre()) && carrera.getFecha().equals(c.getFecha())  ){                
                     ret = false;
                 }
             }

@@ -57,16 +57,27 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Crear Carrera");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(240, 21, 124, 14);
 
         jLabel2.setText("Fecha :");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(101, 56, 69, 14);
 
         jLabel3.setText("Nombre :");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(103, 97, 77, 14);
 
         txtDay.setText("6");
+        getContentPane().add(txtDay);
+        txtDay.setBounds(208, 53, 26, 20);
 
         txtNombre.setText("AAAA");
+        getContentPane().add(txtNombre);
+        txtNombre.setBounds(208, 94, 143, 20);
 
         btnCrearCarrera.setText("Continuar");
         btnCrearCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -74,73 +85,24 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
                 btnCrearCarreraActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCrearCarrera);
+        btnCrearCarrera.setBounds(219, 140, 101, 42);
 
         txtMonth.setText("6");
+        getContentPane().add(txtMonth);
+        txtMonth.setBounds(240, 53, 25, 20);
 
         txtYear.setText("2014");
+        getContentPane().add(txtYear);
+        txtYear.setBounds(271, 53, 80, 20);
+        getContentPane().add(lblMensaje);
+        lblMensaje.setBounds(107, 200, 360, 23);
 
         jLabel4.setText("dd/mm/yyyy");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(361, 56, 83, 14);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(btnCrearCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(96, 96, 96))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(btnCrearCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        pack();
+        setBounds(0, 0, 556, 312);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCarreraActionPerformed
@@ -149,19 +111,16 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         int month =Integer.parseInt(txtMonth.getText());
         int day = Integer.parseInt(txtDay.getText());
         String nombre = txtNombre.getText();
-        Carrera c = new Carrera(nombre);
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DATE, day);
+        Date fch = cal.getTime();
+        Carrera c = new Carrera(nombre, fch);
         
         if(fac.getHipodromoActual().validarDatosCarrera(c)){
             if ( c.validarFecha(year, month, day)) {
-                Calendar cal = Calendar.getInstance();
-                cal.clear();
-                cal.set(Calendar.YEAR, year);
-                cal.set(Calendar.MONTH, month);
-                cal.set(Calendar.DATE, day);
-                Date fch = cal.getTime();
-                c = new Carrera(nombre, fch);
-                
-
                 fac.getHipodromoActual().agregarCarrera(c);
                 dialogCaballos = new DlgSeleccionarCaballosCarrera(jFrame, true, c);
                 dialogCaballos.setVisible(true);
