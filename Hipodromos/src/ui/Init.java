@@ -6,7 +6,7 @@ import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
 import bl.Jugador;
-import java.util.Date;
+import util.Fecha;
 
 public class Init {
 
@@ -55,13 +55,13 @@ public class Init {
         Caballo cab14 = new Caballo("Tornado", "Fulano");
         Caballo cab15 = new Caballo("Kekeke", "Fulano");
 
-        Carrera c1 = new Carrera("Carrera 1", new Date(2014, 10, 5));
-        Carrera c2 = new Carrera("Carrera 2", new Date(2014, 5, 12));
-        Carrera c3 = new Carrera("Carrera 3", new Date(2014, 7, 7));
-        Carrera c4 = new Carrera("Carrera 4", new Date(2014, 12, 5));
-        Carrera c5 = new Carrera("Carrera 5", new Date(2014, 2, 23));
-        Carrera c6 = new Carrera("Carrera 6", new Date(2014, 2, 5));
-        Carrera c7 = new Carrera("Carrera 7", new Date(2014, 7, 7));
+        Carrera c1 = new Carrera("Carrera 1", Fecha.crearFecha(22, 4, 2014));
+        Carrera c2 = new Carrera("Carrera 2", Fecha.crearFecha(22, 4, 2014));
+        Carrera c3 = new Carrera("Carrera 3", Fecha.crearFecha(22, 4, 2014));
+        Carrera c4 = new Carrera("Carrera 4", Fecha.crearFecha(22, 4, 2014));
+        Carrera c5 = new Carrera("Carrera 5", Fecha.crearFecha(22, 4, 2014));
+        Carrera c6 = new Carrera("Carrera 6", Fecha.crearFecha(22, 4, 2014));
+        Carrera c7 = new Carrera("Carrera 7", Fecha.crearFecha(22, 4, 2014));
 
         fac.agregarCaballo(cab1);
         fac.agregarCaballo(cab2);
@@ -78,51 +78,48 @@ public class Init {
         fac.agregarCaballo(cab13);
         fac.agregarCaballo(cab14);
         fac.agregarCaballo(cab15);
-        
+
         c1.agregarCaballo(cab1, 1, 1.10);
         c1.agregarCaballo(cab2, 2, 1.20);
         c1.agregarCaballo(cab3, 3, 1.30);
         c1.agregarCaballo(cab4, 4, 1.40);
-        h1.agregarCarrera(c1);
-
+        c1.setEstado(Carrera.EstadoCarrera.FINALIZADA);
         c2.agregarCaballo(cab5, 1, 1.10);
         c2.agregarCaballo(cab6, 2, 1.20);
         c2.agregarCaballo(cab7, 3, 1.30);
         c2.agregarCaballo(cab8, 4, 1.40);
-        h1.agregarCarrera(c2);
-        c2.abrir();
-
+        c2.setEstado(Carrera.EstadoCarrera.FINALIZADA);
         c3.agregarCaballo(cab9, 1, 1.10);
         c3.agregarCaballo(cab10, 2, 1.20);
         c3.agregarCaballo(cab11, 3, 1.30);
         c3.agregarCaballo(cab12, 4, 1.40);
-        h2.agregarCarrera(c3);
-
+        c3.abrir();
         c4.agregarCaballo(cab13, 1, 1.10);
         c4.agregarCaballo(cab14, 2, 1.20);
         c4.agregarCaballo(cab15, 3, 1.30);
         c4.agregarCaballo(cab1, 4, 1.40);
-        h2.agregarCarrera(c4);
-        c4.abrir();
 
         c5.agregarCaballo(cab2, 1, 1.10);
         c5.agregarCaballo(cab3, 2, 1.20);
         c5.agregarCaballo(cab4, 3, 1.30);
         c5.agregarCaballo(cab5, 4, 1.40);
-        h3.agregarCarrera(c5);
 
         c6.agregarCaballo(cab6, 1, 1.10);
         c6.agregarCaballo(cab7, 2, 1.20);
         c6.agregarCaballo(cab8, 3, 1.30);
         c6.agregarCaballo(cab9, 4, 1.40);
-        h3.agregarCarrera(c6);
-        c6.abrir();
 
         c7.agregarCaballo(cab10, 1, 1.10);
         c7.agregarCaballo(cab11, 2, 1.20);
         c7.agregarCaballo(cab12, 3, 1.30);
         c7.agregarCaballo(cab13, 4, 1.40);
-        h4.agregarCarrera(c7);
-        c7.abrir();
+
+        h1.agregarCarrera(c1);
+        h1.agregarCarrera(c2);
+        h1.agregarCarrera(c3);
+        h1.agregarCarrera(c4);
+        h1.agregarCarrera(c5);
+        h1.agregarCarrera(c6);
+        h1.agregarCarrera(c7);
     }
 }
