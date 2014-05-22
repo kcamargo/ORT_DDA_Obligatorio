@@ -60,7 +60,7 @@ public class Hipodromo {
         boolean ret =true;
         for(Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas){
             for (Carrera carrera : j.getCarreras()){
-                if(carrera.getNombre().equals(c.getNombre())){
+               if( carrera.getNombre().equals(c.getNombre()) && carrera.getFecha().equals(c.getFecha())  ){                
                     ret = false;
                 }
             }
