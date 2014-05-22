@@ -1,14 +1,17 @@
 package bl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
+import util.Fecha;
 
 public class Hipodromo {
 
     private String nombre;
     private String direccion;
     private ArrayList<Jornada> jornadas;
+    private Carrera siguienteCarrera;
+    private Carrera carreraAbierta;
+    private Carrera carreraCerrada;
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public String getDireccion() {
@@ -26,8 +29,57 @@ public class Hipodromo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public ArrayList<Jornada> getJornadas(){
+
+    public ArrayList<Jornada> getJornadas() {
         return jornadas;
+    }
+
+    public Carrera getSiguienteCarrera() {
+        if (siguienteCarrera == null) {
+            if (jornadas.size() > 0) {
+                Jornada j = buscarJornada(Fecha.fechaActual());
+                if (j != null) {
+                    siguienteCarrera = j.getSiguienteCarrera();
+                }
+            }
+        }
+        return siguienteCarrera;
+    }
+
+    public Carrera getCarreraAbierta() {
+        if (carreraAbierta == null) {
+            if (jornadas.size() > 0) {
+                Jornada j = buscarJornada(Fecha.fechaActual());
+                if (j != null) {
+                    carreraAbierta = j.getCarreraAbierta();
+                }
+            }
+        }
+        return carreraAbierta;
+    }
+
+    public Carrera getCarreraCerrada() {
+        if (carreraCerrada == null) {
+            if (jornadas.size() > 0) {
+                Jornada j = buscarJornada(Fecha.fechaActual());
+                if (j != null) {
+                    carreraCerrada = j.getCarreraCerrada();
+                }
+            }
+        }
+        return carreraCerrada;
+    }
+
+    public void setSiguienteCarrera(Carrera c) {
+        this.siguienteCarrera = c;
+    }
+
+    public void setCarreraAbierta(Carrera c) {
+        this.carreraAbierta = c;
+    }
+
+    public void setCarreraCerrada(Carrera c) {
+        this.carreraCerrada = c;
     }
     //</editor-fold>
 
@@ -45,6 +97,7 @@ public class Hipodromo {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Validaciones">
     public boolean validar() {
         return nombre != null && !nombre.isEmpty()
                 && direccion != null && !direccion.isEmpty()
@@ -56,37 +109,30 @@ public class Hipodromo {
         return nombre != null && !nombre.isEmpty()
                 && direccion != null && !direccion.isEmpty();
     }
-    public boolean validarDatosCarrera(Carrera c){
-        boolean ret =true;
-        for(Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas){
-            for (Carrera carrera : j.getCarreras()){
-                if(carrera.getNombre().equals(c.getNombre())){
+
+    public boolean validarDatosCarrera(Carrera c) {
+        boolean ret = true;
+        for (Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas) {
+            for (Carrera carrera : j.getCarreras()) {
+                if (carrera.getNombre().equals(c.getNombre())) {
                     ret = false;
                 }
             }
         }
-    
+
         return ret;
     }
+
     public int validarCampos(String pNombre, String pDireccion) {
         int retorno = 1;
         return retorno;
     }
+    //</editor-fold>
 
-    public boolean estaDisponible(Caballo caballo, Date fecha) {
-        boolean disponible = false;
-        Jornada j = buscarJornada(fecha);
-        if (j != null) {
-            disponible = j.estaDisponible(caballo);
-        }
-        return disponible;
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Carreras">
     public boolean agregarCarrera(Carrera c) {
-        Jornada j;
-        if (buscarJornada(c.getFecha()) != null) {
-            j = buscarJornada(c.getFecha());
-        } else {
+        Jornada j = buscarJornada(c.getFecha());
+        if (j == null) {
             j = new Jornada(c.getFecha());
             agregarJornada(j);
         }
@@ -102,32 +148,17 @@ public class Hipodromo {
         }
     }
 
-    public ArrayList<Carrera> getCarrerasAbiertas() {
-        ArrayList<Carrera> retorno = new ArrayList<>();
-        for (Jornada j : jornadas) {
-            retorno.addAll(j.getCarrerasAbiertas());
-        }
-        return retorno;
-    }
-
-    public Carrera getSiguienteCarrera() {
-        //TODO: Validar esta lógica.
-        if (jornadas.size() > 0) {
-            Collections.sort(jornadas);
-            for (Jornada j : jornadas) {
-                Carrera c = j.getSiguienteCarrera();
-                if (c != null) {
-                    return c;
-                }
-            }
-        }
-        return null;
-    }
-
     public boolean abrirCarrera(Carrera c) {
         Jornada j = buscarJornada(c.getFecha());
         if (j != null) {
-            return j.abrirCarrera(c);
+            if (j.abrirCarrera(c)) {
+                setSiguienteCarrera(null);
+                setSiguienteCarrera(getSiguienteCarrera());
+                setCarreraAbierta(c);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -136,15 +167,38 @@ public class Hipodromo {
     public boolean cerrarCarrera(Carrera c) {
         Jornada j = buscarJornada(c.getFecha());
         if (j != null) {
-            return j.cerrarCarrera(c);
+            if (j.cerrarCarrera(c)) {
+                setCarreraAbierta(null);
+                setCarreraCerrada(c);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
 
+    public boolean asignarGanador(Carrera c, CaballoEnCarrera caballo) {
+        Jornada j = buscarJornada(c.getFecha());
+        if (j != null) {
+            if (j.asignarGanador(c, caballo)) {
+                setCarreraCerrada(null);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Jornadas">
     private Jornada buscarJornada(Date fecha) {
         for (Jornada j : jornadas) {
-            if (j.getFecha().equals(fecha)) {
+            //TODO: Validar lógica
+            if (Fecha.formatearFecha(fecha).equals(Fecha.formatearFecha(j.getFecha()))) {
                 return j;
             }
         }
@@ -152,18 +206,25 @@ public class Hipodromo {
     }
 
     private boolean agregarJornada(Jornada j) {
-        if (!jornadas.contains(j)) {
-            return jornadas.add(j);
+        return jornadas.add(j);
+    }
+    //</editor-fold>
+
+    public boolean estaDisponible(Caballo caballo, Date fecha) {
+        boolean disponible = false;
+        Jornada j = buscarJornada(fecha);
+        if (j != null) {
+            disponible = j.estaDisponible(caballo);
         }
-        return false;
+        return disponible;
     }
 
-    //@Override
-    /*public boolean equals(Object o) {
-     Hipodromo h = (Hipodromo) o;
-     return nombre.equals(h.getNombre())
-     && direccion.equals(h.getDireccion());
-     }*/
+    @Override
+    public boolean equals(Object o) {
+        Hipodromo h = (Hipodromo) o;
+        return nombre.equals(h.getNombre());
+    }
+
     @Override
     public String toString() {
         return getNombre();

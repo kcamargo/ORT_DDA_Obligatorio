@@ -3,6 +3,7 @@ package bl;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import util.Fecha;
 
 public class Carrera implements Comparable<Carrera> {
 
@@ -84,10 +85,12 @@ public class Carrera implements Comparable<Carrera> {
     }
 
     public void setGanador(CaballoEnCarrera caballo) {
-        caballo.setGanador(true);
-        this.ganador = caballo;
-        caballo.pagar();
-        setEstado(EstadoCarrera.FINALIZADA);
+        if (this.estado == EstadoCarrera.CERRADA) {
+            caballo.setGanador(true);
+            this.ganador = caballo;
+            caballo.pagar();
+            setEstado(EstadoCarrera.FINALIZADA);
+        }
     }
     //</editor-fold>
 
@@ -99,10 +102,9 @@ public class Carrera implements Comparable<Carrera> {
     public Carrera(String nombre) {
         this();
         this.nombre = nombre;
-        this.fecha = new Date();
+        this.fecha = Fecha.fechaActual();
         this.estado = EstadoCarrera.DEFINIDA;
         this.caballos = new ArrayList<>();
-        
     }
 
     public Carrera(String nombre, Date fecha) {
@@ -120,23 +122,25 @@ public class Carrera implements Comparable<Carrera> {
                 && fecha != null
                 && estado != null;
     }
-    public boolean validarFecha (int year, int month, int day){
-    boolean ret;
-    
-    Calendar cal = Calendar.getInstance();
+
+    public boolean validarFecha(int year, int month, int day) {
+        boolean ret;
+
+        Calendar cal = Calendar.getInstance();
         cal.clear();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DATE, day);
         Date fch = cal.getTime();
         Date now = new Date();
-        if (now.after(fch)){
+        if (now.after(fch)) {
             ret = false;
         } else {
             ret = true;
-        }        
-    return ret;
+        }
+        return ret;
     }
+
     public boolean estaDisponible(Caballo caballo) {
         return buscarCaballo(caballo) == null;
     }
@@ -164,15 +168,16 @@ public class Carrera implements Comparable<Carrera> {
         }
         return false;
     }
-    public boolean existeNumeroCaballo(CaballoEnCarrera caballoCarrera){
-        boolean res= false;
-        for(CaballoEnCarrera c : caballos){
-            if(c.getNumero() == caballoCarrera.getNumero()){
+
+    public boolean existeNumeroCaballo(CaballoEnCarrera caballoCarrera) {
+        boolean res = false;
+        for (CaballoEnCarrera c : caballos) {
+            if (c.getNumero() == caballoCarrera.getNumero()) {
                 res = true;
             }
         }
-        if(caballos.size() ==0){
-            res=false;
+        if (caballos.size() == 0) {
+            res = false;
         }
         return res;
     }
