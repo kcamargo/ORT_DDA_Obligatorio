@@ -62,17 +62,19 @@ public class SSHipodromos {
 
     public ArrayList<Caballo> getCaballosDisponibles(Date fecha) {
         ArrayList<Caballo> retorno = new ArrayList<>();
-        for (Caballo c : caballos) {
-            if (estaDisponible(c, fecha)) {
-
-                retorno.add(c);
+        
+        for (Hipodromo h1 : hipodromos){
+            for (Caballo c : caballos) {
+                if (estaDisponible(c, fecha,h1)) {
+                    retorno.add(c);
+                }
             }
         }
         return retorno;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Métodos privados">
-    private boolean estaDisponible(Caballo caballo, Date fecha) {
+    private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h1) {
         boolean disp = true;
        //NO BORRO EL CODIGO POR SI TE QUEDAN DUDAS...YO TE EXPLICO , POR SUERTE ENCONTRE ESTE BUG QUE HACE DIAS 
         // NOS ESTABA MATANDO. SALUTE !! =) 
@@ -81,8 +83,7 @@ public class SSHipodromos {
         //while (salida) {
            // int i = 0;
             //Hipodromo h = hipodromos.get(i);
-            Hipodromo h = getHipodromoActual();
-            if (!h.estaDisponible(caballo, fecha) ) {
+            if (!h1.estaDisponible(caballo, fecha) ) {
                 disp = false;
        
             }
