@@ -138,7 +138,13 @@ public class Hipodromo {
         }
         return j.agregarCarrera(c);
     }
-
+    
+    public void borrarCarrera(Carrera c){
+        Jornada j = buscarJornada(c.getFecha());
+        if( j!=null ){
+            j.eliminarCarrera(c);
+        }
+    }
     public ArrayList<Carrera> getCarreras(Date fecha) {
         Jornada j = buscarJornada(fecha);
         if (j != null) {

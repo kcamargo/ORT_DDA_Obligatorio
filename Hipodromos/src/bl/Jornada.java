@@ -143,6 +143,13 @@ public class Jornada implements Comparable<Jornada> {
         }
         return ret;
     }
+    
+    public void eliminarCarrera(Carrera c){
+        Carrera carrera = buscarCarrera(c);
+        if(c!=null){
+            carreras.remove(c);
+        }
+    }
 
     private Carrera buscarCarrera(Carrera carrera) {
         for (Carrera c : carreras) {
@@ -152,6 +159,7 @@ public class Jornada implements Comparable<Jornada> {
         }
         return null;
     }
+    
 
     private int getSiguienteNumeroDeCarrera() {
         return carreras.size() + 1;

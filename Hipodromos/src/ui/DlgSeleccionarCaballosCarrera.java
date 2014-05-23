@@ -8,6 +8,8 @@ import bl.Caballo;
 import bl.CaballoEnCarrera;
 import bl.Carrera;
 import bl.Fachada;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +23,14 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
      */
     Fachada fac = Fachada.getInstancia();
     Carrera carrera;
-    ArrayList<CaballoEnCarrera> caballosCarrera = new ArrayList();
+    ArrayList<CaballoEnCarrera> caballosCarrera = new ArrayList();    
     public DlgSeleccionarCaballosCarrera(java.awt.Frame parent, boolean modal, Carrera c) {
         super(parent, modal);
         initComponents();
-        carrera = c;
-        listarCaballosDisponibles();                             
+        carrera = c;      
+        listarCaballosDisponibles();  
+        CerrarVentana();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,11 +135,15 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+        if (caballosCarrera.size() < 2){
+            lblMensajee.setText("Deberá seleccionar al menos 2 caballos.");
+        } else { 
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         try {
             int numero = Integer.parseInt(txtNumeroCaballo.getText());
             double dividendo = Double.parseDouble( txtDividendo.getText());
@@ -147,13 +153,15 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
                if(!carrera.existeNumeroCaballo(caballoCarrera)){
                    if(caballoCarrera.validar()){
                        caballoCarrera= carrera.agregarCaballo(c, numero,dividendo);    
-                       caballosCarrera.add(caballoCarrera);
+                       //Metodos para la UI
+                       caballosCarrera.add(caballoCarrera);                       
                        lstSeleccionados.setListData(caballosCarrera.toArray());
+                       lblMensajee.setText("");
                    } else {
                        lblMensajee.setText("Los datos ingresados no son correctos.");
                    }
               } else { 
-                       lblMensajee.setText("Ya existe el nuemero de caballo");
+                       lblMensajee.setText("Ya existe el numero de caballo.");
                }
             } else {
                 lblMensajee.setText("Seleccione un caballo.");
@@ -173,17 +181,30 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try{
             CaballoEnCarrera c = (CaballoEnCarrera)lstSeleccionados.getSelectedValue();
-            if(c != null){
+            if(c != null){               
+                carrera.quitarCaballo(c.getCaballo());
+                //metodos para la UI
                 caballosCarrera.remove(c);
                 lstSeleccionados.setListData(caballosCarrera.toArray());
+                listarCaballosDisponibles();
+                
+            }else {
+                lblMensajee.setText("No hay caballos para quitar.");
             }
         }catch (Exception ex){
-            lblMensajee.setText("No hay caballos para quitar.");
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     private void listarCaballosDisponibles(){
         lstDisponibles.setListData(fac.getCaballosDisponibles(carrera.getFecha()).toArray());
     }
+    private void CerrarVentana(){
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                fac.getHipodromoActual().borrarCarrera(carrera);
+            }
+    });
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
