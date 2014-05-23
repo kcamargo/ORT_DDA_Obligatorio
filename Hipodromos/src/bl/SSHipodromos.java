@@ -76,23 +76,10 @@ public class SSHipodromos {
     //<editor-fold defaultstate="collapsed" desc="Métodos privados">
     private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h1) {
         boolean disp = true;
-       //NO BORRO EL CODIGO POR SI TE QUEDAN DUDAS...YO TE EXPLICO , POR SUERTE ENCONTRE ESTE BUG QUE HACE DIAS 
-        // NOS ESTABA MATANDO. SALUTE !! =) 
-        // boolean salida = true;
-       // int count = 0;
-        //while (salida) {
-           // int i = 0;
-            //Hipodromo h = hipodromos.get(i);
             if (!h1.estaDisponible(caballo, fecha) ) {
                 disp = false;
        
             }
-           // if(count == hipodromos.size()){
-              //  salida = false;
-            //}
-           // i++;
-           // count++;
-        //}
         return disp;
     }
 
