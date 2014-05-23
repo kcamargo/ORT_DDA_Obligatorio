@@ -182,11 +182,6 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     private void listarCaballosDisponibles(){
-        ArrayList<String> listado = new ArrayList();
-        
-        for(Caballo c :fac.getCaballosDisponibles(carrera.getFecha()) ){
-            listado.add(c.getNombre());        
-        }        
         lstDisponibles.setListData(fac.getCaballosDisponibles(carrera.getFecha()).toArray());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

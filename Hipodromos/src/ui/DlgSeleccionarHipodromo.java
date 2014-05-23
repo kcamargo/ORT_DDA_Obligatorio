@@ -47,8 +47,14 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog  implements Obs
         lblBienvenida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        getContentPane().add(cmbHipodromos);
+        cmbHipodromos.setBounds(35, 107, 151, 20);
 
         jLabel1.setText("Seleccionar Hipodromo");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(136, 58, 138, 14);
 
         btnSeeccionarHipodromo.setText("Seleccionar");
         btnSeeccionarHipodromo.addActionListener(new java.awt.event.ActionListener() {
@@ -56,49 +62,18 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog  implements Obs
                 btnSeeccionarHipodromoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSeeccionarHipodromo);
+        btnSeeccionarHipodromo.setBounds(229, 106, 90, 23);
 
         jLabel2.setText("Bienvenido :");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 11, 80, 14);
 
         lblBienvenida.setText("jLabel3");
+        getContentPane().add(lblBienvenida);
+        lblBienvenida.setBounds(96, 11, 188, 14);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(cmbHipodromos, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnSeeccionarHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblBienvenida))
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbHipodromos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeeccionarHipodromo))
-                .addContainerGap(171, Short.MAX_VALUE))
-        );
-
-        pack();
+        setBounds(0, 0, 416, 338);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeeccionarHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeccionarHipodromoActionPerformed
