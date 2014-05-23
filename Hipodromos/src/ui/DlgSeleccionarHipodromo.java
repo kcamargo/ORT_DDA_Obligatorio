@@ -15,7 +15,7 @@ import util.Observador;
  *
  * @author Fossemale
  */
-public class DlgSeleccionarHipodromo extends javax.swing.JDialog  implements Observador{
+public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
 
     /**
      * Creates new form DlgSeleccionarHipodromo
@@ -24,7 +24,6 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog  implements Obs
     public DlgSeleccionarHipodromo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        fac.agregarObservador(this);
         seleccionarHipodromo();
              
         
@@ -106,12 +105,5 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog  implements Obs
     private javax.swing.JLabel lblBienvenida;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actualizar(Observable origen, Object param) {
-        if(Fachada.Evento.agregarHipodromo.equals(param)){
-            cmbHipodromos.removeAllItems();
-            seleccionarHipodromo();
-        }
-    }
     
 }

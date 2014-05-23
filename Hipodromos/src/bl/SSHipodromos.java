@@ -38,9 +38,6 @@ public class SSHipodromos {
             ret = hipodromos.add(hipodromo) ? 
                     ErroresHipodromo.OK : ErroresHipodromo.ErrorGenerico;
         }
-        if (ret == ErroresHipodromo.OK) {
-            Fachada.getInstancia().notificarObservadores(Fachada.Evento.agregarHipodromo);
-        }
         return ret;
     }
 
