@@ -32,7 +32,7 @@ public class Jornada implements Comparable<Jornada> {
                 }
             }
         }
-        return null;
+        return siguienteCarrera;
     }
 
     public Carrera getCarreraAbierta() {
