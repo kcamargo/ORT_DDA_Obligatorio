@@ -22,7 +22,7 @@ public class FrmLogin extends javax.swing.JFrame {
     DlgSeleccionarHipodromo dialog;
     public FrmLogin() {
         initComponents();
-        dialog = new DlgSeleccionarHipodromo(this, true);
+       // dialog = new DlgSeleccionarHipodromo(this, true);
     }
 
     /**
@@ -40,6 +40,7 @@ public class FrmLogin extends javax.swing.JFrame {
         lblLoginMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -47,46 +48,21 @@ public class FrmLogin extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogin);
+        btnLogin.setBounds(130, 146, 158, 37);
 
         txtUsuario.setText("Admin");
+        getContentPane().add(txtUsuario);
+        txtUsuario.setBounds(130, 38, 158, 20);
 
         txtPass.setText("111");
         txtPass.setToolTipText("");
+        getContentPane().add(txtPass);
+        txtPass.setBounds(130, 94, 158, 20);
+        getContentPane().add(lblLoginMensaje);
+        lblLoginMensaje.setBounds(80, 200, 249, 14);
 
-        lblLoginMensaje.setText("jLabel1");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsuario)
-                            .addComponent(txtPass)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(lblLoginMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(lblLoginMensaje)
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
-
-        pack();
+        setBounds(0, 0, 416, 338);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -98,9 +74,12 @@ public class FrmLogin extends javax.swing.JFrame {
             admin = fac.login(admin);
             if(admin != null){
                 this.setVisible(false);
-                FrmAdministrador frmAdmin = new FrmAdministrador();
-                frmAdmin.setVisible(true);
+                FrmAdministrador frmAdmin = new FrmAdministrador(admin);
+                dialog = new DlgSeleccionarHipodromo(this, true);
+                dialog.cargarAdmin(admin);
                 dialog.setVisible(true);
+                dialog.cargarForm(frmAdmin);
+                
                
             }else{
                 lblLoginMensaje.setText("Nombre de usuario o contraseña incorrecta.");

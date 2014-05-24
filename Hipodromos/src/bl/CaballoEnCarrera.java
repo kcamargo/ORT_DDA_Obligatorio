@@ -73,7 +73,7 @@ public class CaballoEnCarrera {
     //</editor-fold>
 
     public boolean validar() {
-        return numero > 0
+        return numero > 0 && numero < 99999
                 && dividendo > 1
                 && caballo != null;
     }

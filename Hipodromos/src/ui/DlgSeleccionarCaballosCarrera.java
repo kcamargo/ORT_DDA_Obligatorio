@@ -161,7 +161,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
                        lblMensajee.setText("Los datos ingresados no son correctos.");
                    }
               } else { 
-                       lblMensajee.setText("Ya existe el numero de caballo.");
+                       lblMensajee.setText("Numero de caballo invalido.");
                }
             } else {
                 lblMensajee.setText("Seleccione un caballo.");

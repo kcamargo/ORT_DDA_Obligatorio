@@ -21,6 +21,8 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
      * Creates new form DlgSeleccionarHipodromo
      */
     Fachada fac = Fachada.getInstancia();
+
+    Administrador admin;
     public DlgSeleccionarHipodromo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -81,6 +83,7 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
         fac.seleccionarHipodromo(h);
         System.out.println(fac.getHipodromoActual());
         this.setVisible(false);
+      //  frmAdmin.setVisible(true);
         
     }//GEN-LAST:event_btnSeeccionarHipodromoActionPerformed
 
@@ -91,6 +94,10 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
                 cmbHipodromos.addItem(h);
             }
             cmbHipodromos.getItemAt(1);
+    }
+    public void cargarForm(FrmAdministrador instance){
+        instance.setVisible(true);
+        
     }
 
     /**
@@ -104,6 +111,10 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBienvenida;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarAdmin(Administrador a) {
+        lblBienvenida.setText(a.getUsername());
+    }
 
     
 }

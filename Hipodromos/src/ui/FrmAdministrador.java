@@ -1,5 +1,6 @@
 package ui;
 
+import bl.Administrador;
 import bl.Carrera;
 import bl.Fachada;
 import java.awt.event.WindowAdapter;
@@ -8,11 +9,11 @@ import java.awt.event.WindowEvent;
 public class FrmAdministrador extends javax.swing.JFrame {
 
     Fachada fachada = Fachada.getInstancia();
-
-    public FrmAdministrador() {
+    public FrmAdministrador(Administrador a) {
         initComponents();
         cargarMenu();
-       
+        if(a != null)
+            lblAdmin.setText(a.getUsername());
     }
 
     @SuppressWarnings("unchecked")
@@ -24,15 +25,21 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         lblBienvenida = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         lblMensajeCrear = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblAdmin = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itemSeleccionar = new javax.swing.JMenuItem();
         itemCrearHipodromo = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         administrarCarreras = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -48,10 +55,18 @@ public class FrmAdministrador extends javax.swing.JFrame {
         getContentPane().setLayout(null);
         getContentPane().add(lblBienvenida);
         lblBienvenida.setBounds(72, 11, 0, 0);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(10, 228, 499, 2);
         getContentPane().add(lblMensajeCrear);
         lblMensajeCrear.setBounds(176, 439, 0, 0);
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setText("Bienvenido :");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 110, 150, 40);
+
+        lblAdmin.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lblAdmin.setText("jLabel2");
+        getContentPane().add(lblAdmin);
+        lblAdmin.setBounds(140, 110, 100, 40);
 
         jMenuBar1.setToolTipText("");
 
@@ -85,6 +100,15 @@ public class FrmAdministrador extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
+        jMenuItem4.setText("Abrir");
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Cerrar");
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Ganador");
+        jMenu2.add(jMenuItem6);
+
         administrarCarreras.setText("Administrar");
         administrarCarreras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +118,18 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jMenu2.add(administrarCarreras);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu6.setText("Emular Terminal de Apuestas");
+
+        jMenuItem7.setText("Abrir");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu6);
 
         jMenu5.setText("Finalizar");
 
@@ -109,7 +145,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setBounds(0, 0, 525, 509);
+        setBounds(0, 0, 525, 264);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSeleccionarActionPerformed
@@ -137,21 +173,32 @@ public class FrmAdministrador extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        new FrmJugador().setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrarCarreras;
     private javax.swing.JMenuItem itemCrearHipodromo;
     private javax.swing.JMenuItem itemSeleccionar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblMensajeCrear;
     // End of variables declaration//GEN-END:variables
