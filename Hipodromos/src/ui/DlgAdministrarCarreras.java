@@ -22,6 +22,7 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
         this.hipodromoSeleccionado = hipodromoSeleccionado;
 
         initComponents();
+        this.setLocationRelativeTo(null);
 
         mostrarHipodromo();
         mostrarCarreras();

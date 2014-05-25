@@ -3,17 +3,19 @@ package ui;
 import bl.Administrador;
 import bl.Carrera;
 import bl.Fachada;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 public class FrmAdministrador extends javax.swing.JFrame {
 
     Fachada fachada = Fachada.getInstancia();
+
     public FrmAdministrador(Administrador a) {
         initComponents();
+        this.setLocationRelativeTo(null);
         cargarMenu();
-        if(a != null)
+        if (a != null) {
             lblAdmin.setText(a.getUsername());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -29,19 +31,17 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblAdmin = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuHipodromos = new javax.swing.JMenu();
         itemSeleccionar = new javax.swing.JMenuItem();
         itemCrearHipodromo = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        menuCarreras = new javax.swing.JMenu();
+        crearCarrera = new javax.swing.JMenuItem();
+        monitorearCarreras = new javax.swing.JMenuItem();
         administrarCarreras = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuEmular = new javax.swing.JMenu();
+        itenAbrirTerminal = new javax.swing.JMenuItem();
+        menuFinalizar = new javax.swing.JMenu();
+        salir = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -70,7 +70,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
         jMenuBar1.setToolTipText("");
 
-        jMenu1.setText("Hipodromos");
+        menuHipodromos.setText("Hipodromos");
 
         itemSeleccionar.setText("Seleccionar");
         itemSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
                 itemSeleccionarActionPerformed(evt);
             }
         });
-        jMenu1.add(itemSeleccionar);
+        menuHipodromos.add(itemSeleccionar);
 
         itemCrearHipodromo.setText("Crear");
         itemCrearHipodromo.addActionListener(new java.awt.event.ActionListener() {
@@ -86,28 +86,27 @@ public class FrmAdministrador extends javax.swing.JFrame {
                 itemCrearHipodromoActionPerformed(evt);
             }
         });
-        jMenu1.add(itemCrearHipodromo);
+        menuHipodromos.add(itemCrearHipodromo);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuHipodromos);
 
-        jMenu2.setText("Carreras");
+        menuCarreras.setText("Carreras");
 
-        jMenuItem1.setText("Crear Carrera");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        crearCarrera.setText("Crear Carrera");
+        crearCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                crearCarreraActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuCarreras.add(crearCarrera);
 
-        jMenuItem4.setText("Abrir");
-        jMenu2.add(jMenuItem4);
-
-        jMenuItem5.setText("Cerrar");
-        jMenu2.add(jMenuItem5);
-
-        jMenuItem6.setText("Ganador");
-        jMenu2.add(jMenuItem6);
+        monitorearCarreras.setText("Monitorear");
+        monitorearCarreras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monitorearCarrerasActionPerformed(evt);
+            }
+        });
+        menuCarreras.add(monitorearCarreras);
 
         administrarCarreras.setText("Administrar");
         administrarCarreras.addActionListener(new java.awt.event.ActionListener() {
@@ -115,33 +114,33 @@ public class FrmAdministrador extends javax.swing.JFrame {
                 administrarCarrerasActionPerformed(evt);
             }
         });
-        jMenu2.add(administrarCarreras);
+        menuCarreras.add(administrarCarreras);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuCarreras);
 
-        jMenu6.setText("Emular Terminal de Apuestas");
+        menuEmular.setText("Emular Terminal de Apuestas");
 
-        jMenuItem7.setText("Abrir");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        itenAbrirTerminal.setText("Abrir");
+        itenAbrirTerminal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                itenAbrirTerminalActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem7);
+        menuEmular.add(itenAbrirTerminal);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(menuEmular);
 
-        jMenu5.setText("Finalizar");
+        menuFinalizar.setText("Finalizar");
 
-        jMenuItem3.setText("Salie de la aplicacion");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        salir.setText("Salir de la aplicacion");
+        salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                salirActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem3);
+        menuFinalizar.add(salir);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(menuFinalizar);
 
         setJMenuBar(jMenuBar1);
 
@@ -156,9 +155,9 @@ public class FrmAdministrador extends javax.swing.JFrame {
         new DlgCrearHipodromo(this, true).setVisible(true);
     }//GEN-LAST:event_itemCrearHipodromoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void crearCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCarreraActionPerformed
         new DlgCrearCarrera(this, true).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_crearCarreraActionPerformed
 
     private void administrarCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarCarrerasActionPerformed
         Carrera abierta = fachada.getHipodromoActual().getCarreraAbierta();
@@ -168,39 +167,40 @@ public class FrmAdministrador extends javax.swing.JFrame {
         new DlgAdministrarCarreras(this, true, siguiente, abierta, cerrada, fachada.getHipodromoActual()).setVisible(true);
     }//GEN-LAST:event_administrarCarrerasActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_salirActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
+    private void itenAbrirTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itenAbrirTerminalActionPerformed
         new FrmJugador().setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_itenAbrirTerminalActionPerformed
+
+    private void monitorearCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorearCarrerasActionPerformed
+        String strFecha = JOptionPane.showInputDialog("Ingrese una fecha (dd/mm/aaaa)");
+        
+    }//GEN-LAST:event_monitorearCarrerasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrarCarreras;
+    private javax.swing.JMenuItem crearCarrera;
     private javax.swing.JMenuItem itemCrearHipodromo;
     private javax.swing.JMenuItem itemSeleccionar;
+    private javax.swing.JMenuItem itenAbrirTerminal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblMensajeCrear;
+    private javax.swing.JMenu menuCarreras;
+    private javax.swing.JMenu menuEmular;
+    private javax.swing.JMenu menuFinalizar;
+    private javax.swing.JMenu menuHipodromos;
+    private javax.swing.JMenuItem monitorearCarreras;
+    private javax.swing.JMenuItem salir;
     // End of variables declaration//GEN-END:variables
 
     private void cargarMenu() {
