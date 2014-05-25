@@ -107,20 +107,35 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
 
     private void btnCrearCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCarreraActionPerformed
         // TODO add your handling code here:
-        int year = Integer.parseInt(txtYear.getText());
-        int month =Integer.parseInt(txtMonth.getText());
-        int day = Integer.parseInt(txtDay.getText());
-        String nombre = txtNombre.getText();
-        Calendar cal = Calendar.getInstance();
-        cal.clear();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DATE, day);
-        Date fch = cal.getTime();
+       Date fch;
+       int year;
+       int month;
+       int day;
+       Calendar cal = Calendar.getInstance();
+        try {
+            year = Integer.parseInt(txtYear.getText());
+            month =Integer.parseInt(txtMonth.getText());
+            day = Integer.parseInt(txtDay.getText());                                   
+            cal.clear();
+            cal.set(Calendar.YEAR, year);
+            cal.set(Calendar.MONTH, month);
+            cal.set(Calendar.DATE, day);
+            fch= cal.getTime();
+            
+        } catch (Exception e) {
+            fch = new Date();          
+            cal.setTime(fch);
+            cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+            cal.set(Calendar.MONTH, cal.get(Calendar.MONTH));
+            cal.set(Calendar.DATE,cal.get(Calendar.DAY_OF_MONTH));
+            fch = cal.getTime();   
+        }
+                
+        String nombre = txtNombre.getText();        
         Carrera c = new Carrera(nombre, fch);
         
         if(fac.getHipodromoActual().validarDatosCarrera(c)){
-            if ( c.validarFecha(year, month, day)) {
+            if ( c.validarFecha(fch)) {
                 fac.getHipodromoActual().agregarCarrera(c);
                 dialogCaballos = new DlgSeleccionarCaballosCarrera(jFrame, true, c);
                 dialogCaballos.setVisible(true);

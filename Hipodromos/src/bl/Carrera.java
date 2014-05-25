@@ -123,20 +123,13 @@ public class Carrera implements Comparable<Carrera> {
                 && estado != null;
     }
 
-    public boolean validarFecha(int year, int month, int day) {
+     public boolean validarFecha(Date fch) {
         boolean ret;
-
-        Calendar cal = Calendar.getInstance();
-        cal.clear();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DATE, day);
-        Date fch = cal.getTime();
         Date now = new Date();
-        if (now.after(fch)) {
-            ret = false;
-        } else {
+        if ( now.before(fch) || ( now.getDay()) == (fch.getDay()) ) {
             ret = true;
+        } else {
+            ret = false;
         }
         return ret;
     }

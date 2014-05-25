@@ -38,6 +38,7 @@ public class FrmLogin extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtPass = new javax.swing.JTextField();
         lblLoginMensaje = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -49,18 +50,23 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(130, 146, 158, 37);
+        btnLogin.setBounds(130, 150, 158, 37);
 
         txtUsuario.setText("Admin");
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(130, 38, 158, 20);
+        txtUsuario.setBounds(130, 60, 158, 20);
 
         txtPass.setText("111");
         txtPass.setToolTipText("");
         getContentPane().add(txtPass);
-        txtPass.setBounds(130, 94, 158, 20);
+        txtPass.setBounds(130, 100, 158, 20);
         getContentPane().add(lblLoginMensaje);
-        lblLoginMensaje.setBounds(80, 200, 249, 14);
+        lblLoginMensaje.setBounds(80, 230, 310, 14);
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setText("Ingresar :");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(140, 20, 150, 30);
 
         setBounds(0, 0, 416, 338);
     }// </editor-fold>//GEN-END:initComponents
@@ -95,6 +101,7 @@ public class FrmLogin extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblLoginMensaje;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtUsuario;
