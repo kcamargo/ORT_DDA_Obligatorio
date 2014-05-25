@@ -44,6 +44,9 @@ public class PanelFecha extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public Date getFecha() {
+        if (txtDia.getText().equals("") & txtMes.getText().equals("") & txtAnio.getText().equals("")) {
+            return Fecha.fechaActual();
+        }
         try {
             int dia = Integer.parseInt(txtDia.getText());
             int mes = Integer.parseInt(txtMes.getText());
