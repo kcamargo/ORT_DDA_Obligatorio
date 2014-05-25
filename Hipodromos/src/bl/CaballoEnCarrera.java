@@ -128,7 +128,7 @@ public class CaballoEnCarrera {
     public String toString() {
         String ret = "(" + numero + ") " + caballo.getNombre() + " - " + dividendo;
         if (ganador) {
-            ret += "***GANADOR***";
+            ret += " ***GANADOR***";
         }
         return ret;
     }

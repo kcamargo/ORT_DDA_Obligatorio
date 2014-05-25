@@ -53,6 +53,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
         getContentPane().add(lblBienvenida);
         lblBienvenida.setBounds(72, 11, 0, 0);
@@ -62,12 +63,12 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenido :");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 110, 150, 40);
+        jLabel1.setBounds(120, 80, 150, 40);
 
         lblAdmin.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         lblAdmin.setText("jLabel2");
         getContentPane().add(lblAdmin);
-        lblAdmin.setBounds(140, 110, 100, 40);
+        lblAdmin.setBounds(270, 80, 100, 40);
 
         jMenuBar1.setToolTipText("");
 
@@ -181,7 +182,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         try {
             int resultado = JOptionPane.showConfirmDialog(this, panelFecha, "Monitorear carreras", JOptionPane.OK_CANCEL_OPTION);
             if (resultado == JOptionPane.OK_OPTION) {
-                new DlgMonitorearCarrera(this, true, panelFecha.getFecha()).setVisible(true);
+                new DlgMonitorearCarrera(this, false, panelFecha.getFecha()).setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Fecha inválida!");

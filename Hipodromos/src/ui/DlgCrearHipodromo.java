@@ -26,6 +26,8 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         btnCrearHipodromo.setText("Crear");
         btnCrearHipodromo.addActionListener(new java.awt.event.ActionListener() {
@@ -33,65 +35,28 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
                 btnCrearHipodromoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCrearHipodromo);
+        btnCrearHipodromo.setBounds(110, 170, 92, 48);
+        getContentPane().add(lblMensajeCrear);
+        lblMensajeCrear.setBounds(10, 240, 280, 20);
+        getContentPane().add(txtNombreHipodromo);
+        txtNombreHipodromo.setBounds(100, 60, 183, 20);
+        getContentPane().add(txtDireccionHipodromo);
+        txtDireccionHipodromo.setBounds(100, 110, 183, 20);
 
         jLabel1.setText("Nombre :");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 60, 82, 14);
 
         jLabel2.setText("Direccion :");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 120, 69, 14);
 
         jLabel3.setText("Crear Hipodromo");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(70, 20, 183, 14);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMensajeCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(btnCrearHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtDireccionHipodromo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                            .addComponent(txtNombreHipodromo, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombreHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(txtDireccionHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)
-                .addComponent(btnCrearHipodromo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(lblMensajeCrear)
-                .addGap(39, 39, 39))
-        );
-
-        pack();
+        setBounds(0, 0, 328, 318);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearHipodromoActionPerformed
@@ -122,7 +87,6 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
         } else {
             lblMensajeCrear.setText("Todos los campos son requerdos.");
         }
-        System.out.println(fac.getHipodromos());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearHipodromo;

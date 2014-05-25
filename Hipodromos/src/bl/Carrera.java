@@ -1,5 +1,6 @@
 package bl;
 
+import bl.enums.CambiosCarrera;
 import bl.enums.ErroresApuesta;
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,8 +76,9 @@ public class Carrera implements Comparable<Carrera> {
     public void setEstado(EstadoCarrera estado) {
         this.estado = estado;
         if (estado == EstadoCarrera.CERRADA) {
-            Fachada.getInstancia().notificarObservadores(ErroresApuesta.ApuestaCerrada);
+            Fachada.getInstancia().notificarObservadores(ErroresApuesta.CarreraCerrada);
         }
+        Fachada.getInstancia().notificarObservadores(CambiosCarrera.CambioEstado);
     }
 
     public ArrayList<CaballoEnCarrera> getCaballos() {

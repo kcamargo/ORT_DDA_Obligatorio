@@ -44,6 +44,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         lblMensajee = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jScrollPane1.setViewportView(lstDisponibles);

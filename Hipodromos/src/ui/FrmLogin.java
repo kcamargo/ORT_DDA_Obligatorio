@@ -23,6 +23,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         btnLogin.setText("Login");
@@ -32,25 +33,27 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(130, 150, 158, 37);
+        btnLogin.setBounds(90, 150, 158, 37);
 
         txtUsuario.setText("Admin");
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(130, 60, 158, 20);
+        txtUsuario.setBounds(90, 60, 158, 20);
 
         txtPass.setText("111");
         txtPass.setToolTipText("");
         getContentPane().add(txtPass);
-        txtPass.setBounds(130, 100, 158, 20);
+        txtPass.setBounds(90, 100, 158, 20);
+
+        lblLoginMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblLoginMensaje);
-        lblLoginMensaje.setBounds(80, 230, 310, 14);
+        lblLoginMensaje.setBounds(20, 210, 310, 20);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setText("Ingresar :");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(140, 20, 150, 30);
+        jLabel1.setBounds(100, 20, 150, 30);
 
-        setBounds(0, 0, 416, 338);
+        setBounds(0, 0, 376, 294);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed

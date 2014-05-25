@@ -253,7 +253,7 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     @Override
     public void actualizar(Observable origen, Object param) {
-        if (param.equals(ErroresApuesta.ApuestaCerrada)) {
+        if (param.equals(ErroresApuesta.CarreraCerrada)) {
             carreraAbierta = null;
             limpiarDatosDeCarrera();
             limpiarDatosDeCaballos();

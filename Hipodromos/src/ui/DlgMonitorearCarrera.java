@@ -4,40 +4,48 @@ import bl.Apuesta;
 import bl.CaballoEnCarrera;
 import bl.Carrera;
 import bl.Fachada;
+import bl.enums.CambiosCarrera;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
 import util.Fecha;
+import util.Observable;
+import util.Observador;
 
-public class DlgMonitorearCarrera extends javax.swing.JDialog {
+public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observador {
 
     Date fecha;
     Fachada fac = Fachada.getInstancia();
+    Carrera carreraSeleccionada;
     ArrayList<Carrera> carreras;
     ArrayList<Apuesta> ganadores;
+
     public DlgMonitorearCarrera(java.awt.Frame parent, boolean modal, Date fecha) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+
+        fac.agregarObservador(this);
+
         this.fecha = fecha;
         carreras = fac.getHipodromoActual().getCarreras(Fecha.crearFecha(25, 4, 2014));
+        carreraSeleccionada = null;
+
         mostrarCarreras();
-        this.setLocationRelativeTo(null);
-        
     }
-    public void mostrarCarreras(){
-    
+
+    private void mostrarCarreras() {
         ArrayList<String> listado = new ArrayList();
-        if(carreras != null){
-            for(Carrera c: carreras){
+        if (carreras != null) {
+            for (Carrera c : carreras) {
                 listado.add(c.getNumero() + " - " + c.getNombre() + " - " + c.getEstadoString());
             }
             lstCarreras.setListData(listado.toArray());
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "No hay carreras para la fecha.");
-        } 
+        }
     }
-   
-    
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,6 +63,7 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         lstCarreras.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -65,7 +74,7 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog {
         jScrollPane1.setViewportView(lstCarreras);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 100, 320, 80);
+        jScrollPane1.setBounds(10, 100, 220, 160);
 
         jLabel1.setText("Seleccionar Carreras :");
         getContentPane().add(jLabel1);
@@ -74,59 +83,39 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel2.setText("Monitorear Carreras");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(190, 20, 240, 30);
+        jLabel2.setBounds(140, 20, 240, 30);
+
+        lblDatosCarrera.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(lblDatosCarrera);
-        lblDatosCarrera.setBounds(10, 190, 320, 90);
+        lblDatosCarrera.setBounds(240, 100, 240, 160);
 
         jScrollPane2.setViewportView(lstCaballos);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(20, 310, 240, 60);
+        jScrollPane2.setBounds(20, 310, 210, 170);
 
         jScrollPane3.setViewportView(lstGanadores);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(20, 400, 240, 60);
+        jScrollPane3.setBounds(270, 310, 210, 170);
 
         jLabel3.setText("Caballos");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 290, 60, 14);
+        jLabel3.setBounds(20, 280, 60, 20);
 
         jLabel4.setText("Ganadores :");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 380, 90, 14);
+        jLabel4.setBounds(270, 280, 90, 20);
 
-        setBounds(0, 0, 584, 503);
+        setBounds(0, 0, 516, 532);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lstCarrerasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCarrerasValueChanged
-        // TODO add your handling code here:
-        int numero = lstCarreras.getSelectedIndex();
-        Carrera c = carreras.get(numero);
-        lblDatosCarrera.setText("<html> Numero :" + c.getNumero() + "<br>"+
-                "Nombre :" + c.getNombre() + "<br>"+
-                "Estado :" + c.getEstadoString() + "<br>"+                
-                "Cantidad de Caballos : "+ c.getCaballos().size() + "</html>"  );
-        
-        lstCaballos.setListData(c.getCaballos().toArray());
-        
-        for(CaballoEnCarrera cab : c.getCaballos()){
-            if(cab.isGanador()){
-                ganadores = cab.getApuestas();
-            }
+        if (lstCarreras.getSelectedIndex() != -1) {
+            carreraSeleccionada = carreras.get(lstCarreras.getSelectedIndex());
+            mostrarCarrera();
         }
-        if(ganadores != null){
-            lstGanadores.setListData(formaterarLista(ganadores).toArray());
-        }
-        
-        
-        
-        
-        
-        
-                                 
     }//GEN-LAST:event_lstCarrerasValueChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -141,11 +130,37 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog {
     private javax.swing.JList lstGanadores;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<String> formaterarLista(ArrayList<Apuesta> ganadores) {
+    private ArrayList<String> formaterarListaGanadores(ArrayList<Apuesta> ganadores) {
         ArrayList<String> listado = new ArrayList();
-            for(Apuesta a : ganadores){
-                listado.add("Username : " + a.getJugador().getUsername() + "Monto apostad: " + a.getMonto() + "Monto Ganado : " + a.getGanado() );
-            }
+        for (Apuesta a : ganadores) {
+            listado.add(a.getJugador().getUsername() + " - Apostado(" + a.getMonto() + ") - " + "Ganado: (" + a.getGanado() + ")");
+        }
         return listado;
+    }
+
+    @Override
+    public void actualizar(Observable origen, Object param) {
+        if (param.equals(CambiosCarrera.CambioEstado)) {
+            mostrarCarreras();
+            mostrarCarrera();
+        }
+    }
+
+    private void mostrarCarrera() {
+        lblDatosCarrera.setText("<html> Numero :" + carreraSeleccionada.getNumero() + "<br>"
+                + "Nombre :" + carreraSeleccionada.getNombre() + "<br>"
+                + "Estado :" + carreraSeleccionada.getEstadoString() + "<br>"
+                + "Cantidad de Caballos : " + carreraSeleccionada.getCaballos().size() + "</html>");
+
+        lstCaballos.setListData(carreraSeleccionada.getCaballos().toArray());
+
+        for (CaballoEnCarrera cab : carreraSeleccionada.getCaballos()) {
+            if (cab.isGanador()) {
+                ganadores = cab.getApuestas();
+            }
+        }
+        if (ganadores != null) {
+            lstGanadores.setListData(formaterarListaGanadores(ganadores).toArray());
+        }
     }
 }

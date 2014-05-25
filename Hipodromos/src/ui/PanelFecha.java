@@ -22,10 +22,16 @@ public class PanelFecha extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(218, 86));
         setLayout(null);
+
+        txtMes.setText("4");
         add(txtMes);
         txtMes.setBounds(80, 50, 40, 20);
+
+        txtDia.setText("25");
         add(txtDia);
         txtDia.setBounds(20, 50, 40, 20);
+
+        txtAnio.setText("2014");
         add(txtAnio);
         txtAnio.setBounds(140, 50, 60, 20);
 

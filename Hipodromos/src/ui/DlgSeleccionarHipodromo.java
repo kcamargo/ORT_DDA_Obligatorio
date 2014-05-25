@@ -27,6 +27,7 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
         lblBienvenida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         getContentPane().add(cmbHipodromos);
@@ -53,17 +54,14 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
         getContentPane().add(lblBienvenida);
         lblBienvenida.setBounds(96, 11, 188, 14);
 
-        setBounds(0, 0, 416, 338);
+        setBounds(0, 0, 416, 188);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeeccionarHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeccionarHipodromoActionPerformed
         // TODO add your handling code here:        
         Hipodromo h = (Hipodromo) cmbHipodromos.getItemAt(cmbHipodromos.getSelectedIndex());
         fac.seleccionarHipodromo(h);
-        System.out.println(fac.getHipodromoActual());
         this.setVisible(false);
-        //  frmAdmin.setVisible(true);
-
     }//GEN-LAST:event_btnSeeccionarHipodromoActionPerformed
 
     private void seleccionarHipodromo() {
