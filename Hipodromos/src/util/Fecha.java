@@ -48,6 +48,9 @@ public class Fecha {
         cal.set(Calendar.YEAR, anio);
         cal.set(Calendar.MONTH, mes);
         cal.set(Calendar.DAY_OF_MONTH, dia);
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
         return cal.getTime();
     }
 }

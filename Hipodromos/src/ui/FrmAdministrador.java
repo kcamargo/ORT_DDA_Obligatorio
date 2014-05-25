@@ -26,6 +26,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida = new javax.swing.JLabel();
         lblMensajeCrear = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -176,10 +177,16 @@ public class FrmAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_itenAbrirTerminalActionPerformed
 
     private void monitorearCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monitorearCarrerasActionPerformed
-        String strFecha = JOptionPane.showInputDialog("Ingrese una fecha (dd/mm/aaaa)");
-        
+        PanelFecha panelFecha = new PanelFecha();
+        try {
+            int resultado = JOptionPane.showConfirmDialog(this, panelFecha, "Monitorear carreras", JOptionPane.OK_CANCEL_OPTION);
+            if (resultado == JOptionPane.OK_OPTION) {
+                new DlgMonitorearCarrera(this, true, panelFecha.getFecha()).setVisible(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fecha inválida!");
+        }
     }//GEN-LAST:event_monitorearCarrerasActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrarCarreras;
     private javax.swing.JMenuItem crearCarrera;
@@ -192,6 +199,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblMensajeCrear;
