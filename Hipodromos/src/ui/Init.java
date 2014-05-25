@@ -55,13 +55,13 @@ public class Init {
         Caballo cab14 = new Caballo("Tornado", "Fulano");
         Caballo cab15 = new Caballo("Kekeke", "Fulano");
 
-        Carrera c1 = new Carrera("Carrera 1", Fecha.crearFecha(22, 4, 2014));
-        Carrera c2 = new Carrera("Carrera 2", Fecha.crearFecha(22, 4, 2014));
-        Carrera c3 = new Carrera("Carrera 3", Fecha.crearFecha(22, 4, 2014));
-        Carrera c4 = new Carrera("Carrera 4", Fecha.crearFecha(22, 4, 2014));
-        Carrera c5 = new Carrera("Carrera 5", Fecha.crearFecha(22, 4, 2014));
-        Carrera c6 = new Carrera("Carrera 6", Fecha.crearFecha(22, 4, 2014));
-        Carrera c7 = new Carrera("Carrera 7", Fecha.crearFecha(22, 4, 2014));
+        Carrera c1 = new Carrera("Carrera 1", Fecha.crearFecha(25, 4, 2014));
+        Carrera c2 = new Carrera("Carrera 2", Fecha.crearFecha(25, 4, 2014));
+        Carrera c3 = new Carrera("Carrera 3", Fecha.crearFecha(25, 4, 2014));
+        Carrera c4 = new Carrera("Carrera 4", Fecha.crearFecha(25, 4, 2014));
+        Carrera c5 = new Carrera("Carrera 5", Fecha.crearFecha(25, 4, 2014));
+        Carrera c6 = new Carrera("Carrera 6", Fecha.crearFecha(25, 4, 2014));
+        Carrera c7 = new Carrera("Carrera 7", Fecha.crearFecha(25, 4, 2014));
 
         fac.agregarCaballo(cab1);
         fac.agregarCaballo(cab2);
