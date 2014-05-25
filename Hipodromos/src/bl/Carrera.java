@@ -74,7 +74,9 @@ public class Carrera implements Comparable<Carrera> {
 
     public void setEstado(EstadoCarrera estado) {
         this.estado = estado;
-        Fachada.getInstancia().notificarObservadores(ErroresApuesta.ApuestaCerrada);
+        if (estado == EstadoCarrera.CERRADA) {
+            Fachada.getInstancia().notificarObservadores(ErroresApuesta.ApuestaCerrada);
+        }
     }
 
     public ArrayList<CaballoEnCarrera> getCaballos() {
