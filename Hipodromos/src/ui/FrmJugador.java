@@ -7,6 +7,9 @@ import bl.Fachada;
 import bl.Hipodromo;
 import bl.Jugador;
 import bl.enums.ErroresApuesta;
+import static bl.enums.ErroresApuesta.ErrorGenerico;
+import static bl.enums.ErroresApuesta.OK;
+import static bl.enums.ErroresApuesta.SaldoInsuficiente;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import util.Observable;
@@ -188,34 +191,38 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnApostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApostarActionPerformed
-        Jugador j = new Jugador(0, txtUsuario.getText().toString(), txtPass.getText().toString());
-        j = fachada.login(j);
+        if (carreraAbierta != null) {
+            Jugador j = new Jugador(0, txtUsuario.getText().toString(), txtPass.getText().toString());
+            j = fachada.login(j);
 
-        if (j != null) {
-            if (validarMonto()) {
-                CaballoEnCarrera caballo = (CaballoEnCarrera) lstCaballos.getSelectedValue();
-                Apuesta a = new Apuesta(Integer.parseInt(txtMonto.getText()), j);
-                if (a.validar()) {
-                    ErroresApuesta ret = caballo.agregarApuesta(a);
-                    switch (ret) {
-                        case OK:
-                            messageBox("OK");
-                            break;
-                        case SaldoInsuficiente:
-                            messageBox("Saldo insuficiente");
-                            break;
-                        case ErrorGenerico:
-                            messageBox("Error inesperado");
-                            break;
+            if (j != null) {
+                if (validarMonto()) {
+                    CaballoEnCarrera caballo = (CaballoEnCarrera) lstCaballos.getSelectedValue();
+                    Apuesta a = new Apuesta(Integer.parseInt(txtMonto.getText()), j);
+                    if (a.validar()) {
+                        ErroresApuesta ret = caballo.agregarApuesta(a);
+                        switch (ret) {
+                            case OK:
+                                messageBox("OK");
+                                break;
+                            case SaldoInsuficiente:
+                                messageBox("Saldo insuficiente");
+                                break;
+                            case ErrorGenerico:
+                                messageBox("Error inesperado");
+                                break;
+                        }
+                    } else {
+                        messageBox("El monto debe ser mayor que cero");
                     }
                 } else {
-                    messageBox("El monto debe ser mayor que cero");
+                    messageBox("El monto debe ser numérico");
                 }
             } else {
-                messageBox("El monto debe ser numérico");
+                messageBox("Login incorrecto");
             }
         } else {
-            messageBox("Login incorrecto");
+            messageBox("No hay carreras abiertas");
         }
     }//GEN-LAST:event_btnApostarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -246,7 +253,12 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     @Override
     public void actualizar(Observable origen, Object param) {
-        //TODO Actualizar FrmJugador cuando cambie la fachada
+        if (param.equals(ErroresApuesta.ApuestaCerrada)) {
+            carreraAbierta = null;
+            limpiarDatosDeCarrera();
+            limpiarDatosDeCaballos();
+            messageBox("La carrera se ha cerrado");
+        }
     }
 
     private void cargarHipodromos() {
