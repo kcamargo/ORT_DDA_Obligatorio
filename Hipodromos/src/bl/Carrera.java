@@ -75,9 +75,6 @@ public class Carrera {
 
     public void setEstado(EstadoCarrera estado) {
         this.estado = estado;
-        if (estado == EstadoCarrera.CERRADA) {
-            Fachada.getInstancia().notificarObservadores(ErroresApuesta.CarreraCerrada);
-        }
         Fachada.getInstancia().notificarObservadores(CambiosCarrera.CambioEstado);
     }
 
@@ -154,6 +151,7 @@ public class Carrera {
     public boolean abrir() {
         if (estado == EstadoCarrera.DEFINIDA) {
             setEstado(EstadoCarrera.ABIERTA);
+            Fachada.getInstancia().notificarObservadores(ErroresApuesta.CarreraAbierta);
             return true;
         }
         return false;
@@ -162,6 +160,7 @@ public class Carrera {
     public boolean cerrar() {
         if (estado == EstadoCarrera.ABIERTA) {
             setEstado(EstadoCarrera.CERRADA);
+            Fachada.getInstancia().notificarObservadores(ErroresApuesta.CarreraCerrada);
             return true;
         }
         return false;

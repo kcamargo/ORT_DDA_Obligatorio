@@ -98,23 +98,24 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
             fch = Fecha.fechaActual();
         }
         String nombre = txtNombre.getText();
-        Carrera c = new Carrera(nombre, fch);
 
-        if (fac.getHipodromoActual().validarDatosCarrera(c)) {
-            if (c.validarFecha(fch)) {
-                fac.getHipodromoActual().agregarCarrera(c);
-                limpiarCampos();
-                Frame parent = (Frame) this.getParent();
-                new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
+        if (!nombre.equals("")) {
+            Carrera c = new Carrera(nombre, fch);
+            if (fac.getHipodromoActual().validarDatosCarrera(c)) {
+                if (c.validarFecha(fch)) {
+                    fac.getHipodromoActual().agregarCarrera(c);
+                    limpiarCampos();
+                    Frame parent = (Frame) this.getParent();
+                    new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
+                } else {
+                    lblMensaje.setText("La fecha de la carrera no es correcta");
+                }
             } else {
-                lblMensaje.setText("La fecha de la carrera no es correcta");
+                lblMensaje.setText("El nombre para de carrera para la jornada ya existe");
             }
         } else {
-            lblMensaje.setText("El nombre para de carrera para la jornada ya existe");
+            lblMensaje.setText("Ingrese un nombre para la carrera");
         }
-
-
-
     }//GEN-LAST:event_btnCrearCarreraActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCarrera;

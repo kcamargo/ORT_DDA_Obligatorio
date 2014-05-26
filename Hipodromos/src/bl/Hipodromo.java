@@ -102,16 +102,11 @@ public class Hipodromo {
     }
 
     public boolean validarDatosCarrera(Carrera c) {
-        boolean ret = true;
-        for (Jornada j : jornadas) {
-            for (Carrera carrera : j.getCarreras()) {
-                if (carrera.getNombre().equals(c.getNombre()) && carrera.getFecha().equals(c.getFecha())) {
-                    ret = false;
-                }
-            }
+        Jornada j  = buscarJornada(c.getFecha());
+        if (!j.existeCarrera(c.getNombre())) {
+            return true;
         }
-
-        return ret;
+        return false;
     }
     //</editor-fold>
 

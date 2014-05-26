@@ -259,6 +259,9 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
             limpiarDatosDeCarrera();
             limpiarDatosDeCaballos();
             messageBox("La carrera se ha cerrado");
+        } else if (param.equals(ErroresApuesta.CarreraAbierta)) {
+            carreraAbierta = fachada.getHipodromoActual().getSiguienteCarrera();
+            mostrarInfoDeCarrera(carreraAbierta);
         }
     }
 
@@ -309,5 +312,6 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     private void borrarDatosJugador() {
         txtUsuario.setText("");
         txtPass.setText("");
+        txtMonto.setText("");
     }
 }

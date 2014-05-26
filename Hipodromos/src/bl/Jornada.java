@@ -170,4 +170,13 @@ public class Jornada {
         Jornada j = (Jornada) obj;
         return fecha.equals(j.getFecha());
     }
+
+    boolean existeCarrera(String nombre) {
+        for (Carrera c : carreras){
+            if (c.getNombre().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
