@@ -1,0 +1,35 @@
+﻿Autoevaluación:
+
+Cosas a arreglar para la segunda entrega:
+	1) Manejar errores con excepciones del lado de la lógica para desacoplar las vistas.
+
+	2) ToString de Caballo en carrera se muestra directamente en la interfaz, esto debe ser cambiado para desacoplar la UI.
+
+	3) Hacer AdministrarCarreras no modal para facilitar usabilidad. Deberá implementar Observer.
+
+	4) Manejar errores uniformemente en todas las ventanas.
+
+Detalles específicos:
+	4) Sacar de la interfaz (DlgSeleccionarCaballosCarrera) la lógica de verificar que no exista caballo con el mismo número y moverla a la clase Carrera
+
+	5) Mover validación de fecha dentro del método validar() de Carrera
+
+	6) Revisar lógica de validarCamposLogin (Usuario)
+
+Calificación: 17 pts
+
+
+***DATOS ÚTILES***
+
+Administradores: (usuario/pass)
+	admin/admin
+	root/root
+
+Jugadores:
+	Pedro/222
+	Juan/333
+	Ana/444
+	Jose/555
+	Maria/666
+
+Todas las carreras de prueba están en el Hipódromo de Maroñas.
