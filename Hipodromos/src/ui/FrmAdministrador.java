@@ -13,9 +13,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarMenu();
-        if (a != null) {
-            lblAdmin.setText(a.getUsername());
-        }
+        this.setTitle("Bienvenido " + a.getNombre() + " " + a.getApellido());
     }
 
     @SuppressWarnings("unchecked")
@@ -29,8 +27,6 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblBienvenida = new javax.swing.JLabel();
         lblMensajeCrear = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        lblAdmin = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuHipodromos = new javax.swing.JMenu();
         itemSeleccionar = new javax.swing.JMenuItem();
@@ -59,16 +55,6 @@ public class FrmAdministrador extends javax.swing.JFrame {
         lblBienvenida.setBounds(72, 11, 0, 0);
         getContentPane().add(lblMensajeCrear);
         lblMensajeCrear.setBounds(176, 439, 0, 0);
-
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel1.setText("Bienvenido :");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(120, 80, 150, 40);
-
-        lblAdmin.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        lblAdmin.setText("jLabel2");
-        getContentPane().add(lblAdmin);
-        lblAdmin.setBounds(270, 80, 100, 40);
 
         jMenuBar1.setToolTipText("");
 
@@ -146,7 +132,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setBounds(0, 0, 525, 264);
+        setBounds(0, 0, 417, 282);
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSeleccionarActionPerformed
@@ -194,14 +180,12 @@ public class FrmAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCrearHipodromo;
     private javax.swing.JMenuItem itemSeleccionar;
     private javax.swing.JMenuItem itenAbrirTerminal;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblAdmin;
     private javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblMensajeCrear;
     private javax.swing.JMenu menuCarreras;

@@ -23,19 +23,18 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
         cmbHipodromos = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         btnSeeccionarHipodromo = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        lblBienvenida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(null);
 
         getContentPane().add(cmbHipodromos);
-        cmbHipodromos.setBounds(35, 107, 151, 20);
+        cmbHipodromos.setBounds(20, 60, 180, 20);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Seleccionar Hipodromo");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(136, 58, 138, 14);
+        jLabel1.setBounds(20, 20, 180, 20);
 
         btnSeeccionarHipodromo.setText("Seleccionar");
         btnSeeccionarHipodromo.addActionListener(new java.awt.event.ActionListener() {
@@ -44,17 +43,9 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btnSeeccionarHipodromo);
-        btnSeeccionarHipodromo.setBounds(229, 106, 90, 23);
+        btnSeeccionarHipodromo.setBounds(60, 100, 110, 30);
 
-        jLabel2.setText("Bienvenido :");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 11, 80, 14);
-
-        lblBienvenida.setText("jLabel3");
-        getContentPane().add(lblBienvenida);
-        lblBienvenida.setBounds(96, 11, 188, 14);
-
-        setBounds(0, 0, 416, 188);
+        setBounds(0, 0, 237, 188);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeeccionarHipodromoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeccionarHipodromoActionPerformed
@@ -81,11 +72,9 @@ public class DlgSeleccionarHipodromo extends javax.swing.JDialog {
     private javax.swing.JButton btnSeeccionarHipodromo;
     private javax.swing.JComboBox cmbHipodromos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lblBienvenida;
     // End of variables declaration//GEN-END:variables
 
     public void cargarAdmin(Administrador a) {
-        lblBienvenida.setText(a.getUsername());
+        this.setTitle("Bienvenido " + a.getNombre() + " " + a.getApellido());
     }
 }

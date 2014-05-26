@@ -28,7 +28,7 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observa
         fac.agregarObservador(this);
 
         this.fecha = fecha;
-        carreras = fac.getHipodromoActual().getCarreras(Fecha.crearFecha(25, 4, 2014));
+        carreras = fac.getHipodromoActual().getCarreras(fecha);
         carreraSeleccionada = null;
 
         mostrarCarreras();

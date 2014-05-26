@@ -13,6 +13,12 @@ public class Jugador extends Usuario {
         this.apuestas = new ArrayList<>();
     }
 
+    public Jugador(double saldo, String username, String password, String nombre, String apellido) {
+        super(username, password, nombre, apellido);
+        this.saldo = saldo;
+        this.apuestas = new ArrayList<>();
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public double getSaldo() {
         return saldo;
@@ -35,7 +41,7 @@ public class Jugador extends Usuario {
         descontarSaldo(a.getMonto());
         return apuestas.add(a);
     }
-    
+
     public Apuesta getUltimaApuesta() {
         if (apuestas.size() >= 1) {
             return apuestas.get(apuestas.size() - 1);

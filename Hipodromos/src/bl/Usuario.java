@@ -41,6 +41,12 @@ public class Usuario {
     }
     //</editor-fold>
 
+    public Usuario(String username, String password, String nombre, String apellido){
+        this(username, password);
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+    
     public Usuario(String username, String password) {
         this.username = username;
         this.password = password;

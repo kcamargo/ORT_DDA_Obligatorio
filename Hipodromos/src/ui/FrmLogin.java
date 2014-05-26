@@ -34,12 +34,9 @@ public class FrmLogin extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogin);
         btnLogin.setBounds(90, 150, 158, 37);
-
-        txtUsuario.setText("Admin");
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(90, 60, 158, 20);
 
-        txtPass.setText("111");
         txtPass.setToolTipText("");
         getContentPane().add(txtPass);
         txtPass.setBounds(90, 100, 158, 20);
@@ -71,10 +68,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 dialog.setVisible(true);
                 dialog.cargarForm(frmAdmin);
             } else {
-                lblLoginMensaje.setText("Nombre de usuario o contraseña incorrecta.");
+                lblLoginMensaje.setText("Acceso denegado.");
             }
         } else {
-            lblLoginMensaje.setText("Nombre de usuario o contraseña incorrecta.");
+            lblLoginMensaje.setText("Acceso denegado.");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -2,10 +2,10 @@ package ui;
 
 import bl.Carrera;
 import bl.Fachada;
-import bl.Jornada;
 import java.awt.Frame;
 import java.util.Calendar;
 import java.util.Date;
+import util.Fecha;
 
 public class DlgCrearCarrera extends javax.swing.JDialog {
 
@@ -54,12 +54,8 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         jLabel3.setText("Nombre :");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 100, 80, 20);
-
-        txtDay.setText("6");
         getContentPane().add(txtDay);
         txtDay.setBounds(130, 60, 26, 20);
-
-        txtNombre.setText("AAAA");
         getContentPane().add(txtNombre);
         txtNombre.setBounds(130, 100, 143, 20);
 
@@ -71,14 +67,12 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         });
         getContentPane().add(btnCrearCarrera);
         btnCrearCarrera.setBounds(140, 140, 101, 42);
-
-        txtMonth.setText("6");
         getContentPane().add(txtMonth);
         txtMonth.setBounds(160, 60, 25, 20);
-
-        txtYear.setText("2014");
         getContentPane().add(txtYear);
         txtYear.setBounds(190, 60, 80, 20);
+
+        lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblMensaje);
         lblMensaje.setBounds(30, 200, 360, 23);
 
@@ -97,29 +91,19 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         Calendar cal = Calendar.getInstance();
         try {
             year = Integer.parseInt(txtYear.getText());
-            month = Integer.parseInt(txtMonth.getText());
+            month = Integer.parseInt(txtMonth.getText()) - 1;
             day = Integer.parseInt(txtDay.getText());
-            cal.clear();
-            cal.set(Calendar.YEAR, year);
-            cal.set(Calendar.MONTH, month);
-            cal.set(Calendar.DATE, day);
-            fch = cal.getTime();
-
+            fch = Fecha.crearFecha(day, month, year);
         } catch (Exception e) {
-            fch = new Date();
-            cal.setTime(fch);
-            cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
-            cal.set(Calendar.MONTH, cal.get(Calendar.MONTH));
-            cal.set(Calendar.DATE, cal.get(Calendar.DAY_OF_MONTH));
-            fch = cal.getTime();
+            fch = Fecha.fechaActual();
         }
-
         String nombre = txtNombre.getText();
         Carrera c = new Carrera(nombre, fch);
 
         if (fac.getHipodromoActual().validarDatosCarrera(c)) {
             if (c.validarFecha(fch)) {
                 fac.getHipodromoActual().agregarCarrera(c);
+                limpiarCampos();
                 Frame parent = (Frame) this.getParent();
                 new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
             } else {
@@ -146,4 +130,11 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos() {
+        this.txtDay.setText("");
+        this.txtMonth.setText("");
+        this.txtYear.setText("");
+        this.txtNombre.setText("");
+    }
 }

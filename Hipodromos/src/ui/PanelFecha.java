@@ -22,16 +22,10 @@ public class PanelFecha extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(218, 86));
         setLayout(null);
-
-        txtMes.setText("4");
         add(txtMes);
         txtMes.setBounds(80, 50, 40, 20);
-
-        txtDia.setText("25");
         add(txtDia);
         txtDia.setBounds(20, 50, 40, 20);
-
-        txtAnio.setText("2014");
         add(txtAnio);
         txtAnio.setBounds(140, 50, 60, 20);
 
@@ -55,7 +49,7 @@ public class PanelFecha extends javax.swing.JPanel {
         }
         try {
             int dia = Integer.parseInt(txtDia.getText());
-            int mes = Integer.parseInt(txtMes.getText());
+            int mes = Integer.parseInt(txtMes.getText()) - 1;
             int anio = Integer.parseInt(txtAnio.getText());
             return Fecha.crearFecha(dia, mes, anio);
         } catch (Exception e) {

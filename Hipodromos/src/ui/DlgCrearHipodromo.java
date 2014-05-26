@@ -79,10 +79,8 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
                     lblMensajeCrear.setText("Hipodromo Creado");
                     break;
                 case NombreDup:
-                    lblMensajeCrear.setText("Nombre de hipodromo repetido");
-                    break;
                 case DireccionDup:
-                    lblMensajeCrear.setText("Direccion de Hipodromo ya ingresada");
+                    lblMensajeCrear.setText("No se puede crear hipódromo");
                     break;
                 case ErrorGenerico:
                     lblMensajeCrear.setText("Error inesperado");
