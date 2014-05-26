@@ -204,6 +204,7 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
                         switch (ret) {
                             case OK:
                                 messageBox("OK");
+                                borrarDatosJugador();
                                 break;
                             case SaldoInsuficiente:
                                 messageBox("Saldo insuficiente");
@@ -303,5 +304,10 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     private void messageBox(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    private void borrarDatosJugador() {
+        txtUsuario.setText("");
+        txtPass.setText("");
     }
 }

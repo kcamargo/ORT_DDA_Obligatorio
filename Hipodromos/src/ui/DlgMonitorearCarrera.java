@@ -8,7 +8,6 @@ import bl.enums.CambiosCarrera;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
 import util.Fecha;
 import util.Observable;
 import util.Observador;
@@ -41,7 +40,9 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observa
             for (Carrera c : carreras) {
                 listado.add(c.getNumero() + " - " + c.getNombre() + " - " + c.getEstadoString());
             }
+            int i = lstCarreras.getSelectedIndex();
             lstCarreras.setListData(listado.toArray());
+            lstCarreras.setSelectedIndex(i);
         } else {
             JOptionPane.showMessageDialog(this, "No hay carreras para la fecha.");
         }
@@ -147,20 +148,22 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observa
     }
 
     private void mostrarCarrera() {
-        lblDatosCarrera.setText("<html> Numero :" + carreraSeleccionada.getNumero() + "<br>"
-                + "Nombre :" + carreraSeleccionada.getNombre() + "<br>"
-                + "Estado :" + carreraSeleccionada.getEstadoString() + "<br>"
-                + "Cantidad de Caballos : " + carreraSeleccionada.getCaballos().size() + "</html>");
+        if (carreraSeleccionada != null) {
+            lblDatosCarrera.setText("<html> Numero: " + carreraSeleccionada.getNumero() + "<br>"
+                    + "Nombre: " + carreraSeleccionada.getNombre() + "<br>"
+                    + "Estado: " + carreraSeleccionada.getEstadoString() + "<br>"
+                    + "Cantidad de Caballos: " + carreraSeleccionada.getCaballos().size() + "</html>");
 
-        lstCaballos.setListData(carreraSeleccionada.getCaballos().toArray());
+            lstCaballos.setListData(carreraSeleccionada.getCaballos().toArray());
 
-        for (CaballoEnCarrera cab : carreraSeleccionada.getCaballos()) {
-            if (cab.isGanador()) {
-                ganadores = cab.getApuestas();
+            for (CaballoEnCarrera cab : carreraSeleccionada.getCaballos()) {
+                if (cab.isGanador()) {
+                    ganadores = cab.getApuestas();
+                }
             }
-        }
-        if (ganadores != null) {
-            lstGanadores.setListData(formaterarListaGanadores(ganadores).toArray());
+            if (ganadores != null) {
+                lstGanadores.setListData(formaterarListaGanadores(ganadores).toArray());
+            }
         }
     }
 }
