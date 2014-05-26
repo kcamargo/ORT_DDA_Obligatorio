@@ -3,20 +3,18 @@ package ui;
 import bl.Carrera;
 import bl.Fachada;
 import bl.Jornada;
+import java.awt.Frame;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DlgCrearCarrera extends javax.swing.JDialog {
 
     Fachada fac = Fachada.getInstancia();
-    DlgSeleccionarCaballosCarrera dialogCaballos;
-    java.awt.Frame jFrame;
 
     public DlgCrearCarrera(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        jFrame = parent;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -92,7 +90,6 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCarreraActionPerformed
-        // TODO add your handling code here:
         Date fch;
         int year;
         int month;
@@ -123,9 +120,8 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         if (fac.getHipodromoActual().validarDatosCarrera(c)) {
             if (c.validarFecha(fch)) {
                 fac.getHipodromoActual().agregarCarrera(c);
-                dialogCaballos = new DlgSeleccionarCaballosCarrera(jFrame, true, c);
-                dialogCaballos.setVisible(true);
-
+                Frame parent = (Frame) this.getParent();
+                new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
             } else {
                 lblMensaje.setText("La fecha de la carrera no es correcta");
             }

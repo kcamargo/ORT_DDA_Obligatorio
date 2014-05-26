@@ -57,21 +57,19 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
         String user = txtUsuario.getText();
         String pass = txtPass.getText();
         Administrador admin = new Administrador();
         if (admin.validarCamposLogin(user, pass)) {
             admin = fac.login(admin);
             if (admin != null) {
+                //TODO: Revisar
                 this.setVisible(false);
                 FrmAdministrador frmAdmin = new FrmAdministrador(admin);
                 dialog = new DlgSeleccionarHipodromo(this, true);
                 dialog.cargarAdmin(admin);
                 dialog.setVisible(true);
                 dialog.cargarForm(frmAdmin);
-
-
             } else {
                 lblLoginMensaje.setText("Nombre de usuario o contraseña incorrecta.");
             }

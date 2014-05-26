@@ -12,7 +12,6 @@ public class Init {
 
     public static void main(String[] args) {
         datosPrueba();
-        //FrmJugador frm = new FrmJugador();
         FrmLogin frm = new FrmLogin();
         frm.setVisible(true);
     }

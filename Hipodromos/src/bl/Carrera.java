@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
 
-public class Carrera implements Comparable<Carrera> {
+public class Carrera {
 
     public enum EstadoCarrera {
 
@@ -215,10 +215,5 @@ public class Carrera implements Comparable<Carrera> {
                 && numero == c.getNumero()
                 && fecha.equals(c.getFecha())
                 && estado == c.getEstado();
-    }
-
-    @Override
-    public int compareTo(Carrera c) {
-        return getNumero() - c.getNumero();
     }
 }

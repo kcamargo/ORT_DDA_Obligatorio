@@ -3,7 +3,7 @@ package bl;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Jornada implements Comparable<Jornada> {
+public class Jornada {
 
     private Date fecha;
     private ArrayList<Carrera> carreras;
@@ -169,16 +169,5 @@ public class Jornada implements Comparable<Jornada> {
     public boolean equals(Object obj) {
         Jornada j = (Jornada) obj;
         return fecha.equals(j.getFecha());
-    }
-
-    @Override
-    public int compareTo(Jornada o) {
-        if (fecha.after(o.getFecha())) {
-            return 1;
-        } else if (fecha.before(o.getFecha())) {
-            return -1;
-        } else {
-            return 0;
-        }
     }
 }

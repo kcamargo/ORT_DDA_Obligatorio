@@ -3,6 +3,10 @@ package ui;
 import bl.Hipodromo;
 import bl.enums.ErroresHipodromo;
 import bl.Fachada;
+import static bl.enums.ErroresHipodromo.DireccionDup;
+import static bl.enums.ErroresHipodromo.ErrorGenerico;
+import static bl.enums.ErroresHipodromo.NombreDup;
+import static bl.enums.ErroresHipodromo.OK;
 
 public class DlgCrearHipodromo extends javax.swing.JDialog {
 
@@ -67,7 +71,8 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
         String nombre = txtNombreHipodromo.getText();
         String direccion = txtDireccionHipodromo.getText();
         Hipodromo h = new Hipodromo(nombre, direccion);
-        if (null != h.getNombre()) {
+
+        if (h.validar()) {
             ErroresHipodromo res = fac.agregarHipodromo(h);
             switch (res) {
                 case OK:

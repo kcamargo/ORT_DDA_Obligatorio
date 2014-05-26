@@ -90,42 +90,28 @@ public class Hipodromo {
 
     public Hipodromo(String nombre, String direccion) {
         this();
-        if (this.validarIngreso(nombre, direccion)) {
-            this.nombre = nombre;
-            this.direccion = direccion;
-        }
+        this.nombre = nombre;
+        this.direccion = direccion;
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Validaciones">
     public boolean validar() {
         return nombre != null && !nombre.isEmpty()
-                && direccion != null && !direccion.isEmpty()
-                && jornadas != null;
-
-    }
-
-    public boolean validarIngreso(String nombre, String direccion) {
-        return nombre != null && !nombre.isEmpty()
                 && direccion != null && !direccion.isEmpty();
     }
 
-    public boolean validarDatosCarrera(Carrera c){
-        boolean ret =true;
-        for(Jornada j : Fachada.getInstancia().getHipodromoActual().jornadas){
-            for (Carrera carrera : j.getCarreras()){
-               if( carrera.getNombre().equals(c.getNombre()) && carrera.getFecha().equals(c.getFecha())  ){                
+    public boolean validarDatosCarrera(Carrera c) {
+        boolean ret = true;
+        for (Jornada j : jornadas) {
+            for (Carrera carrera : j.getCarreras()) {
+                if (carrera.getNombre().equals(c.getNombre()) && carrera.getFecha().equals(c.getFecha())) {
                     ret = false;
                 }
             }
         }
 
         return ret;
-    }
-
-    public int validarCampos(String pNombre, String pDireccion) {
-        int retorno = 1;
-        return retorno;
     }
     //</editor-fold>
 
@@ -138,13 +124,14 @@ public class Hipodromo {
         }
         return j.agregarCarrera(c);
     }
-    
-    public void borrarCarrera(Carrera c){
+
+    public void borrarCarrera(Carrera c) {
         Jornada j = buscarJornada(c.getFecha());
-        if( j!=null ){
+        if (j != null) {
             j.eliminarCarrera(c);
         }
     }
+
     public ArrayList<Carrera> getCarreras(Date fecha) {
         Jornada j = buscarJornada(fecha);
         if (j != null) {
