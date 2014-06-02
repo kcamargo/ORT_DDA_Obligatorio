@@ -126,35 +126,25 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-
         try {
             int numero = Integer.parseInt(txtNumeroCaballo.getText());
             double dividendo = Double.parseDouble(txtDividendo.getText());
             Caballo c = (Caballo) lstDisponibles.getSelectedValue();
             if (c != null) {
                 CaballoEnCarrera caballoCarrera = new CaballoEnCarrera(numero, dividendo, c);
-                if (!carrera.existeNumeroCaballo(caballoCarrera)) {
-                    if (caballoCarrera.validar()) {
-                        caballoCarrera = carrera.agregarCaballo(c, numero, dividendo);
-                        //Metodos para la UI
-                        caballosCarrera.add(caballoCarrera);
-                        listarCaballosSeleccionados();
-                        limpiarCampos();
-                    } else {
-                        lblMensaje.setText("Los datos ingresados no son correctos.");
-                    }
-                } else {
-                    lblMensaje.setText("Numero de caballo invalido.");
+                if (carrera.agregarCaballo(caballoCarrera)) {
+                    caballosCarrera.add(caballoCarrera);
+                    listarCaballosSeleccionados();
+                    limpiarCampos();
                 }
             } else {
                 lblMensaje.setText("Seleccione un caballo.");
             }
         } catch (Exception ex) {
-            lblMensaje.setText("Complete los campos.");
+            lblMensaje.setText(ex.getMessage());
         }
 
         listarCaballosDisponibles();
-
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
@@ -163,7 +153,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
             if (c != null) {
                 carrera.quitarCaballo(c.getCaballo());
                 caballosCarrera.remove(c);
-                
+
                 listarCaballosSeleccionados();
                 listarCaballosDisponibles();
             } else {

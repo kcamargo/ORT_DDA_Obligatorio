@@ -2,6 +2,7 @@ package ui;
 
 import bl.Administrador;
 import bl.Caballo;
+import bl.CaballoEnCarrera;
 import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
@@ -48,18 +49,15 @@ public class Init {
         Caballo cab8 = new Caballo("Revelde", "Esteban");
         Caballo cab9 = new Caballo("Tornado", "Esteban");
         Caballo cab10 = new Caballo("El Rayo", "Esteban");
-        Caballo cab12 = new Caballo("Mengano", "Pedro");
-        Caballo cab13 = new Caballo("Babieca", "Pedro");
-        Caballo cab14 = new Caballo("Tornado", "Fulano");
-        Caballo cab15 = new Caballo("Kekeke", "Fulano");
+        Caballo cab11 = new Caballo("Mengano", "Pedro");
+        Caballo cab12 = new Caballo("Babieca", "Pedro");
+        Caballo cab13 = new Caballo("Tornado", "Fulano");
+        Caballo cab14 = new Caballo("Kekeke", "Fulano");
 
         Carrera c1 = new Carrera("Carrera 1", Fecha.fechaActual());
         Carrera c2 = new Carrera("Carrera 2", Fecha.fechaActual());
         Carrera c3 = new Carrera("Carrera 3", Fecha.fechaActual());
         Carrera c4 = new Carrera("Carrera 4", Fecha.fechaActual());
-        Carrera c5 = new Carrera("Carrera 5", Fecha.fechaActual());
-        Carrera c6 = new Carrera("Carrera 6", Fecha.fechaActual());
-        Carrera c7 = new Carrera("Carrera 7", Fecha.fechaActual());
 
         fac.agregarCaballo(cab1);
         fac.agregarCaballo(cab2);
@@ -71,50 +69,54 @@ public class Init {
         fac.agregarCaballo(cab8);
         fac.agregarCaballo(cab9);
         fac.agregarCaballo(cab10);
+        fac.agregarCaballo(cab11);
         fac.agregarCaballo(cab12);
         fac.agregarCaballo(cab13);
         fac.agregarCaballo(cab14);
-        fac.agregarCaballo(cab15);
 
-        c1.agregarCaballo(cab1, 1, 1.10);
-        c1.agregarCaballo(cab2, 2, 1.20);
-        c1.agregarCaballo(cab3, 3, 1.30);
-        c1.agregarCaballo(cab4, 4, 1.40);
+        CaballoEnCarrera cec1 = new CaballoEnCarrera(1, 1.10, cab1);
+        CaballoEnCarrera cec2 = new CaballoEnCarrera(2, 1.20, cab2);
+        CaballoEnCarrera cec3 = new CaballoEnCarrera(3, 1.30, cab3);
+        CaballoEnCarrera cec4 = new CaballoEnCarrera(4, 1.40, cab4);
         
-        c2.agregarCaballo(cab5, 1, 1.10);
-        c2.agregarCaballo(cab6, 2, 1.20);
-        c2.agregarCaballo(cab7, 3, 1.30);
-        c2.agregarCaballo(cab8, 4, 1.40);
+        CaballoEnCarrera cec5 = new CaballoEnCarrera(1, 1.10, cab5);
+        CaballoEnCarrera cec6 = new CaballoEnCarrera(2, 1.20, cab6);
+        CaballoEnCarrera cec7 = new CaballoEnCarrera(3, 1.30, cab7);
+        CaballoEnCarrera cec8 = new CaballoEnCarrera(4, 1.40, cab8);
         
-        c3.agregarCaballo(cab9, 1, 1.10);
-        c3.agregarCaballo(cab10, 2, 1.20);
-        c3.agregarCaballo(cab12, 4, 1.40);
+        CaballoEnCarrera cec9 = new CaballoEnCarrera(1, 1.10, cab9);
+        CaballoEnCarrera cec10 = new CaballoEnCarrera(2, 1.20, cab10);
+        CaballoEnCarrera cec11 = new CaballoEnCarrera(3, 1.40, cab11);
         
-        c4.agregarCaballo(cab13, 1, 1.10);
-        c4.agregarCaballo(cab14, 2, 1.20);
-        c4.agregarCaballo(cab15, 3, 1.30);
-        c4.agregarCaballo(cab1, 4, 1.40);
+        CaballoEnCarrera cec12 = new CaballoEnCarrera(1, 1.40, cab12);
+        CaballoEnCarrera cec13 = new CaballoEnCarrera(2, 1.60, cab13);
+        CaballoEnCarrera cec14 = new CaballoEnCarrera(3, 2.10, cab14);
+        
+        try {
+            c1.agregarCaballo(cec1);
+            c1.agregarCaballo(cec2);
+            c1.agregarCaballo(cec3);
+            c1.agregarCaballo(cec4);
 
-        c5.agregarCaballo(cab2, 1, 1.10);
-        c5.agregarCaballo(cab3, 2, 1.20);
-        c5.agregarCaballo(cab4, 3, 1.30);
-        c5.agregarCaballo(cab5, 4, 1.40);
+            c2.agregarCaballo(cec5);
+            c2.agregarCaballo(cec6);
+            c2.agregarCaballo(cec7);
+            c2.agregarCaballo(cec8);
 
-        c6.agregarCaballo(cab6, 1, 1.10);
-        c6.agregarCaballo(cab7, 2, 1.20);
-        c6.agregarCaballo(cab8, 3, 1.30);
-        c6.agregarCaballo(cab9, 4, 1.40);
-
-        c7.agregarCaballo(cab10, 1, 1.10);
-        c7.agregarCaballo(cab12, 3, 1.30);
-        c7.agregarCaballo(cab13, 4, 1.40);
+            c3.agregarCaballo(cec9);
+            c3.agregarCaballo(cec10);
+            c3.agregarCaballo(cec11);
+            
+            c4.agregarCaballo(cec12);
+            c4.agregarCaballo(cec13);
+            c4.agregarCaballo(cec14);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
         h1.agregarCarrera(c1);
         h1.agregarCarrera(c2);
         h1.agregarCarrera(c3);
         h1.agregarCarrera(c4);
-        h1.agregarCarrera(c5);
-        h1.agregarCarrera(c6);
-        h1.agregarCarrera(c7);
     }
 }

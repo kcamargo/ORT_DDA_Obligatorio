@@ -173,7 +173,7 @@ public class Carrera {
                 res = true;
             }
         }
-        if (caballos.size() == 0) {
+        if (caballos.isEmpty()) {
             res = false;
         }
         return res;
@@ -188,14 +188,18 @@ public class Carrera {
         return null;
     }
 
-    public CaballoEnCarrera agregarCaballo(Caballo c, int numero, double dividendo) {
-        CaballoEnCarrera caballoEnCarrera = new CaballoEnCarrera(numero, dividendo, c);
-        caballoEnCarrera.setCarrera(this);
+    public boolean agregarCaballo(CaballoEnCarrera c) throws Exception {
+        c.setCarrera(this);
 
-        if (caballos.add(caballoEnCarrera)) {
-            return caballoEnCarrera;
+        if (c.validar()) {
+            for (CaballoEnCarrera cec : caballos) {
+                if (cec.equals(c)) {
+                    throw new Exception("Número de caballo repetido");
+                }
+            }
+            return caballos.add(c);
         }
-        return null;
+        throw new Exception("Los datos ingresados no son correctos");
     }
 
     public boolean quitarCaballo(Caballo c) {
