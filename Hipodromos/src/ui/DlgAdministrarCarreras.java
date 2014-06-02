@@ -5,6 +5,7 @@ import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
 import bl.enums.CambiosCarrera;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import util.Observable;
 import util.Observador;
@@ -241,7 +242,7 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog implements Obser
     private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
         if (cerrada != null) {
             if (lstCaballosCerrada.getSelectedValue() != null) {
-                CaballoEnCarrera caballo = (CaballoEnCarrera) lstCaballosCerrada.getSelectedValue();
+                CaballoEnCarrera caballo = cerrada.getCaballos().get(lstCaballosCerrada.getSelectedIndex());
                 if (hipodromoSeleccionado.asignarGanador(cerrada, caballo)) {
                     cerrada = hipodromoSeleccionado.getCarreraCerrada();
                     siguiente = hipodromoSeleccionado.getSiguienteCarrera();
@@ -296,19 +297,19 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog implements Obser
         if (abierta != null) {
             this.lblNombreAbierta.setText(abierta.getNombre());
             this.lblNumeroAbierta.setText(String.valueOf(abierta.getNumero()));
-            this.lstCaballosAbierta.setListData(abierta.getCaballos().toArray());
+            this.lstCaballosAbierta.setListData(listarCaballos(abierta.getCaballos()));
         }
 
         if (cerrada != null) {
             this.lblNombreCerrada.setText(cerrada.getNombre());
             this.lblNumeroCerrada.setText(String.valueOf(cerrada.getNumero()));
-            this.lstCaballosCerrada.setListData(cerrada.getCaballos().toArray());
+            this.lstCaballosCerrada.setListData(listarCaballos(cerrada.getCaballos()));
         }
 
         if (siguiente != null) {
             this.lblNombreSiguiente.setText(siguiente.getNombre());
             this.lblNumeroSiguiente.setText(String.valueOf(siguiente.getNumero()));
-            this.lstCaballosSiguiente.setListData(siguiente.getCaballos().toArray());
+            this.lstCaballosSiguiente.setListData(listarCaballos(siguiente.getCaballos()));
         }
     }
 
@@ -334,18 +335,26 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog implements Obser
         this.lstCaballosSiguiente.setListData(new Object[0]);
     }
 
+    private Object[] listarCaballos(ArrayList<CaballoEnCarrera> caballos) {
+        ArrayList ret = new ArrayList();
+        for (CaballoEnCarrera c : caballos) {
+            ret.add("(" + c.getNumero() + ") " + c.getCaballo().getNombre() + " - " + c.getDividendo());
+        }
+        return ret.toArray();
+    }
+
     @Override
     public void actualizar(Observable origen, Object param) {
         if (param.equals(CambiosCarrera.CarreraAbierta)) {
             siguiente = hipodromoSeleccionado.getSiguienteCarrera();
             abierta = hipodromoSeleccionado.getCarreraAbierta();
         }
-        
+
         if (param.equals(CambiosCarrera.CarreraCerrada)) {
             abierta = null;
             cerrada = hipodromoSeleccionado.getCarreraCerrada();
         }
-        
+
         if (param.equals(CambiosCarrera.CarreraFinalizada)) {
             cerrada = null;
         }

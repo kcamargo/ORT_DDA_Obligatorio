@@ -3,12 +3,12 @@ package ui;
 import bl.Apuesta;
 import bl.CaballoEnCarrera;
 import bl.Carrera;
+import bl.Carrera.EstadoCarrera;
 import bl.Fachada;
 import bl.enums.CambiosCarrera;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import util.Fecha;
 import util.Observable;
 import util.Observador;
 
@@ -75,7 +75,7 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observa
         jScrollPane1.setViewportView(lstCarreras);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 100, 220, 160);
+        jScrollPane1.setBounds(20, 100, 210, 160);
 
         jLabel1.setText("Seleccionar Carreras :");
         getContentPane().add(jLabel1);
@@ -88,7 +88,7 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observa
 
         lblDatosCarrera.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(lblDatosCarrera);
-        lblDatosCarrera.setBounds(240, 100, 240, 160);
+        lblDatosCarrera.setBounds(270, 100, 210, 160);
 
         jScrollPane2.setViewportView(lstCaballos);
 
@@ -149,21 +149,31 @@ public class DlgMonitorearCarrera extends javax.swing.JDialog implements Observa
 
     private void mostrarCarrera() {
         if (carreraSeleccionada != null) {
-            lblDatosCarrera.setText("<html> Numero: " + carreraSeleccionada.getNumero() + "<br>"
-                    + "Nombre: " + carreraSeleccionada.getNombre() + "<br>"
-                    + "Estado: " + carreraSeleccionada.getEstadoString() + "<br>"
-                    + "Cantidad de Caballos: " + carreraSeleccionada.getCaballos().size() + "</html>");
+            lblDatosCarrera.setText(generarHTMLCarrera(carreraSeleccionada));
+            lstCaballos.setListData(listarCaballos(carreraSeleccionada.getCaballos()));
 
-            lstCaballos.setListData(carreraSeleccionada.getCaballos().toArray());
-
-            for (CaballoEnCarrera cab : carreraSeleccionada.getCaballos()) {
-                if (cab.isGanador()) {
-                    ganadores = cab.getApuestas();
-                }
+            if (carreraSeleccionada.getEstado().equals(EstadoCarrera.FINALIZADA)) {
+                ganadores = carreraSeleccionada.getGanador().getApuestas();
             }
+            
             if (ganadores != null) {
                 lstGanadores.setListData(formaterarListaGanadores(ganadores).toArray());
             }
         }
+    }
+
+    private Object[] listarCaballos(ArrayList<CaballoEnCarrera> caballos) {
+        ArrayList ret = new ArrayList();
+        for (CaballoEnCarrera c : caballos) {
+            ret.add("(" + c.getNumero() + ") " + c.getCaballo().getNombre() + " - " + c.getDividendo());
+        }
+        return ret.toArray();
+    }
+
+    private String generarHTMLCarrera(Carrera c) {
+        return "<html> Numero: " + c.getNumero() + "<br><br>"
+                + "Nombre: " + c.getNombre() + "<br><br>"
+                + "Estado: " + c.getEstadoString() + "<br><br>"
+                + "Cantidad de Caballos: " + c.getCaballos().size() + "</html>";
     }
 }

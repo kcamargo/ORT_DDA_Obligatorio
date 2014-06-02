@@ -32,6 +32,8 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         txtYear = new javax.swing.JTextField();
         lblMensaje = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField2");
 
@@ -41,23 +43,24 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Crear Carrera");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(160, 20, 124, 14);
+        jLabel1.setBounds(0, 10, 330, 20);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Fecha :");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 60, 80, 20);
+        jLabel2.setBounds(10, 80, 70, 20);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Nombre :");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 100, 80, 20);
+        jLabel3.setBounds(10, 50, 70, 20);
         getContentPane().add(txtDay);
-        txtDay.setBounds(130, 60, 26, 20);
+        txtDay.setBounds(90, 80, 26, 20);
         getContentPane().add(txtNombre);
-        txtNombre.setBounds(130, 100, 143, 20);
+        txtNombre.setBounds(90, 50, 140, 20);
 
         btnCrearCarrera.setText("Continuar");
         btnCrearCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -66,21 +69,29 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btnCrearCarrera);
-        btnCrearCarrera.setBounds(140, 140, 101, 42);
+        btnCrearCarrera.setBounds(110, 150, 101, 42);
         getContentPane().add(txtMonth);
-        txtMonth.setBounds(160, 60, 25, 20);
+        txtMonth.setBounds(130, 80, 25, 20);
         getContentPane().add(txtYear);
-        txtYear.setBounds(190, 60, 80, 20);
+        txtYear.setBounds(170, 80, 60, 20);
 
         lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblMensaje);
-        lblMensaje.setBounds(30, 200, 360, 23);
+        lblMensaje.setBounds(0, 110, 330, 23);
 
         jLabel4.setText("dd/mm/yyyy");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(280, 60, 83, 20);
+        jLabel4.setBounds(240, 80, 83, 20);
 
-        setBounds(0, 0, 422, 282);
+        jLabel5.setText("/");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(120, 80, 10, 20);
+
+        jLabel6.setText("/");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(160, 80, 10, 20);
+
+        setBounds(0, 0, 349, 244);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCarreraActionPerformed
@@ -123,6 +134,8 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblMensaje;

@@ -22,7 +22,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         listarCaballosDisponibles();
         CerrarVentana();
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -49,16 +49,17 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         jScrollPane1.setViewportView(lstDisponibles);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 80, 170, 130);
+        jScrollPane1.setBounds(290, 160, 170, 130);
 
         jScrollPane2.setViewportView(lstSeleccionados);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(380, 80, 155, 130);
+        jScrollPane2.setBounds(20, 160, 170, 130);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Seleccionar caballos ");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(220, 20, 139, 14);
+        jLabel1.setBounds(10, 10, 450, 20);
 
         btnFinalizar.setText("Finalizar");
         btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,57 +68,53 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btnFinalizar);
-        btnFinalizar.setBounds(440, 230, 94, 23);
+        btnFinalizar.setBounds(370, 320, 90, 23);
 
         jLabel2.setText("Disponibles");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 60, 130, 14);
+        jLabel2.setBounds(20, 130, 170, 20);
 
         jLabel3.setText("Seleccionados");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(390, 60, 113, 14);
+        jLabel3.setBounds(290, 130, 170, 20);
 
-        btnSeleccionar.setText("Seleccionar      >>");
+        btnSeleccionar.setText(">>");
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
             }
         });
         getContentPane().add(btnSeleccionar);
-        btnSeleccionar.setBounds(200, 140, 170, 23);
-
-        txtNumeroCaballo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroCaballoActionPerformed(evt);
-            }
-        });
+        btnSeleccionar.setBounds(210, 200, 60, 23);
         getContentPane().add(txtNumeroCaballo);
-        txtNumeroCaballo.setBounds(260, 80, 110, 20);
+        txtNumeroCaballo.setBounds(190, 60, 110, 20);
 
-        jLabel4.setText("Numero :");
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Numero:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(200, 80, 60, 20);
+        jLabel4.setBounds(100, 60, 80, 20);
 
-        btnQuitar.setText("<<  Quitar");
+        btnQuitar.setText("<<");
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuitarActionPerformed(evt);
             }
         });
         getContentPane().add(btnQuitar);
-        btnQuitar.setBounds(200, 170, 170, 23);
+        btnQuitar.setBounds(210, 230, 60, 23);
         getContentPane().add(txtDividendo);
-        txtDividendo.setBounds(260, 110, 110, 20);
+        txtDividendo.setBounds(190, 90, 110, 20);
 
-        jLabel7.setText("Dividendo");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Dividendo:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(200, 110, 50, 14);
+        jLabel7.setBounds(100, 90, 80, 20);
 
         lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblMensaje);
-        lblMensaje.setBounds(20, 230, 390, 20);
+        lblMensaje.setBounds(20, 320, 340, 20);
 
-        setBounds(0, 0, 577, 317);
+        setBounds(0, 0, 493, 395);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
@@ -141,7 +138,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
                         caballoCarrera = carrera.agregarCaballo(c, numero, dividendo);
                         //Metodos para la UI
                         caballosCarrera.add(caballoCarrera);
-                        lstSeleccionados.setListData(caballosCarrera.toArray());
+                        listarCaballosSeleccionados();
                         limpiarCampos();
                     } else {
                         lblMensaje.setText("Los datos ingresados no son correctos.");
@@ -160,44 +157,21 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
-    private void txtNumeroCaballoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCaballoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroCaballoActionPerformed
-
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         try {
-            CaballoEnCarrera c = (CaballoEnCarrera) lstSeleccionados.getSelectedValue();
+            CaballoEnCarrera c = caballosCarrera.get(lstSeleccionados.getSelectedIndex());
             if (c != null) {
                 carrera.quitarCaballo(c.getCaballo());
-                //metodos para la UI
                 caballosCarrera.remove(c);
-                lstSeleccionados.setListData(caballosCarrera.toArray());
+                
+                listarCaballosSeleccionados();
                 listarCaballosDisponibles();
-
             } else {
                 lblMensaje.setText("No hay caballos para quitar.");
             }
         } catch (Exception ex) {
         }
     }//GEN-LAST:event_btnQuitarActionPerformed
-
-    private void listarCaballosDisponibles() {
-        lstDisponibles.setListData(fac.getCaballosDisponibles(carrera.getFecha()).toArray());
-    }
-
-    private void CerrarVentana() {
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                fac.getHipodromoActual().borrarCarrera(carrera);
-            }
-        });
-    }
-    
-    private void limpiarCampos(){
-        this.txtNumeroCaballo.setText("");
-        this.txtDividendo.setText("");
-        this.lblMensaje.setText("");
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnQuitar;
@@ -215,4 +189,42 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     private javax.swing.JTextField txtDividendo;
     private javax.swing.JTextField txtNumeroCaballo;
     // End of variables declaration//GEN-END:variables
+
+    private void listarCaballosDisponibles() {
+        lstDisponibles.setListData(caballosDisponiblesToArray(fac.getCaballosDisponibles(carrera.getFecha())));
+    }
+
+    private void listarCaballosSeleccionados() {
+        lstSeleccionados.setListData(caballosEnCarreraToArray(caballosCarrera));
+    }
+
+    private void CerrarVentana() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                fac.getHipodromoActual().borrarCarrera(carrera);
+            }
+        });
+    }
+
+    private void limpiarCampos() {
+        this.txtNumeroCaballo.setText("");
+        this.txtDividendo.setText("");
+        this.lblMensaje.setText("");
+    }
+
+    private Object[] caballosEnCarreraToArray(ArrayList<CaballoEnCarrera> caballos) {
+        ArrayList ret = new ArrayList();
+        for (CaballoEnCarrera c : caballos) {
+            ret.add("(" + c.getNumero() + ") " + c.getCaballo().getNombre() + " - " + c.getDividendo());
+        }
+        return ret.toArray();
+    }
+
+    private Object[] caballosDisponiblesToArray(ArrayList<Caballo> caballos) {
+        ArrayList ret = new ArrayList();
+        for (Caballo c : caballos) {
+            ret.add("");
+        }
+        return ret.toArray();
+    }
 }
