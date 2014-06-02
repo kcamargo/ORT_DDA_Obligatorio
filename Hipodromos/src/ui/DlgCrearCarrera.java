@@ -5,6 +5,8 @@ import bl.Fachada;
 import java.awt.Frame;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.Fecha;
 
 public class DlgCrearCarrera extends javax.swing.JDialog {
@@ -27,7 +29,7 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtDay = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        btnCrearCarrera = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
         txtMonth = new javax.swing.JTextField();
         txtYear = new javax.swing.JTextField();
         lblMensaje = new javax.swing.JLabel();
@@ -62,14 +64,14 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         getContentPane().add(txtNombre);
         txtNombre.setBounds(90, 50, 140, 20);
 
-        btnCrearCarrera.setText("Continuar");
-        btnCrearCarrera.addActionListener(new java.awt.event.ActionListener() {
+        btnContinuar.setText("Continuar");
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearCarreraActionPerformed(evt);
+                btnContinuarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCrearCarrera);
-        btnCrearCarrera.setBounds(110, 150, 101, 42);
+        getContentPane().add(btnContinuar);
+        btnContinuar.setBounds(110, 150, 101, 42);
         getContentPane().add(txtMonth);
         txtMonth.setBounds(130, 80, 25, 20);
         getContentPane().add(txtYear);
@@ -94,42 +96,36 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         setBounds(0, 0, 349, 244);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCrearCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCarreraActionPerformed
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         Date fch;
-        int year;
-        int month;
-        int day;
-        Calendar cal = Calendar.getInstance();
         try {
-            year = Integer.parseInt(txtYear.getText());
-            month = Integer.parseInt(txtMonth.getText()) - 1;
-            day = Integer.parseInt(txtDay.getText());
+            int year = Integer.parseInt(txtYear.getText());
+            int month = Integer.parseInt(txtMonth.getText()) - 1;
+            int day = Integer.parseInt(txtDay.getText());
             fch = Fecha.crearFecha(day, month, year);
         } catch (Exception e) {
             fch = Fecha.fechaActual();
         }
+
         String nombre = txtNombre.getText();
 
         if (!nombre.equals("")) {
             Carrera c = new Carrera(nombre, fch);
-            if (fac.getHipodromoActual().validarDatosCarrera(c)) {
-                if (c.validarFecha(fch)) {
-                    fac.getHipodromoActual().agregarCarrera(c);
+            try {
+                if (fac.getHipodromoActual().agregarCarrera(c)) {
                     limpiarCampos();
                     Frame parent = (Frame) this.getParent();
                     new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
-                } else {
-                    lblMensaje.setText("La fecha de la carrera no es correcta");
                 }
-            } else {
-                lblMensaje.setText("El nombre para de carrera para la jornada ya existe");
+            } catch (Exception ex) {
+                lblMensaje.setText(ex.getMessage());
             }
         } else {
             lblMensaje.setText("Ingrese un nombre para la carrera");
         }
-    }//GEN-LAST:event_btnCrearCarreraActionPerformed
+    }//GEN-LAST:event_btnContinuarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCrearCarrera;
+    private javax.swing.JButton btnContinuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

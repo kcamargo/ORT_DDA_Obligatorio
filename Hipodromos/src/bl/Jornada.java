@@ -91,12 +91,17 @@ public class Jornada {
         return flag;
     }
 
-    public boolean agregarCarrera(Carrera c) {
-        if (!carreras.contains(c)) {
-            c.setNumero(getSiguienteNumeroDeCarrera());
-            return carreras.add(c);
+    public boolean agregarCarrera(Carrera c) throws Exception {
+        if (!existeNombreCarrera(c.getNombre())) {
+            if (c.validarFecha(c.getFecha())) {
+                c.setNumero(getSiguienteNumeroDeCarrera());
+                return carreras.add(c);
+            } else {
+                throw new Exception("La fecha de la carrera es inválida");
+            }
+        } else {
+            throw new Exception("El nombre para de carrera para la jornada ya existe");
         }
-        return false;
     }
 
     public boolean abrirCarrera(Carrera c) {
@@ -143,10 +148,10 @@ public class Jornada {
         }
         return ret;
     }
-    
-    public void eliminarCarrera(Carrera c){
+
+    public void eliminarCarrera(Carrera c) {
         Carrera carrera = buscarCarrera(c);
-        if(c!=null){
+        if (c != null) {
             carreras.remove(c);
         }
     }
@@ -159,7 +164,6 @@ public class Jornada {
         }
         return null;
     }
-    
 
     private int getSiguienteNumeroDeCarrera() {
         return carreras.size() + 1;
@@ -171,8 +175,8 @@ public class Jornada {
         return fecha.equals(j.getFecha());
     }
 
-    boolean existeCarrera(String nombre) {
-        for (Carrera c : carreras){
+    private boolean existeNombreCarrera(String nombre) {
+        for (Carrera c : carreras) {
             if (c.getNombre().equals(nombre)) {
                 return true;
             }

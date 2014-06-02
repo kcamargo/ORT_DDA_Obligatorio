@@ -12,7 +12,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
     Fachada fac = Fachada.getInstancia();
     Carrera carrera;
-    ArrayList<CaballoEnCarrera> caballosCarrera = new ArrayList();
+    ArrayList<CaballoEnCarrera> caballosCarrera = new ArrayList<>();
 
     public DlgSeleccionarCaballosCarrera(java.awt.Frame parent, boolean modal, Carrera c) {
         super(parent, modal);
@@ -49,12 +49,12 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         jScrollPane1.setViewportView(lstDisponibles);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(290, 160, 170, 130);
+        jScrollPane1.setBounds(20, 160, 170, 130);
 
         jScrollPane2.setViewportView(lstSeleccionados);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(20, 160, 170, 130);
+        jScrollPane2.setBounds(290, 160, 170, 130);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Seleccionar caballos ");
@@ -213,7 +213,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     private Object[] caballosDisponiblesToArray(ArrayList<Caballo> caballos) {
         ArrayList ret = new ArrayList();
         for (Caballo c : caballos) {
-            ret.add("");
+            ret.add(c.getNombre());
         }
         return ret.toArray();
     }

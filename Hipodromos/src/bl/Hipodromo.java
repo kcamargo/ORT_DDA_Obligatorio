@@ -1,6 +1,5 @@
 package bl;
 
-import bl.enums.CambiosCarrera;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -98,21 +97,15 @@ public class Hipodromo {
 
     //<editor-fold defaultstate="collapsed" desc="Validaciones">
     public boolean validar() {
-        return nombre != null && !nombre.isEmpty()
-                && direccion != null && !direccion.isEmpty();
-    }
-
-    public boolean validarDatosCarrera(Carrera c) {
-        Jornada j = buscarJornada(c.getFecha());
-        if (!j.existeCarrera(c.getNombre())) {
-            return true;
-        }
-        return false;
+        return nombre != null
+                && !nombre.isEmpty()
+                && direccion != null
+                && !direccion.isEmpty();
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Carreras">
-    public boolean agregarCarrera(Carrera c) {
+    public boolean agregarCarrera(Carrera c) throws Exception {
         Jornada j = buscarJornada(c.getFecha());
         if (j == null) {
             j = new Jornada(c.getFecha());
@@ -200,7 +193,7 @@ public class Hipodromo {
     //</editor-fold>
 
     public boolean estaDisponible(Caballo caballo, Date fecha) {
-        boolean disponible = false;
+        boolean disponible = true;
         Jornada j = buscarJornada(fecha);
         if (j != null) {
             disponible = j.estaDisponible(caballo);

@@ -35,8 +35,8 @@ public class SSHipodromos {
         }
 
         if (ret == ErroresHipodromo.OK) {
-            ret = hipodromos.add(hipodromo) ? 
-                    ErroresHipodromo.OK : ErroresHipodromo.ErrorGenerico;
+            ret = hipodromos.add(hipodromo)
+                    ? ErroresHipodromo.OK : ErroresHipodromo.ErrorGenerico;
         }
         return ret;
     }
@@ -59,25 +59,21 @@ public class SSHipodromos {
 
     public ArrayList<Caballo> getCaballosDisponibles(Date fecha) {
         ArrayList<Caballo> retorno = new ArrayList<>();
-        
-        for (Hipodromo h1 : hipodromos){
+
+        for (Hipodromo h1 : hipodromos) {
             for (Caballo c : caballos) {
-                if (estaDisponible(c, fecha,h1)) {
+                if (estaDisponible(c, fecha, h1)) {
                     retorno.add(c);
                 }
             }
         }
+
         return retorno;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Métodos privados">
     private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h1) {
-        boolean disp = true;
-            if (!h1.estaDisponible(caballo, fecha) ) {
-                disp = false;
-       
-            }
-        return disp;
+        return h1.estaDisponible(caballo, fecha);
     }
 
     private Hipodromo buscarHipodromo(String nombre) {
