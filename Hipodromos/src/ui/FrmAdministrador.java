@@ -152,7 +152,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         Carrera cerrada = fachada.getHipodromoActual().getCarreraCerrada();
         Carrera siguiente = fachada.getHipodromoActual().getSiguienteCarrera();
 
-        new DlgAdministrarCarreras(this, true, siguiente, abierta, cerrada, fachada.getHipodromoActual()).setVisible(true);
+        new DlgAdministrarCarreras(this, false, siguiente, abierta, cerrada, fachada.getHipodromoActual()).setVisible(true);
     }//GEN-LAST:event_administrarCarrerasActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed

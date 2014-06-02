@@ -2,10 +2,14 @@ package ui;
 
 import bl.CaballoEnCarrera;
 import bl.Carrera;
+import bl.Fachada;
 import bl.Hipodromo;
+import bl.enums.CambiosCarrera;
 import javax.swing.JOptionPane;
+import util.Observable;
+import util.Observador;
 
-public class DlgAdministrarCarreras extends javax.swing.JDialog {
+public class DlgAdministrarCarreras extends javax.swing.JDialog implements Observador {
 
     Hipodromo hipodromoSeleccionado;
     Carrera siguiente;
@@ -13,13 +17,14 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
     Carrera cerrada;
 
     public DlgAdministrarCarreras(java.awt.Frame parent, boolean modal,
-            Carrera siguiente, Carrera abierta, Carrera cerrada, Hipodromo hipodromoSeleccionado) {
+            Carrera siguiente, Carrera abierta, Carrera cerrada, Hipodromo hipodromo) {
         super(parent, modal);
 
         this.siguiente = siguiente;
         this.abierta = abierta;
         this.cerrada = cerrada;
-        this.hipodromoSeleccionado = hipodromoSeleccionado;
+        this.hipodromoSeleccionado = hipodromo;
+        Fachada.getInstancia().agregarObservador(this);
 
         initComponents();
         this.setLocationRelativeTo(null);
@@ -167,7 +172,7 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
 
         lblHipodromo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         getContentPane().add(lblHipodromo);
-        lblHipodromo.setBounds(110, 20, 130, 20);
+        lblHipodromo.setBounds(110, 20, 270, 20);
         getContentPane().add(jSeparator2);
         jSeparator2.setBounds(10, 410, 370, 10);
 
@@ -206,7 +211,7 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
         if (siguiente != null) {
             if (hipodromoSeleccionado.abrirCarrera(siguiente)) {
-                abierta = siguiente;
+                abierta = hipodromoSeleccionado.getCarreraAbierta();
                 siguiente = hipodromoSeleccionado.getSiguienteCarrera();
                 mostrarCarreras();
                 messageBox("Carrera abierta");
@@ -221,7 +226,7 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         if (abierta != null) {
             if (hipodromoSeleccionado.cerrarCarrera(abierta)) {
-                cerrada = abierta;
+                cerrada = hipodromoSeleccionado.getCarreraCerrada();
                 abierta = hipodromoSeleccionado.getCarreraAbierta();
                 mostrarCarreras();
                 messageBox("Carrera cerrada");
@@ -238,7 +243,7 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
             if (lstCaballosCerrada.getSelectedValue() != null) {
                 CaballoEnCarrera caballo = (CaballoEnCarrera) lstCaballosCerrada.getSelectedValue();
                 if (hipodromoSeleccionado.asignarGanador(cerrada, caballo)) {
-                    cerrada = null;
+                    cerrada = hipodromoSeleccionado.getCarreraCerrada();
                     siguiente = hipodromoSeleccionado.getSiguienteCarrera();
                     mostrarCarreras();
                     messageBox("Ganador asignado");
@@ -327,5 +332,23 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog {
         this.lblNombreSiguiente.setText("");
         this.lblNumeroSiguiente.setText("");
         this.lstCaballosSiguiente.setListData(new Object[0]);
+    }
+
+    @Override
+    public void actualizar(Observable origen, Object param) {
+        if (param.equals(CambiosCarrera.CarreraAbierta)) {
+            siguiente = hipodromoSeleccionado.getSiguienteCarrera();
+            abierta = hipodromoSeleccionado.getCarreraAbierta();
+        }
+        
+        if (param.equals(CambiosCarrera.CarreraCerrada)) {
+            abierta = null;
+            cerrada = hipodromoSeleccionado.getCarreraCerrada();
+        }
+        
+        if (param.equals(CambiosCarrera.CarreraFinalizada)) {
+            cerrada = null;
+        }
+        mostrarCarreras();
     }
 }

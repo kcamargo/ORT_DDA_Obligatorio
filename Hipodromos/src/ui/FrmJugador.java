@@ -6,6 +6,7 @@ import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
 import bl.Jugador;
+import bl.enums.CambiosCarrera;
 import bl.enums.ErroresApuesta;
 import static bl.enums.ErroresApuesta.ErrorGenerico;
 import static bl.enums.ErroresApuesta.OK;
@@ -254,12 +255,12 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
 
     @Override
     public void actualizar(Observable origen, Object param) {
-        if (param.equals(ErroresApuesta.CarreraCerrada)) {
+        if (param.equals(CambiosCarrera.CarreraCerrada)) {
             carreraAbierta = null;
             limpiarDatosDeCarrera();
             limpiarDatosDeCaballos();
             messageBox("La carrera se ha cerrado");
-        } else if (param.equals(ErroresApuesta.CarreraAbierta)) {
+        } else if (param.equals(CambiosCarrera.CarreraAbierta)) {
             carreraAbierta = fachada.getHipodromoActual().getSiguienteCarrera();
             mostrarInfoDeCarrera(carreraAbierta);
         }

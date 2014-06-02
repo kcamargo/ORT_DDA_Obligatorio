@@ -1,7 +1,6 @@
 package bl;
 
 import bl.enums.CambiosCarrera;
-import bl.enums.ErroresApuesta;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -92,6 +91,7 @@ public class Carrera {
             this.ganador = caballo;
             caballo.pagar();
             setEstado(EstadoCarrera.FINALIZADA);
+            Fachada.getInstancia().notificarObservadores(CambiosCarrera.CarreraFinalizada);
         }
     }
     //</editor-fold>
@@ -125,10 +125,10 @@ public class Carrera {
                 && estado != null;
     }
 
-     public boolean validarFecha(Date fch) {
+    public boolean validarFecha(Date fch) {
         boolean ret;
         Date now = new Date();
-        if ( now.before(fch) || ( now.getDay()) == (fch.getDay()) ) {
+        if (now.before(fch) || (now.getDay()) == (fch.getDay())) {
             ret = true;
         } else {
             ret = false;
@@ -151,7 +151,7 @@ public class Carrera {
     public boolean abrir() {
         if (estado == EstadoCarrera.DEFINIDA) {
             setEstado(EstadoCarrera.ABIERTA);
-            Fachada.getInstancia().notificarObservadores(ErroresApuesta.CarreraAbierta);
+            Fachada.getInstancia().notificarObservadores(CambiosCarrera.CarreraAbierta);
             return true;
         }
         return false;
@@ -160,7 +160,7 @@ public class Carrera {
     public boolean cerrar() {
         if (estado == EstadoCarrera.ABIERTA) {
             setEstado(EstadoCarrera.CERRADA);
-            Fachada.getInstancia().notificarObservadores(ErroresApuesta.CarreraCerrada);
+            Fachada.getInstancia().notificarObservadores(CambiosCarrera.CarreraCerrada);
             return true;
         }
         return false;

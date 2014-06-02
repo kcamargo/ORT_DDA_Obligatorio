@@ -1,5 +1,6 @@
 package bl;
 
+import bl.enums.CambiosCarrera;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -102,7 +103,7 @@ public class Hipodromo {
     }
 
     public boolean validarDatosCarrera(Carrera c) {
-        Jornada j  = buscarJornada(c.getFecha());
+        Jornada j = buscarJornada(c.getFecha());
         if (!j.existeCarrera(c.getNombre())) {
             return true;
         }
@@ -141,8 +142,8 @@ public class Hipodromo {
         if (j != null) {
             if (j.abrirCarrera(c)) {
                 setSiguienteCarrera(null);
-                setSiguienteCarrera(getSiguienteCarrera());
                 setCarreraAbierta(c);
+                setSiguienteCarrera(getSiguienteCarrera());
                 return true;
             } else {
                 return false;
