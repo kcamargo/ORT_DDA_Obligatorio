@@ -93,7 +93,7 @@ public class Jornada {
 
     public boolean agregarCarrera(Carrera c) throws Exception {
         if (!existeNombreCarrera(c.getNombre())) {
-            if (c.validarFecha(c.getFecha())) {
+            if (c.validar()) {
                 c.setNumero(getSiguienteNumeroDeCarrera());
                 return carreras.add(c);
             } else {

@@ -121,19 +121,22 @@ public class Carrera {
     public boolean validar() {
         return nombre != null && !nombre.isEmpty()
                 && numero > 1
-                && fecha != null
+                && validarFecha()
                 && estado != null;
     }
 
-    public boolean validarFecha(Date fch) {
-        boolean ret;
-        Date now = new Date();
-        if (now.before(fch) || (now.getDay()) == (fch.getDay())) {
-            ret = true;
-        } else {
-            ret = false;
+    private boolean validarFecha() {
+        if (fecha == null) {
+            return false;
         }
-        return ret;
+        
+        Date now = Fecha.fechaActual();
+        
+        if (now.before(fecha) || (now.getDay()) == (fecha.getDay())) {
+            return true;
+        }
+        
+        return false;
     }
 
     public boolean estaDisponible(Caballo caballo) {
