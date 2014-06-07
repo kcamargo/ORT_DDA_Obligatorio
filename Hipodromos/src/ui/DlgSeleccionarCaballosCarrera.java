@@ -10,15 +10,17 @@ import java.util.ArrayList;
 
 public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
-    Fachada fac = Fachada.getInstancia();
     Carrera carrera;
     ArrayList<CaballoEnCarrera> caballosCarrera = new ArrayList<>();
+    ArrayList<Caballo> caballosDisponibles = new ArrayList<>();
 
     public DlgSeleccionarCaballosCarrera(java.awt.Frame parent, boolean modal, Carrera c) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+
         carrera = c;
+        caballosDisponibles = Fachada.getInstancia().getCaballosDisponibles(carrera.getFecha());
         listarCaballosDisponibles();
         CerrarVentana();
     }
@@ -127,9 +129,21 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         try {
-            int numero = Integer.parseInt(txtNumeroCaballo.getText());
-            double dividendo = Double.parseDouble(txtDividendo.getText());
-            Caballo c = (Caballo) lstDisponibles.getSelectedValue();
+            int numero = 0;
+            double dividendo = 0;
+            try {
+                numero = Integer.parseInt(txtNumeroCaballo.getText());
+            } catch (Exception e) {
+                throw new Exception("El número de caballo es inválido");
+            }
+
+            try {
+                dividendo = Double.parseDouble(txtDividendo.getText());
+            } catch (Exception e) {
+                throw new Exception("El dividendo es inválido");
+            }
+
+            Caballo c = getDisponibleSeleccionado();
             if (c != null) {
                 CaballoEnCarrera caballoCarrera = new CaballoEnCarrera(numero, dividendo, c);
                 if (carrera.agregarCaballo(caballoCarrera)) {
@@ -137,6 +151,8 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
                     listarCaballosSeleccionados();
                     limpiarCampos();
                 }
+                caballosDisponibles.remove(c);
+                listarCaballosDisponibles();
             } else {
                 lblMensaje.setText("Seleccione un caballo.");
             }
@@ -149,10 +165,11 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         try {
-            CaballoEnCarrera c = caballosCarrera.get(lstSeleccionados.getSelectedIndex());
+            CaballoEnCarrera c = getCaballoCarreraSeleccionado();
             if (c != null) {
                 carrera.quitarCaballo(c.getCaballo());
                 caballosCarrera.remove(c);
+                caballosDisponibles.add(c.getCaballo());
 
                 listarCaballosSeleccionados();
                 listarCaballosDisponibles();
@@ -181,7 +198,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void listarCaballosDisponibles() {
-        lstDisponibles.setListData(caballosDisponiblesToArray(fac.getCaballosDisponibles(carrera.getFecha())));
+        lstDisponibles.setListData(caballosDisponiblesToArray(caballosDisponibles));
     }
 
     private void listarCaballosSeleccionados() {
@@ -191,7 +208,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
     private void CerrarVentana() {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                fac.getHipodromoActual().borrarCarrera(carrera);
+                Fachada.getInstancia().getHipodromoActual().borrarCarrera(carrera);
             }
         });
     }
@@ -216,5 +233,15 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
             ret.add(c.getNombre());
         }
         return ret.toArray();
+    }
+
+    private Caballo getDisponibleSeleccionado() {
+        int indiceSeleccionado = lstDisponibles.getSelectedIndex();
+        return caballosDisponibles.get(indiceSeleccionado);
+    }
+
+    private CaballoEnCarrera getCaballoCarreraSeleccionado() {
+        int indiceSeleccionado = lstSeleccionados.getSelectedIndex();
+        return caballosCarrera.get(indiceSeleccionado);
     }
 }

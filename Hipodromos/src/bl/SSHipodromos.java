@@ -60,14 +60,15 @@ public class SSHipodromos {
     public ArrayList<Caballo> getCaballosDisponibles(Date fecha) {
         ArrayList<Caballo> retorno = new ArrayList<>();
 
-        for (Hipodromo h1 : hipodromos) {
-            for (Caballo c : caballos) {
-                if (estaDisponible(c, fecha, h1)) {
-                    retorno.add(c);
-                }
+        boolean estaDisponible = false;
+        for (Caballo c : caballos) {
+            for (Hipodromo h : hipodromos) {
+                estaDisponible = estaDisponible(c, fecha, h);
+            }
+            if (estaDisponible) {
+                retorno.add(c);
             }
         }
-
         return retorno;
     }
 
