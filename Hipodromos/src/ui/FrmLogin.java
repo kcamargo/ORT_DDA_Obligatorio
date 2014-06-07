@@ -67,22 +67,18 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String user = txtUsuario.getText();
-        String pass = txtPass.getText();
-        Administrador admin = new Administrador();
-        if (admin.validarCamposLogin(user, pass)) {
-            admin = fac.login(admin);
-            if (admin != null) {
-                //TODO: Revisar
-                this.setVisible(false);
+        String user = txtUsuario.getText().trim();
+        String pass = txtPass.getText().trim();
+        
+        Administrador admin = fac.login(new Administrador(user, pass));
+        
+        if (admin != null) {
+            this.setVisible(false);
                 FrmAdministrador frmAdmin = new FrmAdministrador(admin);
                 dialog = new DlgSeleccionarHipodromo(this, true);
                 dialog.cargarAdmin(admin);
                 dialog.setVisible(true);
                 dialog.cargarForm(frmAdmin);
-            } else {
-                lblLoginMensaje.setText("Acceso denegado.");
-            }
         } else {
             lblLoginMensaje.setText("Acceso denegado.");
         }

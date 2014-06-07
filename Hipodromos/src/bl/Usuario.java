@@ -41,12 +41,12 @@ public class Usuario {
     }
     //</editor-fold>
 
-    public Usuario(String username, String password, String nombre, String apellido){
+    public Usuario(String username, String password, String nombre, String apellido) {
         this(username, password);
         this.nombre = nombre;
         this.apellido = apellido;
     }
-    
+
     public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
@@ -55,25 +55,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    //TODO: Revisar
-    public boolean validarCamposLogin(String pUser, String pPass) {
-        boolean retorno = false;
-        if (pUser != null && !pUser.isEmpty() && pPass != null && !pPass.isEmpty()) {
-            retorno = true;
-        }
-        if (retorno) {
-            this.setUsername(pUser);
-            this.setPassword(pPass);
-        }
-        return retorno;
-    }
-
     @Override
     public boolean equals(Object o) {
         Usuario u = (Usuario) o;
         return username.equals(u.getUsername())
                 && password.equals(u.getPassword());
-        // && nombre.equals(u.getNombre())
-        // && apellido.equals(u.getApellido());
     }
 }

@@ -176,7 +176,7 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
     }//GEN-LAST:event_cmbHipodromoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        Jugador j = new Jugador(0, txtUsuario.getText().toString(), new String(txtPass.getPassword()));
+        Jugador j = new Jugador(0, txtUsuario.getText().trim(), new String(txtPass.getPassword()).trim());
         j = fachada.login(j);
 
         if (j != null) {
