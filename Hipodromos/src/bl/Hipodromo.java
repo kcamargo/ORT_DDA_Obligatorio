@@ -174,6 +174,11 @@ public class Hipodromo {
             return false;
         }
     }
+
+    public int getSiguienteNroCarrera(Date fecha) {
+        Jornada j = buscarJornada(fecha);
+        return j.getSiguienteNumeroDeCarrera();
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Jornadas">

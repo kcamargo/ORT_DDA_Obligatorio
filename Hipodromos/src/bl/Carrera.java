@@ -118,24 +118,37 @@ public class Carrera {
     }
     //</editor-fold>
 
-    public boolean validar() {
-        return nombre != null && !nombre.isEmpty()
-                && numero > 1
-                && validarFecha()
-                && estado != null;
+    public boolean validar() throws Exception {
+        if (nombre != null && !nombre.isEmpty()) {
+            if (numero >= 1) {
+                if (validarFecha()) {
+                    if (estado != null) {
+                        return true;
+                    } else {
+                        throw new Exception("El estado no puede ser nulo");
+                    }
+                } else {
+                    throw new Exception("Fecha inválida; debe ser igual o posterior a hoy");
+                }
+            } else {
+                throw new Exception("El número de la carrera es inválido");
+            }
+        } else {
+            throw new Exception("Nombre inválido");
+        }
     }
 
     private boolean validarFecha() {
         if (fecha == null) {
             return false;
         }
-        
+
         Date now = Fecha.fechaActual();
-        
+
         if (now.before(fecha) || (now.getDay()) == (fecha.getDay())) {
             return true;
         }
-        
+
         return false;
     }
 

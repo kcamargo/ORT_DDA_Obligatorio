@@ -93,14 +93,18 @@ public class Jornada {
 
     public boolean agregarCarrera(Carrera c) throws Exception {
         if (!existeNombreCarrera(c.getNombre())) {
-            if (c.validar()) {
-                c.setNumero(getSiguienteNumeroDeCarrera());
-                return carreras.add(c);
-            } else {
-                throw new Exception("La fecha de la carrera es inválida");
+            try {
+                boolean retorno = false;
+                if (c.validar()) {
+                    c.setNumero(getSiguienteNumeroDeCarrera());
+                    retorno = carreras.add(c);
+                }
+                return retorno;
+            } catch (Exception ex) {
+                throw ex;
             }
         } else {
-            throw new Exception("El nombre para de carrera para la jornada ya existe");
+            throw new Exception("El nombre para de carrera ya existe para esta jornada ");
         }
     }
 
@@ -165,7 +169,7 @@ public class Jornada {
         return null;
     }
 
-    private int getSiguienteNumeroDeCarrera() {
+    public int getSiguienteNumeroDeCarrera() {
         return carreras.size() + 1;
     }
 

@@ -3,10 +3,7 @@ package ui;
 import bl.Carrera;
 import bl.Fachada;
 import java.awt.Frame;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import util.Fecha;
 
 public class DlgCrearCarrera extends javax.swing.JDialog {
@@ -110,7 +107,9 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         String nombre = txtNombre.getText();
 
         if (!nombre.equals("")) {
+            //Carrera c = new Carrera(nombre, fch);
             Carrera c = new Carrera(nombre, fch);
+            c.setNumero(fac.getHipodromoActual().getSiguienteNroCarrera(fch));
             try {
                 if (fac.getHipodromoActual().agregarCarrera(c)) {
                     limpiarCampos();
