@@ -78,20 +78,20 @@ public class Init {
         CaballoEnCarrera cec2 = new CaballoEnCarrera(2, 1.20, cab2);
         CaballoEnCarrera cec3 = new CaballoEnCarrera(3, 1.30, cab3);
         CaballoEnCarrera cec4 = new CaballoEnCarrera(4, 1.40, cab4);
-        
+
         CaballoEnCarrera cec5 = new CaballoEnCarrera(1, 1.10, cab5);
         CaballoEnCarrera cec6 = new CaballoEnCarrera(2, 1.20, cab6);
         CaballoEnCarrera cec7 = new CaballoEnCarrera(3, 1.30, cab7);
         CaballoEnCarrera cec8 = new CaballoEnCarrera(4, 1.40, cab8);
-        
+
         CaballoEnCarrera cec9 = new CaballoEnCarrera(1, 1.10, cab9);
         CaballoEnCarrera cec10 = new CaballoEnCarrera(2, 1.20, cab10);
         CaballoEnCarrera cec11 = new CaballoEnCarrera(3, 1.40, cab11);
-        
+
         CaballoEnCarrera cec12 = new CaballoEnCarrera(1, 1.40, cab12);
         CaballoEnCarrera cec13 = new CaballoEnCarrera(2, 1.60, cab13);
         CaballoEnCarrera cec14 = new CaballoEnCarrera(3, 2.10, cab14);
-        
+
         try {
             c1.agregarCaballo(cec1);
             c1.agregarCaballo(cec2);
@@ -106,7 +106,7 @@ public class Init {
             c3.agregarCaballo(cec9);
             c3.agregarCaballo(cec10);
             c3.agregarCaballo(cec11);
-            
+
             c4.agregarCaballo(cec12);
             c4.agregarCaballo(cec13);
             c4.agregarCaballo(cec14);
@@ -114,9 +114,13 @@ public class Init {
             System.out.println(ex.getMessage());
         }
 
-        h1.agregarCarrera(c1);
-        h1.agregarCarrera(c2);
-        h1.agregarCarrera(c3);
-        h1.agregarCarrera(c4);
+        try {
+            h1.agregarCarrera(c1);
+            h1.agregarCarrera(c2);
+            h1.agregarCarrera(c3);
+            h1.agregarCarrera(c4);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

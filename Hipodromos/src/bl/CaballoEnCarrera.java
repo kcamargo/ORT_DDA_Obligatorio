@@ -72,10 +72,20 @@ public class CaballoEnCarrera {
     }
     //</editor-fold>
 
-    public boolean validar() {
-        return numero > 0 && numero < 99999
-                && dividendo > 1
-                && caballo != null;
+    public boolean validar() throws Exception {
+        if (numero > 0 && numero < 99999) {
+            if (dividendo > 1) {
+                if (caballo != null) {
+                    return true;
+                } else {
+                    throw new Exception("Debe asignarse un caballo");
+                }
+            } else {
+                throw new Exception("Dividendo debe ser mayor a 1");
+            }
+        } else {
+            throw new Exception("Número debe estar entre 0 y 99999");
+        }
     }
 
     public ErroresApuesta agregarApuesta(Apuesta apuesta) {
