@@ -11,7 +11,9 @@ public class CaballoEnCarrera {
     private Caballo caballo;
     private Carrera carrera;
     private ArrayList<Apuesta> apuestas;
-
+    //private TipoApuesta tipoApuesta =  new ApuestaSimple();
+   // private TipoApuesta tipoApuesta =  new ApuestaTriple();
+    private TipoApuesta tipoApuesta =  new ApuestaCuadruple();
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public void setNumero(int numero) {
         this.numero = numero;
@@ -115,13 +117,14 @@ public class CaballoEnCarrera {
     }
 
     public boolean pagar() {
-        for (Apuesta a : apuestas) {
+        /*for (Apuesta a : apuestas) {
             Jugador j = a.getJugador();
             double ganancia = a.getMonto() * dividendo;
 
             j.sumarSaldo(ganancia);
             a.setGanado(ganancia);
-        }
+        }*/
+        tipoApuesta.pagar(apuestas, dividendo, getMontoApostado());
         return true;
     }
 
