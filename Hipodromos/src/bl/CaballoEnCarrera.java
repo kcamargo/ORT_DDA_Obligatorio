@@ -1,7 +1,9 @@
 package bl;
 
 import bl.enums.ErroresApuesta;
+import bl.enums.TiposApuestas;
 import java.util.ArrayList;
+import util.ICrearApuesta;
 
 public class CaballoEnCarrera {
 
@@ -144,5 +146,17 @@ public class CaballoEnCarrera {
             ret += " ***GANADOR***";
         }
         return ret;
+    }
+
+   
+    public void cambiarTipoApuesta(TiposApuestas tipo) throws Exception {
+        switch(tipo){
+            case Simple : this.tipoApuesta =  new SimpleFactory().crearTipoApuesta();
+            case Triple : this.tipoApuesta = new TripleFactory().crearTipoApuesta();
+            case Cuadruple : this.tipoApuesta = new CuadrupleFactory().crearTipoApuesta();
+            default : 
+                throw new Exception();
+        
+        }
     }
 }
