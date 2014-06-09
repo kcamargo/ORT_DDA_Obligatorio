@@ -9,7 +9,9 @@ public class Fachada extends Observable {
 
     private SSHipodromos ssHipodromos;
     private SSUsuarios ssUsuarios;
+
     public enum Evento {
+
         agregarHipodromo
     }
     //<editor-fold defaultstate="collapsed" desc="Singleton">
@@ -36,7 +38,7 @@ public class Fachada extends Observable {
     public ErroresHipodromo agregarHipodromo(Hipodromo hipodromo) {
         return ssHipodromos.agregarHipodromo(hipodromo);
     }
-    
+
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {
         return ssHipodromos.seleccionarHipodromo(hipodromo);
     }
