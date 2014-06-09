@@ -60,21 +60,25 @@ public class SSHipodromos {
     public ArrayList<Caballo> getCaballosDisponibles(Date fecha) {
         ArrayList<Caballo> retorno = new ArrayList<>();
 
-        boolean estaDisponible = false;
+        boolean estaDisponible = true;
         for (Caballo c : caballos) {
             for (Hipodromo h : hipodromos) {
-                estaDisponible = estaDisponible(c, fecha, h);
+                if (!estaDisponible(c, fecha, h)) {
+                    estaDisponible = false;
+                    break;
+                }
             }
             if (estaDisponible) {
                 retorno.add(c);
             }
+            estaDisponible = true;
         }
         return retorno;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Métodos privados">
-    private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h1) {
-        return h1.estaDisponible(caballo, fecha);
+    private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h) {
+        return h.estaDisponible(caballo, fecha);
     }
 
     private Hipodromo buscarHipodromo(String nombre) {

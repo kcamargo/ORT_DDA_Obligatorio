@@ -14,6 +14,26 @@ public class Carrera {
         CERRADA,
         FINALIZADA
     }
+
+    public static EstadoCarrera getEstado(int i) {
+        EstadoCarrera ret = null;
+        switch (i) {
+            case 1:
+                ret = EstadoCarrera.DEFINIDA;
+                break;
+            case 2:
+                ret = EstadoCarrera.ABIERTA;
+                break;
+            case 3:
+                ret = EstadoCarrera.CERRADA;
+                break;
+            case 4:
+                ret = EstadoCarrera.FINALIZADA;
+                break;
+        }
+        return ret;
+    }
+    private int oid;
     private String nombre;
     private int numero;
     private Date fecha;
@@ -22,6 +42,14 @@ public class Carrera {
     private CaballoEnCarrera ganador;
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -209,7 +237,7 @@ public class Carrera {
 
         if (c.validar()) {
             for (CaballoEnCarrera cec : caballos) {
-                if (cec.equals(c)) {
+                if (cec.getNumero() == c.getNumero()) {
                     throw new Exception("Número de caballo repetido");
                 }
             }

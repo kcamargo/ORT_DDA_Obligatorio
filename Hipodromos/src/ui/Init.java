@@ -55,9 +55,13 @@ public class Init {
         Caballo cab14 = new Caballo("Kekeke", "Fulano");
 
         Carrera c1 = new Carrera("Carrera 1", Fecha.fechaActual());
+        c1.setNumero(1);
         Carrera c2 = new Carrera("Carrera 2", Fecha.fechaActual());
+        c2.setNumero(2);
         Carrera c3 = new Carrera("Carrera 3", Fecha.fechaActual());
+        c3.setNumero(3);
         Carrera c4 = new Carrera("Carrera 4", Fecha.fechaActual());
+        c4.setNumero(4);
 
         fac.agregarCaballo(cab1);
         fac.agregarCaballo(cab2);
