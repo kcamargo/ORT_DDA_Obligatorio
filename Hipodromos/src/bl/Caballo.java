@@ -2,6 +2,7 @@ package bl;
 
 public class Caballo {
 
+    private int oid;
     private String nombre;
     private String nombreResponsable;
 
@@ -10,7 +11,19 @@ public class Caballo {
         this.nombreResponsable = nombreResponsable;
     }
 
+    public Caballo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -36,7 +49,6 @@ public class Caballo {
 
     @Override
     public String toString() {
-        return nombre; 
+        return nombre;
     }
-    
 }
