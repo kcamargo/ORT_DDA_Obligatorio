@@ -2,6 +2,9 @@ package bl.persistencia;
 
 import bl.CaballoEnCarrera;
 import bl.Carrera;
+import bl.Fachada;
+import bl.Hipodromo;
+import dal.ManejadorBD;
 import dal.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,9 +71,9 @@ public class PCarrera implements Persistente {
 
     @Override
     public String getSelectSQL() {
-        String sql = "SELECT * FROM carreras";
+        String sql = "SELECT * FROM carreras CA INNER JOIN caballoscarrera CC, caballos C WHERE CA.oid = CC.oidCarrera AND CC.oidCaballo = C.oid";
         if (carrera != null && getOid() != 0) {
-            sql += " WHERE oid = " + getOid();
+            sql += " AND oid = " + getOid();
         }
         return sql;
     }
@@ -97,16 +100,33 @@ public class PCarrera implements Persistente {
 
     @Override
     public void leerDesdeResultSet(ResultSet rs) {
-        //TODO:
         try {
             carrera.setOid(rs.getInt("oid"));
             carrera.setNombre(rs.getString("nombre"));
             carrera.setNumero(rs.getInt("numero"));
             carrera.setFecha(rs.getDate("fecha"));
             carrera.setEstado(Carrera.getEstado(rs.getInt("estado")));
-            //Setear el ganador
-            //Setear el hipodromo
+
+            //Busco el hipodromo y agrego la carrera.
+            PHipodromo pHip = new PHipodromo(new Hipodromo());
+            pHip.setOid(rs.getInt("oidHipodromo"));
+            
+            Hipodromo h = (Hipodromo) ManejadorBD.getInstancia().obtener(pHip).get(0);
+            h = Fachada.getInstancia().buscarHipodromo(h.getNombre());
+            h.agregarCarrera(carrera);
+
+            //Busco al caballo ganador y lo seteo.
+            if (carrera.getEstado() == Carrera.EstadoCarrera.FINALIZADA) {
+                PCaballoEnCarrera pCab = new PCaballoEnCarrera(new CaballoEnCarrera());
+                pCab.setOid(rs.getInt("oidGanador"));
+                ArrayList<CaballoEnCarrera> cabs = ManejadorBD.getInstancia().obtener(pCab);
+
+                CaballoEnCarrera c = cabs.get(0);
+                carrera.setGanadorSimple(c);
+            }
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

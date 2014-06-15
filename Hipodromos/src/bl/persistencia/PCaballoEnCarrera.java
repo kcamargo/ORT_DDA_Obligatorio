@@ -1,14 +1,21 @@
 package bl.persistencia;
 
+import bl.Caballo;
 import bl.CaballoEnCarrera;
+import bl.Carrera;
+import bl.Fachada;
+import dal.ManejadorBD;
 import dal.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PCaballoEnCarrera implements Persistente {
 
     private CaballoEnCarrera caballo;
+    private Carrera carrera;
 
     public PCaballoEnCarrera(CaballoEnCarrera caballo) {
         this.caballo = caballo;
@@ -20,12 +27,11 @@ public class PCaballoEnCarrera implements Persistente {
 
     @Override
     public ArrayList<String> getInsertSQL() {
-        //TODO:
         ArrayList<String> ret = new ArrayList<>();
         String sql = "INSERT INTO caballoscarrera VALUES (";
         sql += getOid() + ", ";
         sql += caballo.getCaballo().getOid() + ", ";
-        //Resolver como obtener el oid de la carrera...
+        sql += carrera.getOid() + ", ";
         sql += caballo.getNumero() + ", ";
         sql += caballo.getDividendo() + ", ";
         sql += caballo.getTipoApuesta();
@@ -36,12 +42,11 @@ public class PCaballoEnCarrera implements Persistente {
 
     @Override
     public ArrayList<String> getUpdateSQL() {
-        //TODO:
         ArrayList<String> ret = new ArrayList<>();
         String sql = "UPDATE caballoscarrera SET ";
         sql += "oid = '" + caballo.getOid() + "', ";
         sql += "oidCaballo = '" + caballo.getCaballo().getOid() + "', ";
-        //sql += "oidCarrera = '" + ????? + "', ";
+        sql += "oidCarrera = '" + carrera.getOid() + "', ";
         sql += "numero = '" + caballo.getNumero() + "', ";
         sql += "dividendo = '" + caballo.getDividendo() + "', ";
         sql += "tipoApuesta = '" + caballo.getTipoApuesta() + "', ";
@@ -88,15 +93,27 @@ public class PCaballoEnCarrera implements Persistente {
 
     @Override
     public void leerDesdeResultSet(ResultSet rs) {
-        //TODO:
         try {
             caballo.setOid(rs.getInt("oid"));
-            //caballo.set(rs.getInt("oidCaballo"));
-            //caballo.set(rs.getInt("oidCarrera"));
             caballo.setNumero(rs.getInt("numero"));
             caballo.setDividendo(rs.getDouble("dividendo"));
-            //caballo.setTipoApuesta(rs.getInt("tipoApuesta"));
+
+            //Busco y seteo el caballo
+            PCaballo pCab = new PCaballo(new Caballo());
+            pCab.setOid(rs.getInt("oidCaballo"));
+            Caballo cab = (Caballo) ManejadorBD.getInstancia().obtener(pCab).get(0);
+
+            cab = Fachada.getInstancia().buscarCaballo(cab.getNombre());
+            caballo.setCaballo(cab);
+
+            //Busco la carrera y le agrego el caballo
+            Carrera car = Fachada.getInstancia().buscarCarreraPorOid(rs.getInt("oidCarrera"));;
+            if (car != null) {
+                car.agregarCaballo(caballo);
+            }
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

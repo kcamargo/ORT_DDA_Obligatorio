@@ -113,6 +113,10 @@ public class Carrera {
         return ganador;
     }
 
+    public void setGanadorSimple(CaballoEnCarrera caballo) {
+        this.ganador = caballo;
+    }
+
     public void setGanador(CaballoEnCarrera caballo) {
         if (this.estado == EstadoCarrera.CERRADA) {
             caballo.setGanador(true);

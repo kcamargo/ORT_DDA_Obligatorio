@@ -76,18 +76,37 @@ public class SSHipodromos {
         return retorno;
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Métodos privados">
-    private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h) {
-        return h.estaDisponible(caballo, fecha);
-    }
-
-    private Hipodromo buscarHipodromo(String nombre) {
+    public Hipodromo buscarHipodromo(String nombre) {
         for (Hipodromo h : hipodromos) {
             if (h.getNombre().equals(nombre)) {
                 return h;
             }
         }
         return null;
+    }
+
+    public Caballo buscarCaballo(String nombre) {
+        for (Caballo c : caballos) {
+            if (c.getNombre().equals(nombre)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Carrera buscarCarreraPorOid(int oid) {
+        for (Hipodromo h : hipodromos) {
+            Carrera c = h.buscarCarreraPorOid(oid);
+            if (c != null) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Métodos privados">
+    private boolean estaDisponible(Caballo caballo, Date fecha, Hipodromo h) {
+        return h.estaDisponible(caballo, fecha);
     }
 
     private void setHipodromoActual(Hipodromo actual) {

@@ -229,4 +229,14 @@ public class Hipodromo {
     public String toString() {
         return getNombre();
     }
+
+    public Carrera buscarCarreraPorOid(int oid) {
+        for (Jornada j : jornadas) {
+            Carrera c = j.buscarCarreraPorOid(oid);
+            if (c != null) {
+                return c;
+            }
+        }
+        return null;
+    }
 }

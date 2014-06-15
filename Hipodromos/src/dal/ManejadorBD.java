@@ -8,6 +8,10 @@ public class ManejadorBD {
     private Connection conexion;
     private static ManejadorBD instancia;
 
+    private ManejadorBD() {
+        conectar("jdbc:mysql://localhost:3306/obligatorio", "root", "root");
+    }
+
     public static ManejadorBD getInstancia() {
         if (instancia == null) {
             instancia = new ManejadorBD();
@@ -15,10 +19,10 @@ public class ManejadorBD {
         return instancia;
     }
 
-    public void conectar(String url) {
+    public void conectar(String url, String user, String pass) {
         try {
-            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            conexion = DriverManager.getConnection(url);
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException e) {
             System.out.println("Error de driver.");
         } catch (SQLException e1) {
@@ -87,7 +91,7 @@ public class ManejadorBD {
         }
         return ret;
     }
-    
+
     public void agregar(Persistente b) {
         int oid = this.proximoOid();
         b.setOid(oid);
@@ -95,20 +99,20 @@ public class ManejadorBD {
             this.ejecutar(s);
         }
     }
-    
+
     public void modificar(Persistente b) {
         for (String s : b.getUpdateSQL()) {
             this.ejecutar(s);
         }
     }
-    
+
     public void eliminar(Persistente b) {
         for (String s : b.getDeleteSQL()) {
             this.ejecutar(s);
         }
         b.setOid(0);
     }
-    
+
     public void actualizar(Persistente b) {
         try {
             ResultSet rs = this.consultar(b.getSelectSQL());

@@ -12,7 +12,7 @@ public class Caballo {
     }
 
     public Caballo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">

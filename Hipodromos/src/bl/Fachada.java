@@ -54,6 +54,18 @@ public class Fachada extends Observable {
     public ArrayList<Hipodromo> getHipodromos() {
         return ssHipodromos.getHipodromos();
     }
+
+    public Hipodromo buscarHipodromo(String nombre) {
+        return ssHipodromos.buscarHipodromo(nombre);
+    }
+
+    public Caballo buscarCaballo(String nombre) {
+        return ssHipodromos.buscarCaballo(nombre);
+    }
+
+    public Carrera buscarCarreraPorOid(int oid) {
+        return ssHipodromos.buscarCarreraPorOid(oid);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="SSUsuarios">

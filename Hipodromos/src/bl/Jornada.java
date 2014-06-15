@@ -187,4 +187,13 @@ public class Jornada {
         }
         return false;
     }
+
+    public Carrera buscarCarreraPorOid(int oid) {
+        for (Carrera c : carreras){
+            if (c.getOid() == oid) {
+                return c;
+            }
+        }
+        return null;
+    }
 }

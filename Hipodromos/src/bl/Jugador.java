@@ -7,6 +7,9 @@ public class Jugador extends Usuario {
     private double saldo;
     private ArrayList<Apuesta> apuestas;
 
+    public Jugador() {
+    }
+
     public Jugador(double saldo, String username, String password) {
         super(username, password);
         this.saldo = saldo;

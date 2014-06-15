@@ -10,7 +10,7 @@ public class PCaballo implements Persistente {
 
     private Caballo caballo;
 
-    private PCaballo(Caballo c) {
+    public PCaballo(Caballo c) {
         caballo = c;
     }
 
