@@ -6,6 +6,7 @@ import util.Fecha;
 
 public class Hipodromo {
 
+    private int oid;
     private String nombre;
     private String direccion;
     private ArrayList<Jornada> jornadas;
@@ -14,6 +15,14 @@ public class Hipodromo {
     private Carrera carreraCerrada;
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
     public String getDireccion() {
         return direccion;
     }
@@ -177,7 +186,11 @@ public class Hipodromo {
 
     public int getSiguienteNroCarrera(Date fecha) {
         Jornada j = buscarJornada(fecha);
-        return j.getSiguienteNumeroDeCarrera();
+        if (j != null) {
+            return j.getSiguienteNumeroDeCarrera();
+        } else {
+            return 1;
+        }
     }
     //</editor-fold>
 
@@ -215,5 +228,15 @@ public class Hipodromo {
     @Override
     public String toString() {
         return getNombre();
+    }
+
+    public Carrera buscarCarreraPorOid(int oid) {
+        for (Jornada j : jornadas) {
+            Carrera c = j.buscarCarreraPorOid(oid);
+            if (c != null) {
+                return c;
+            }
+        }
+        return null;
     }
 }

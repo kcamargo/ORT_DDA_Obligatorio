@@ -5,7 +5,11 @@ import java.util.ArrayList;
 public class Jugador extends Usuario {
 
     private double saldo;
-    private ArrayList<Apuesta> apuestas;
+    private ArrayList<Apuesta> apuestas = new ArrayList<>();
+
+    public Jugador() {
+        
+    }
 
     public Jugador(double saldo, String username, String password) {
         super(username, password);

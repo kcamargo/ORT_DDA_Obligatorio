@@ -35,6 +35,7 @@ INSERT INTO administradores VALUES (24, 'Root', 'González', 'root', 'root');
 
 /* CARRERAS */
 INSERT INTO carreras VALUES (25, 'Carrera_1', 1, CURDATE(), 4, 26, 14);
+<<<<<<< HEAD
 	INSERT INTO caballoscarrera VALUES (26, 1, 25, 1, 1.10, 0);
 	INSERT INTO caballoscarrera VALUES (27, 2, 25, 2, 1.20, 0);
 	INSERT INTO caballoscarrera VALUES (28, 3, 25, 3, 1.30, 0);
@@ -68,3 +69,34 @@ INSERT INTO carreras VALUES (49, 'Carrera_7', 7, CURDATE(), 1, NULL, 14);
 	INSERT INTO caballoscarrera VALUES (50, 1, 49, 3, 1.10, 0);
 	INSERT INTO caballoscarrera VALUES (51, 2, 49, 3, 1.20, 0);
 	INSERT INTO caballoscarrera VALUES (52, 3, 49, 3, 1.30, 0);
+=======
+INSERT INTO carreras VALUES (29, 'Carrera_2', 2, CURDATE(), 4, 30, 14);
+INSERT INTO carreras VALUES (33, 'Carrera_3', 3, CURDATE(), 4, 34, 14);
+INSERT INTO carreras VALUES (37, 'Carrera_4', 4, CURDATE(), 2, NULL, 14);
+INSERT INTO carreras VALUES (41, 'Carrera_5', 5, CURDATE(), 1, NULL, 14);
+INSERT INTO carreras VALUES (45, 'Carrera_6', 6, CURDATE(), 1, NULL, 14);
+INSERT INTO carreras VALUES (49, 'Carrera_7', 7, CURDATE(), 1, NULL, 14);
+
+/* CABALLOS CARRERA */
+INSERT INTO caballoscarrera VALUES (26, 1, 25, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (27, 2, 25, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (28, 3, 25, 3, 1.30, 0);
+INSERT INTO caballoscarrera VALUES (30, 4, 29, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (31, 5, 29, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (32, 6, 29, 3, 1.30, 0);
+INSERT INTO caballoscarrera VALUES (34, 7, 33, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (35, 8, 33, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (36, 9, 33, 3, 1.30, 0);
+INSERT INTO caballoscarrera VALUES (38, 10, 37, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (39, 11, 37, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (40, 12, 37, 3, 1.30, 0);
+INSERT INTO caballoscarrera VALUES (42, 13, 41, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (43, 1, 41, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (44, 2, 41, 3, 1.30, 0);
+INSERT INTO caballoscarrera VALUES (46, 3, 45, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (47, 4, 45, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (48, 5, 45, 3, 1.30, 0);
+INSERT INTO caballoscarrera VALUES (50, 6, 49, 1, 1.10, 0);
+INSERT INTO caballoscarrera VALUES (51, 7, 49, 2, 1.20, 0);
+INSERT INTO caballoscarrera VALUES (52, 8, 49, 3, 1.30, 0);
+>>>>>>> origin/Bruno-2

@@ -82,13 +82,13 @@ public class Jornada {
     //</editor-fold>
 
     public boolean estaDisponible(Caballo caballo) {
-        boolean flag = true;
+        boolean disponible = true;
         for (Carrera c : carreras) {
             if (!c.estaDisponible(caballo)) {
-                flag = false;
+                disponible = false;
             }
         }
-        return flag;
+        return disponible;
     }
 
     public boolean agregarCarrera(Carrera c) throws Exception {
@@ -186,5 +186,14 @@ public class Jornada {
             }
         }
         return false;
+    }
+
+    public Carrera buscarCarreraPorOid(int oid) {
+        for (Carrera c : carreras){
+            if (c.getOid() == oid) {
+                return c;
+            }
+        }
+        return null;
     }
 }

@@ -3,20 +3,27 @@ package bl;
 import bl.enums.ErroresApuesta;
 import bl.enums.TiposApuestas;
 import java.util.ArrayList;
-import util.ICrearApuesta;
 
 public class CaballoEnCarrera {
 
+    private int oid;
     private int numero;
     private double dividendo;
     private boolean ganador;
     private Caballo caballo;
     private Carrera carrera;
     private ArrayList<Apuesta> apuestas;
-    //private TipoApuesta tipoApuesta =  new ApuestaSimple();
-   // private TipoApuesta tipoApuesta =  new ApuestaTriple();
-    private TipoApuesta tipoApuesta =  new ApuestaCuadruple();
+    private TipoApuesta tipoApuesta = new ApuestaCuadruple();
+
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -59,6 +66,14 @@ public class CaballoEnCarrera {
 
     public ArrayList<Apuesta> getApuestas() {
         return apuestas;
+    }
+
+    public TipoApuesta getTipoApuesta() {
+        return tipoApuesta;
+    }
+
+    public void setTipoApuesta(TipoApuesta tipoApuesta) {
+        this.tipoApuesta = tipoApuesta;
     }
     //</editor-fold>
 
@@ -120,12 +135,12 @@ public class CaballoEnCarrera {
 
     public boolean pagar() {
         /*for (Apuesta a : apuestas) {
-            Jugador j = a.getJugador();
-            double ganancia = a.getMonto() * dividendo;
+         Jugador j = a.getJugador();
+         double ganancia = a.getMonto() * dividendo;
 
-            j.sumarSaldo(ganancia);
-            a.setGanado(ganancia);
-        }*/
+         j.sumarSaldo(ganancia);
+         a.setGanado(ganancia);
+         }*/
         tipoApuesta.pagar(apuestas, dividendo, getMontoApostado());
         return true;
     }
@@ -148,15 +163,17 @@ public class CaballoEnCarrera {
         return ret;
     }
 
-   
     public void cambiarTipoApuesta(TiposApuestas tipo) throws Exception {
-        switch(tipo){
-            case Simple : this.tipoApuesta =  new SimpleFactory().crearTipoApuesta();
-            case Triple : this.tipoApuesta = new TripleFactory().crearTipoApuesta();
-            case Cuadruple : this.tipoApuesta = new CuadrupleFactory().crearTipoApuesta();
-            default : 
+        switch (tipo) {
+            case Simple:
+                this.tipoApuesta = new SimpleFactory().crearTipoApuesta();
+            case Triple:
+                this.tipoApuesta = new TripleFactory().crearTipoApuesta();
+            case Cuadruple:
+                this.tipoApuesta = new CuadrupleFactory().crearTipoApuesta();
+            default:
                 throw new Exception();
-        
+
         }
     }
 }

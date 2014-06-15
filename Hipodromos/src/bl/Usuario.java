@@ -2,12 +2,21 @@ package bl;
 
 public class Usuario {
 
+    private int oid;
     private String username;
     private String password;
     private String nombre;
     private String apellido;
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
     public String getUsername() {
         return username;
     }
