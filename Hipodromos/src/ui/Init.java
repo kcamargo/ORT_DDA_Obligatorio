@@ -9,6 +9,7 @@ import bl.Hipodromo;
 import bl.Jugador;
 import bl.persistencia.PAdministrador;
 import bl.persistencia.PCaballo;
+import bl.persistencia.PCaballoEnCarrera;
 import bl.persistencia.PCarrera;
 import bl.persistencia.PHipodromo;
 import bl.persistencia.PJugador;
@@ -143,6 +144,7 @@ public class Init {
         cargarUsuarios();
         cargarCaballos();
         cargarCarreras();
+        cargarCaballosCarrera();
     }
 
     private static void cargarUsuarios() {
@@ -173,5 +175,9 @@ public class Init {
 
     private static void cargarCarreras() {
         ArrayList<Carrera> carreras = bd.obtener(new PCarrera(null));
+    }
+
+    private static void cargarCaballosCarrera() {
+        ArrayList<CaballoEnCarrera> cecs = bd.obtener(new PCaballoEnCarrera(null));
     }
 }

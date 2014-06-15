@@ -9,8 +9,6 @@ import dal.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PCaballoEnCarrera implements Persistente {
 
@@ -22,7 +20,6 @@ public class PCaballoEnCarrera implements Persistente {
     }
 
     PCaballoEnCarrera() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -108,8 +105,12 @@ public class PCaballoEnCarrera implements Persistente {
 
             //Busco la carrera y le agrego el caballo
             Carrera car = Fachada.getInstancia().buscarCarreraPorOid(rs.getInt("oidCarrera"));;
-            if (car != null) {
-                car.agregarCaballo(caballo);
+            try {
+                if (car != null) {
+                    car.agregarCaballo(caballo);
+                }
+            } catch (Exception e) {
+                System.out.println("El caballo ha sido asignado a la carrera como ganador anteriormente");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

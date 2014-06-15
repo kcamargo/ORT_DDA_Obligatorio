@@ -71,7 +71,7 @@ public class PCarrera implements Persistente {
 
     @Override
     public String getSelectSQL() {
-        String sql = "SELECT * FROM carreras CA INNER JOIN caballoscarrera CC, caballos C WHERE CA.oid = CC.oidCarrera AND CC.oidCaballo = C.oid";
+        String sql = "SELECT * FROM carreras";
         if (carrera != null && getOid() != 0) {
             sql += " AND oid = " + getOid();
         }
