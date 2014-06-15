@@ -166,11 +166,12 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
         fachada.seleccionarHipodromo((Hipodromo) cmbHipodromo.getSelectedItem());
         carreraAbierta = fachada.getHipodromoActual().getCarreraAbierta();
 
+        limpiarDatosDeCarrera();
+        limpiarDatosDeCaballos();
+        
         if (carreraAbierta == null) {
-            messageBox("No hay carreras abiertas");
+            messageBox("No hay carreras abiertas en el hipódromo seleccionado");
         } else {
-            limpiarDatosDeCarrera();
-            limpiarDatosDeCaballos();
             mostrarInfoDeCarrera(carreraAbierta);
         }
     }//GEN-LAST:event_cmbHipodromoActionPerformed
@@ -204,7 +205,7 @@ public class FrmJugador extends javax.swing.JFrame implements Observador {
                         ErroresApuesta ret = caballo.agregarApuesta(a);
                         switch (ret) {
                             case OK:
-                                messageBox("OK");
+                                messageBox("Apuesta realizada correctamente");
                                 borrarDatosJugador();
                                 break;
                             case SaldoInsuficiente:
