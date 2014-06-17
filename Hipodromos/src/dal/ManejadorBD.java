@@ -62,14 +62,14 @@ public class ManejadorBD {
     public int proximoOid() {
         int oid = -1;
         try {
-            String sql = "SELECT value FROM config WHERE key='oid'";
+            String sql = "SELECT value FROM config C WHERE C.key = 'oid'";
             ResultSet rs = this.consultar(sql);
             while (rs.next()) {
                 oid = Integer.parseInt(rs.getString("value"));
             }
             rs.close();
             oid++;
-            this.ejecutar("UPDATE config set value=" + oid + " WHERE key='oid'");
+            this.ejecutar("UPDATE config C SET value = '" + oid + "' WHERE C.key = 'oid'");
         } catch (SQLException e) {
             System.out.println("Error al obtener el proximo oid." + e.getMessage());
         }
