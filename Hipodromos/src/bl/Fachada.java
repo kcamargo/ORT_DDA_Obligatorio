@@ -1,6 +1,5 @@
 package bl;
 
-import bl.enums.ErroresHipodromo;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Observable;
@@ -35,8 +34,8 @@ public class Fachada extends Observable {
         return ssHipodromos.getHipodromoActual();
     }
 
-    public ErroresHipodromo agregarHipodromo(Hipodromo hipodromo) {
-        return ssHipodromos.agregarHipodromo(hipodromo);
+    public void agregarHipodromo(Hipodromo hipodromo) throws Exception {
+        ssHipodromos.agregarHipodromo(hipodromo);
     }
 
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {

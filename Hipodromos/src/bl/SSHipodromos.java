@@ -1,6 +1,9 @@
 package bl;
 
 import bl.enums.ErroresHipodromo;
+import bl.persistencia.PHipodromo;
+import dal.ManejadorBD;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,22 +26,19 @@ public class SSHipodromos {
         return hipodromoActual;
     }
 
-    public ErroresHipodromo agregarHipodromo(Hipodromo hipodromo) {
-        ErroresHipodromo ret = ErroresHipodromo.OK;
-
+    public void agregarHipodromo(Hipodromo hipodromo) throws Exception {
         for (Hipodromo h : hipodromos) {
             if (h.getNombre().equals(hipodromo.getNombre())) {
-                ret = ErroresHipodromo.NombreDup;
+                throw new Exception("Ya existe el nombre de hipodromo ingresado");
             } else if (h.getDireccion().equals(hipodromo.getDireccion())) {
-                ret = ErroresHipodromo.DireccionDup;
+                throw new Exception("Ya existe la direccion de hipodromo ingresada");
             }
         }
 
-        if (ret == ErroresHipodromo.OK) {
-            ret = hipodromos.add(hipodromo)
-                    ? ErroresHipodromo.OK : ErroresHipodromo.ErrorGenerico;
+        ManejadorBD.getInstancia().agregar(new PHipodromo(hipodromo));
+        if (!hipodromos.add(hipodromo)) {
+            throw new Exception("No se pudo agregar el hipodromo");
         }
-        return ret;
     }
 
     public Hipodromo seleccionarHipodromo(Hipodromo hipodromo) {

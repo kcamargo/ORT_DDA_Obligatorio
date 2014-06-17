@@ -73,19 +73,11 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
         Hipodromo h = new Hipodromo(nombre, direccion);
 
         if (h.validar()) {
-            ErroresHipodromo res = fac.agregarHipodromo(h);
-            switch (res) {
-                case OK:
-                    lblMensajeCrear.setText("Hipodromo Creado");
-                    break;
-                case NombreDup:
-                case DireccionDup:
-                    lblMensajeCrear.setText("No se puede crear hipódromo");
-                    break;
-                case ErrorGenerico:
-                    lblMensajeCrear.setText("Error inesperado");
-                default:
-                    throw new AssertionError();
+            try {
+                fac.agregarHipodromo(h);
+                lblMensajeCrear.setText("Hipodromo Creado");
+            } catch (Exception e) {
+                lblMensajeCrear.setText(e.getMessage());
             }
         } else {
             lblMensajeCrear.setText("Todos los campos son requerdos.");
