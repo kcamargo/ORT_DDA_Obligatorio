@@ -1,5 +1,8 @@
 package bl;
 
+import bl.persistencia.PAdministrador;
+import bl.persistencia.PCarrera;
+import dal.ManejadorBD;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -120,13 +123,18 @@ public class Hipodromo {
             j = new Jornada(c.getFecha());
             agregarJornada(j);
         }
-        return j.agregarCarrera(c);
+        if (j.agregarCarrera(c)) {
+            ManejadorBD.getInstancia().agregar(new PCarrera(c, this));
+            return true;
+        }
+        return false;
     }
 
     public void borrarCarrera(Carrera c) {
         Jornada j = buscarJornada(c.getFecha());
         if (j != null) {
             j.eliminarCarrera(c);
+            ManejadorBD.getInstancia().eliminar(new PCarrera(c));
         }
     }
 
@@ -146,6 +154,7 @@ public class Hipodromo {
                 setSiguienteCarrera(null);
                 setCarreraAbierta(c);
                 setSiguienteCarrera(getSiguienteCarrera());
+                ManejadorBD.getInstancia().modificar(new PCarrera(c));
                 return true;
             } else {
                 return false;
@@ -161,6 +170,7 @@ public class Hipodromo {
             if (j.cerrarCarrera(c)) {
                 setCarreraAbierta(null);
                 setCarreraCerrada(c);
+                ManejadorBD.getInstancia().modificar(new PCarrera(c));
                 return true;
             } else {
                 return false;
@@ -175,6 +185,7 @@ public class Hipodromo {
         if (j != null) {
             if (j.asignarGanador(c, caballo)) {
                 setCarreraCerrada(null);
+                ManejadorBD.getInstancia().modificar(new PCarrera(c));
                 return true;
             } else {
                 return false;

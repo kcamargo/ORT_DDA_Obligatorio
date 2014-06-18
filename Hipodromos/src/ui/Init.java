@@ -2,6 +2,7 @@ package ui;
 
 import bl.Administrador;
 import bl.Caballo;
+import bl.Carrera;
 import bl.Fachada;
 import bl.Hipodromo;
 import bl.Jugador;
@@ -64,11 +65,11 @@ public class Init {
     }
 
     private static void cargarCarreras() {
-        bd.obtener(new PCarrera(null));
+        ArrayList<Carrera> ca = bd.obtener(new PCarrera(null));
     }
 
     private static void cargarCaballosCarrera() {
-        bd.obtener(new PCaballoEnCarrera(null));
+        bd.obtener(new PCaballoEnCarrera());
     }
     //</editor-fold>
 }

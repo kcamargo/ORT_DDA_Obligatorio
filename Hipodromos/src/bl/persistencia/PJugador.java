@@ -18,7 +18,7 @@ public class PJugador implements Persistente {
     public ArrayList<String> getInsertSQL() {
         ArrayList<String> ret = new ArrayList<>();
         String sql = "INSERT INTO jugadores VALUES (";
-        sql += getOid() + "', ";
+        sql += getOid() + ", ";
         sql += "'" + jugador.getNombre() + "', ";
         sql += "'" + jugador.getApellido() + "', ";
         sql += "'" + jugador.getUsername() + "', ";

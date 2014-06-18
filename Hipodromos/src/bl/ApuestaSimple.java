@@ -11,4 +11,9 @@ public class ApuestaSimple extends TipoApuesta {
         System.out.println("SIMPLE");
         return dividendo;
     }
+
+    @Override
+    public int getCodigo() {
+        return 1;
+    }
 }

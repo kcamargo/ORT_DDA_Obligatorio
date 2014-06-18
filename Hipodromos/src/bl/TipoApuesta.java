@@ -8,6 +8,8 @@ public abstract class TipoApuesta {
         super();
     }
 
+    public abstract int getCodigo();
+    
     public abstract double getValorMultiplicador(double dividendo, double montoApostado);
 
     public void pagar(ArrayList<Apuesta> apuesta, double dividendo, double montoApostado) {

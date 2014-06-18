@@ -61,10 +61,6 @@ public class Fachada extends Observable {
     public Caballo buscarCaballo(String nombre) {
         return ssHipodromos.buscarCaballo(nombre);
     }
-
-    public Carrera buscarCarreraPorOid(int oid) {
-        return ssHipodromos.buscarCarreraPorOid(oid);
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="SSUsuarios">
