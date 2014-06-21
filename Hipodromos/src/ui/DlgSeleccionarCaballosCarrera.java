@@ -22,7 +22,7 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         carrera = c;
         caballosDisponibles = Fachada.getInstancia().getCaballosDisponibles(carrera.getFecha());
         listarCaballosDisponibles();
-        CerrarVentana();
+        cerrarVentana();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,6 +123,12 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         if (caballosCarrera.size() < 2) {
             lblMensaje.setText("Deberá seleccionar al menos 2 caballos.");
         } else {
+            try {
+                //PREGUNTAR A RÁUL
+                Fachada.getInstancia().getHipodromoActual().agregarCarrera(carrera);
+            } catch (Exception ex) {
+                lblMensaje.setText(ex.getMessage());
+            }
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
@@ -205,8 +211,9 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         lstSeleccionados.setListData(caballosEnCarreraToArray(caballosCarrera));
     }
 
-    private void CerrarVentana() {
+    private void cerrarVentana() {
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 Fachada.getInstancia().getHipodromoActual().borrarCarrera(carrera);
             }

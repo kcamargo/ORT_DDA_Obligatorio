@@ -1,10 +1,8 @@
 package bl;
 
-import bl.enums.ErroresHipodromo;
 import bl.persistencia.PCaballo;
 import bl.persistencia.PHipodromo;
 import dal.ManejadorBD;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 

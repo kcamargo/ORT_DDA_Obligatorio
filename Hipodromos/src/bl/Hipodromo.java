@@ -1,6 +1,5 @@
 package bl;
 
-import bl.persistencia.PAdministrador;
 import bl.persistencia.PCarrera;
 import dal.ManejadorBD;
 import java.util.ArrayList;

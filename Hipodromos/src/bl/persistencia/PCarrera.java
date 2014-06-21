@@ -8,6 +8,7 @@ import dal.ManejadorBD;
 import dal.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class PCarrera implements Persistente {
@@ -38,10 +39,11 @@ public class PCarrera implements Persistente {
         sqlCarrera += getOid() + ", ";
         sqlCarrera += "'" + carrera.getNombre() + "', ";
         sqlCarrera += carrera.getNumero() + ", ";
-        sqlCarrera += "'" + carrera.getFecha() + "', ";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        sqlCarrera += "'" + sdf.format(carrera.getFecha()) + "', ";
         sqlCarrera += carrera.getEstado().ordinal() + ", ";
         sqlCarrera += carrera.getGanador() == null
-                ? "-1"
+                ? "0, "
                 : carrera.getGanador().getOid() + ", ";
         sqlCarrera += hipodromo.getOid();
         sqlCarrera += ");";
@@ -133,7 +135,7 @@ public class PCarrera implements Persistente {
             pHip.setOid(rs.getInt("oidHipodromo"));
             Hipodromo h = (Hipodromo) ManejadorBD.getInstancia().obtener(pHip).get(0);
             h = Fachada.getInstancia().buscarHipodromo(h.getNombre());
-            
+
             h.agregarCarrera(carrera);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
