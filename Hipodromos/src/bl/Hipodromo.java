@@ -1,5 +1,6 @@
 package bl;
 
+import bl.enums.TiposApuestas;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -225,6 +226,14 @@ public class Hipodromo {
         return nombre.equals(h.getNombre());
     }
 
+    public ArrayList<Carrera> getCarrerasDefinidasAbiertas(){
+        ArrayList<Carrera> lista = new ArrayList();
+        for(Jornada j :jornadas){
+            lista.addAll(j.getCarrerasDefinidasAbiertas());
+        }               
+        return lista;
+   }
+    
     @Override
     public String toString() {
         return getNombre();
@@ -238,5 +247,5 @@ public class Hipodromo {
             }
         }
         return null;
-    }
+    }    
 }

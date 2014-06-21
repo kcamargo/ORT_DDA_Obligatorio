@@ -63,11 +63,6 @@ public class CaballoEnCarrera {
     public Caballo getCaballo() {
         return caballo;
     }
-
-    public ArrayList<Apuesta> getApuestas() {
-        return apuestas;
-    }
-
     public TipoApuesta getTipoApuesta() {
         return tipoApuesta;
     }
@@ -75,7 +70,13 @@ public class CaballoEnCarrera {
     public void setTipoApuesta(TipoApuesta tipoApuesta) {
         this.tipoApuesta = tipoApuesta;
     }
+
+    public ArrayList<Apuesta> getApuestas() {
+        return apuestas;
+    }
+
     //</editor-fold>
+    
 
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public CaballoEnCarrera() {
@@ -134,17 +135,15 @@ public class CaballoEnCarrera {
     }
 
     public boolean pagar() {
-        /*for (Apuesta a : apuestas) {
-         Jugador j = a.getJugador();
-         double ganancia = a.getMonto() * dividendo;
-
-         j.sumarSaldo(ganancia);
-         a.setGanado(ganancia);
-         }*/
         tipoApuesta.pagar(apuestas, dividendo, getMontoApostado());
         return true;
     }
-
+    public boolean getCaballoSinApuesta(){
+        if(apuestas.size() > 0){
+            return false;
+        }
+        return true;
+    }
     @Override
     public boolean equals(Object obj) {
         CaballoEnCarrera c = (CaballoEnCarrera) obj;
@@ -163,14 +162,14 @@ public class CaballoEnCarrera {
         return ret;
     }
 
-    public void cambiarTipoApuesta(TiposApuestas tipo) throws Exception {
+    public TipoApuesta cambiarTipoApuesta(TiposApuestas tipo) throws Exception {
         switch (tipo) {
-            case Simple:
-                this.tipoApuesta = new SimpleFactory().crearTipoApuesta();
-            case Triple:
-                this.tipoApuesta = new TripleFactory().crearTipoApuesta();
-            case Cuadruple:
-                this.tipoApuesta = new CuadrupleFactory().crearTipoApuesta();
+            case Simple : return new SimpleFactory().crearTipoApuesta();
+                
+            case Triple : return new TripleFactory().crearTipoApuesta();
+                
+            case Cuadruple : return new CuadrupleFactory().crearTipoApuesta();
+                
             default:
                 throw new Exception();
 

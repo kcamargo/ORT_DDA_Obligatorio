@@ -36,9 +36,12 @@ public class FrmLogin extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogin);
         btnLogin.setBounds(60, 160, 158, 37);
+
+        txtUsuario.setText("admin");
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(100, 60, 158, 20);
 
+        txtPass.setText("admin");
         txtPass.setToolTipText("");
         getContentPane().add(txtPass);
         txtPass.setBounds(100, 90, 158, 20);

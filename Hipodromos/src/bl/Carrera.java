@@ -1,6 +1,7 @@
 package bl;
 
 import bl.enums.CambiosCarrera;
+import bl.enums.TiposApuestas;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -258,6 +259,44 @@ public class Carrera {
             return false;
         }
     }
+    
+    public boolean isDefinidaAbierta() {      
+       // if ( getFecha().after(Fecha.fechaActual()) || getFecha().equals(Fecha.fechaActual()) ){
+           if(getEstadoString().equals("DEFINIDA") || getEstadoString().equals("ABIERTA") ){
+               return true;
+            }
+       // }
+        return false;
+    }
+    
+    public ArrayList<CaballoEnCarrera> getCaballosSinApuestas(){
+        ArrayList<CaballoEnCarrera> lista = new ArrayList();
+        for(CaballoEnCarrera cab: caballos ){
+            if(cab.getCaballoSinApuesta()){
+                lista.add(cab);
+            }
+        }
+        return lista;
+    }
+    
+    
+    public void actualizarTipoApuesta(CaballoEnCarrera cab, TiposApuestas tipo) throws Exception{
+         if (caballos.contains(cab)){
+           for(CaballoEnCarrera c : caballos ){
+               if (c.equals(cab)){
+                   c.setTipoApuesta(c.cambiarTipoApuesta(tipo)); 
+                   System.out.println("*******" + c.getTipoApuesta());
+               }
+               
+           }
+           
+       }
+    }
+    
+    
+   
+
+    
 
     @Override
     public boolean equals(Object o) {
@@ -266,5 +305,10 @@ public class Carrera {
                 && numero == c.getNumero()
                 && fecha.equals(c.getFecha())
                 && estado == c.getEstado();
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

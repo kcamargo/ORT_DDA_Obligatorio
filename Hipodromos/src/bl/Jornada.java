@@ -1,5 +1,6 @@
 package bl;
 
+import bl.enums.TiposApuestas;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -155,7 +156,7 @@ public class Jornada {
 
     public void eliminarCarrera(Carrera c) {
         Carrera carrera = buscarCarrera(c);
-        if (c != null) {
+        if (carrera != null) {
             carreras.remove(c);
         }
     }
@@ -196,4 +197,17 @@ public class Jornada {
         }
         return null;
     }
+    
+    public ArrayList<Carrera> getCarrerasDefinidasAbiertas(){
+        ArrayList<Carrera> lista = new ArrayList();
+            for(Carrera c: carreras){
+                if(c.isDefinidaAbierta()){
+                    lista.add(c);
+                }
+            }
+        return lista;
+    }
+
+ 
+
 }

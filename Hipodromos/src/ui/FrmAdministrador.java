@@ -35,6 +35,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         crearCarrera = new javax.swing.JMenuItem();
         monitorearCarreras = new javax.swing.JMenuItem();
         administrarCarreras = new javax.swing.JMenuItem();
+        cambiarTipoApuesta = new javax.swing.JMenuItem();
         menuEmular = new javax.swing.JMenu();
         itenAbrirTerminal = new javax.swing.JMenuItem();
         menuFinalizar = new javax.swing.JMenu();
@@ -103,6 +104,14 @@ public class FrmAdministrador extends javax.swing.JFrame {
             }
         });
         menuCarreras.add(administrarCarreras);
+
+        cambiarTipoApuesta.setText("Camiar Tipo de Apuesta");
+        cambiarTipoApuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarTipoApuestaActionPerformed(evt);
+            }
+        });
+        menuCarreras.add(cambiarTipoApuesta);
 
         jMenuBar1.add(menuCarreras);
 
@@ -174,8 +183,14 @@ public class FrmAdministrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Fecha inválida!");
         }
     }//GEN-LAST:event_monitorearCarrerasActionPerformed
+
+    private void cambiarTipoApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarTipoApuestaActionPerformed
+       new DlgCambiarTipoApuesta(this, false).setVisible(true);
+    }//GEN-LAST:event_cambiarTipoApuestaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrarCarreras;
+    private javax.swing.JMenuItem cambiarTipoApuesta;
     private javax.swing.JMenuItem crearCarrera;
     private javax.swing.JMenuItem itemCrearHipodromo;
     private javax.swing.JMenuItem itemSeleccionar;
