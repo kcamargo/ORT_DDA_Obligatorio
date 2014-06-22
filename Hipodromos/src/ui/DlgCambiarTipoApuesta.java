@@ -28,8 +28,6 @@ public class DlgCambiarTipoApuesta extends javax.swing.JDialog {
     boolean inicio= false;
     ArrayList<Hipodromo> hipodromos = new ArrayList();
     ArrayList<Carrera> carreras = new ArrayList();
-    ArrayList<CaballoEnCarrera> caballos = new ArrayList();
-    ArrayList<CaballoEnCarrera> caballosSinApuestas  = new ArrayList();
     
     public DlgCambiarTipoApuesta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

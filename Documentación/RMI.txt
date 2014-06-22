@@ -1,0 +1,23 @@
+fachada. login( Administrador admin) // FrmLogin  
+
+Cambiar fac.getHipodrmoActual por un hipodromo , ( referencia remota )  NOTA: REMOVER LA FACHADA DEL FRMADMINISTRADOR
+
+DlgAdministrarCarreras , referencia remota a hipodromo
+
+DglCambairTipoApuesta --> referencia remota a caballo en carrera  y  carrera 
+
+DlgCrearCarrera --> referencia remota a el hipodromo
+
+DlgSeleccionar cabalolo --> referencia reemota a  carrera, pedirle que retorne la carrera pasando la carrera recibida de DlgCrearCarrera (dejar de usa la carrera pasada por parametro)
+
+DlgSeleccioanrHipodrmo --> setear en el parent el hipodromo seleccionado.
+
+
+Resumen : 
+Calses Remotas : Fachada , Hipodromo, Carrera, CaballoEnCarrera.}
+El resto Serializable.
+
+
+Modelo : métodos.
+
+
