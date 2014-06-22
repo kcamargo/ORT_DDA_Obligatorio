@@ -4,6 +4,9 @@
  */
 package ui;
 
+import bl.ApuestaCuadruple;
+import bl.ApuestaSimple;
+import bl.ApuestaTriple;
 import bl.CaballoEnCarrera;
 import bl.Fachada;
 import bl.Hipodromo;
@@ -27,6 +30,7 @@ public class DlgCambiarTipoApuesta extends javax.swing.JDialog {
     ArrayList<Carrera> carreras = new ArrayList();
     ArrayList<CaballoEnCarrera> caballos = new ArrayList();
     ArrayList<CaballoEnCarrera> caballosSinApuestas  = new ArrayList();
+    
     public DlgCambiarTipoApuesta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -138,18 +142,16 @@ public class DlgCambiarTipoApuesta extends javax.swing.JDialog {
     private void jCambiarTipoApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCambiarTipoApuestaActionPerformed
         // TODO add your handling code here:
         try{
-            Carrera c = (Carrera)lstCarreras.getSelectedValue();
             CaballoEnCarrera cab = (CaballoEnCarrera)lstCaballos.getSelectedValue();
             
             switch (cmbTipoApuesta.getSelectedItem().toString()){
-               case "Simple" : c.actualizarTipoApuesta(cab, TiposApuestas.Simple);
+               case "Simple" : cab.setTipoApuesta(TiposApuestas.Simple);
                    break;
-               case "Triple" : c.actualizarTipoApuesta(cab, TiposApuestas.Triple);
+               case "Triple" : cab.setTipoApuesta(TiposApuestas.Triple);
                    break;
-               case "Cuadruple" : c.actualizarTipoApuesta(cab, TiposApuestas.Cuadruple);
+               case "Cuadruple" :cab.setTipoApuesta(TiposApuestas.Cuadruple);
                    break;
-               default :
-                    throw new Exception();
+  
             }
         }catch (Exception ex) {
             System.out.println("Error***: " +  ex.getMessage());

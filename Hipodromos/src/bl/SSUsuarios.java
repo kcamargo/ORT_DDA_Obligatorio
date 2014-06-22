@@ -1,5 +1,8 @@
 package bl;
 
+import bl.persistencia.PAdministrador;
+import bl.persistencia.PJugador;
+import dal.ManejadorBD;
 import java.util.ArrayList;
 
 public class SSUsuarios {
@@ -32,6 +35,7 @@ public class SSUsuarios {
 
     public boolean agregarAdministrador(Administrador a) {
         if (!admins.contains(a)) {
+            ManejadorBD.getInstancia().agregar(new PAdministrador(a));
             return admins.add(a);
         }
         return false;
@@ -39,6 +43,7 @@ public class SSUsuarios {
 
     public boolean agregarJugador(Jugador j) {
         if (!jugadores.contains(j)) {
+            ManejadorBD.getInstancia().agregar(new PJugador(j));
             return jugadores.add(j);
         }
         return false;

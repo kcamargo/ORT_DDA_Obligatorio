@@ -20,10 +20,11 @@ public class DlgAdministrarCarreras extends javax.swing.JDialog implements Obser
     public DlgAdministrarCarreras(java.awt.Frame parent, boolean modal,
             Carrera siguiente, Carrera abierta, Carrera cerrada, Hipodromo hipodromo) {
         super(parent, modal);
-
-        this.siguiente = siguiente;
-        this.abierta = abierta;
+        
+        this.abierta = abierta; 
         this.cerrada = cerrada;
+        this.siguiente = siguiente;
+        
         this.hipodromoSeleccionado = hipodromo;
         Fachada.getInstancia().agregarObservador(this);
 

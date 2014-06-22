@@ -105,7 +105,7 @@ public class Jornada {
                 throw ex;
             }
         } else {
-            throw new Exception("El nombre para de carrera ya existe para esta jornada ");
+            throw new Exception("La carrera ya existe en esta jornada");
         }
     }
 

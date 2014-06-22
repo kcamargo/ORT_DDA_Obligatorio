@@ -15,4 +15,9 @@ public class ApuestaTriple extends TipoApuesta {
             return 2 * dividendo;
         }
     }
+
+    @Override
+    public int getCodigo() {
+        return 3;
+    }
 }

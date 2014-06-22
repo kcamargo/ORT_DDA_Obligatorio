@@ -67,8 +67,8 @@ public class CaballoEnCarrera {
         return tipoApuesta;
     }
 
-    public void setTipoApuesta(TipoApuesta tipoApuesta) {
-        this.tipoApuesta = tipoApuesta;
+    public void setTipoApuesta(TiposApuestas tipoApuesta){
+       this.tipoApuesta = cambiarTipoApuesta(tipoApuesta);
     }
 
     public ArrayList<Apuesta> getApuestas() {
@@ -162,17 +162,15 @@ public class CaballoEnCarrera {
         return ret;
     }
 
-    public TipoApuesta cambiarTipoApuesta(TiposApuestas tipo) throws Exception {
+    public TipoApuesta cambiarTipoApuesta(TiposApuestas tipo)  {
         switch (tipo) {
             case Simple : return new SimpleFactory().crearTipoApuesta();
                 
             case Triple : return new TripleFactory().crearTipoApuesta();
                 
             case Cuadruple : return new CuadrupleFactory().crearTipoApuesta();
-                
-            default:
-                throw new Exception();
 
         }
+        return null;
     }
 }

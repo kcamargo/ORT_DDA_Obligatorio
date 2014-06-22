@@ -13,6 +13,12 @@ import java.util.ArrayList;
 public class PCarrera implements Persistente {
 
     private Carrera carrera;
+    private Hipodromo hipodromo;
+
+    public PCarrera(Carrera carrera, Hipodromo hipodromo) {
+        this.carrera = carrera;
+        this.hipodromo = hipodromo;
+    }
 
     public PCarrera(Carrera carrera) {
         this.carrera = carrera;
@@ -20,38 +26,39 @@ public class PCarrera implements Persistente {
 
     @Override
     public ArrayList<String> getInsertSQL() {
-        //TODO:
         ArrayList<String> ret = new ArrayList<>();
-        String sql = "INSERT INTO carreras VALUES (";
-        sql += getOid() + ", ";
-        sql += "'" + carrera.getNombre() + "', ";
-        sql += carrera.getNumero() + ", ";
-        sql += "'" + carrera.getFecha() + "', ";
-        sql += carrera.getEstado() + ", ";
-        sql += carrera.getGanador() == null
-                ? "NULL"
+
+        //Inserto todos los caballos
+        for (CaballoEnCarrera cec : carrera.getCaballos()) {
+            PCaballoEnCarrera pCec = new PCaballoEnCarrera(cec, carrera);
+            ret.addAll(pCec.getInsertSQL());
+        }
+
+        String sqlCarrera = "INSERT INTO carreras VALUES (";
+        sqlCarrera += getOid() + ", ";
+        sqlCarrera += "'" + carrera.getNombre() + "', ";
+        sqlCarrera += carrera.getNumero() + ", ";
+        sqlCarrera += "'" + carrera.getFecha() + "', ";
+        sqlCarrera += carrera.getEstado().ordinal() + ", ";
+        sqlCarrera += carrera.getGanador() == null
+                ? "-1"
                 : carrera.getGanador().getOid() + ", ";
-        //Resolver como obtener el oid del hipodromo...
-        sql += ");";
-        ret.add(sql);
+        sqlCarrera += hipodromo.getOid();
+        sqlCarrera += ");";
+        ret.add(sqlCarrera);
         return ret;
     }
 
     @Override
     public ArrayList<String> getUpdateSQL() {
-        //TODO:
         ArrayList<String> ret = new ArrayList<>();
+        String oidGanador = carrera.getGanador() == null
+                ? null : "'" + carrera.getGanador().getOid() + "'";
+
         String sql = "UPDATE carreras SET ";
-        sql += "oid = " + carrera.getOid() + ", ";
-        sql += "nombre = '" + carrera.getNombre() + "', ";
-        sql += "numero = " + carrera.getNumero() + ", ";
-        sql += "fecha = '" + carrera.getFecha() + "', ";
         sql += "estado = " + carrera.getEstado() + ", ";
-        sql += carrera.getGanador() == null
-                ? "NULL"
-                : carrera.getGanador().getOid() + ", ";
-        //sql += "oidHipodromo = " +  + ", ";
-        sql += "WHERE oid = " + getOid();
+        sql += "oidGanador = " + oidGanador;
+        sql += "WHERE oid = '" + getOid() + "'";
         ret.add(sql);
         return ret;
     }
@@ -60,6 +67,7 @@ public class PCarrera implements Persistente {
     public ArrayList<String> getDeleteSQL() {
         ArrayList<String> ret = new ArrayList<>();
 
+        //Borro todos los caballos
         for (CaballoEnCarrera cec : carrera.getCaballos()) {
             PCaballoEnCarrera pCec = new PCaballoEnCarrera(cec);
             ret.addAll(pCec.getDeleteSQL());
@@ -73,7 +81,7 @@ public class PCarrera implements Persistente {
     public String getSelectSQL() {
         String sql = "SELECT * FROM carreras";
         if (carrera != null && getOid() != 0) {
-            sql += " AND oid = " + getOid();
+            sql += " WHERE oid = " + getOid();
         }
         return sql;
     }
@@ -107,23 +115,26 @@ public class PCarrera implements Persistente {
             carrera.setFecha(rs.getDate("fecha"));
             carrera.setEstado(Carrera.getEstado(rs.getInt("estado")));
 
+            //Armo la lista de caballos
+            PCaballoEnCarrera pCC = new PCaballoEnCarrera(carrera);
+            ArrayList<CaballoEnCarrera> caballos = ManejadorBD.getInstancia().obtener(pCC);
+
+            for (CaballoEnCarrera c : caballos) {
+                carrera.agregarCaballo(c);
+                c.setCarrera(carrera);
+                if (rs.getInt("oidGanador") == c.getOid()) {
+                    carrera.setGanadorSimple(c);
+                    c.setGanador(true);
+                }
+            }
+
             //Busco el hipodromo y agrego la carrera.
             PHipodromo pHip = new PHipodromo(new Hipodromo());
             pHip.setOid(rs.getInt("oidHipodromo"));
-            
             Hipodromo h = (Hipodromo) ManejadorBD.getInstancia().obtener(pHip).get(0);
             h = Fachada.getInstancia().buscarHipodromo(h.getNombre());
+            
             h.agregarCarrera(carrera);
-
-            //Busco al caballo ganador y lo seteo.
-            if (carrera.getEstado() == Carrera.EstadoCarrera.FINALIZADA) {
-                PCaballoEnCarrera pCab = new PCaballoEnCarrera(new CaballoEnCarrera());
-                pCab.setOid(rs.getInt("oidGanador"));
-                ArrayList<CaballoEnCarrera> cabs = ManejadorBD.getInstancia().obtener(pCab);
-
-                CaballoEnCarrera c = cabs.get(0);
-                carrera.setGanadorSimple(c);
-            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {

@@ -1,6 +1,7 @@
 package bl;
 
 import bl.enums.ErroresHipodromo;
+import bl.persistencia.PCaballo;
 import bl.persistencia.PHipodromo;
 import dal.ManejadorBD;
 import java.sql.SQLException;
@@ -35,9 +36,11 @@ public class SSHipodromos {
             }
         }
 
-        ManejadorBD.getInstancia().agregar(new PHipodromo(hipodromo));
         if (!hipodromos.add(hipodromo)) {
             throw new Exception("No se pudo agregar el hipodromo");
+            
+        } else {
+            ManejadorBD.getInstancia().agregar(new PHipodromo(hipodromo));
         }
     }
 
@@ -52,6 +55,7 @@ public class SSHipodromos {
 
     public boolean agregarCaballo(Caballo caballo) {
         if (!caballos.contains(caballo)) {
+            ManejadorBD.getInstancia().agregar(new PCaballo(caballo));
             return caballos.add(caballo);
         }
         return false;
@@ -88,16 +92,6 @@ public class SSHipodromos {
     public Caballo buscarCaballo(String nombre) {
         for (Caballo c : caballos) {
             if (c.getNombre().equals(nombre)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    public Carrera buscarCarreraPorOid(int oid) {
-        for (Hipodromo h : hipodromos) {
-            Carrera c = h.buscarCarreraPorOid(oid);
-            if (c != null) {
                 return c;
             }
         }

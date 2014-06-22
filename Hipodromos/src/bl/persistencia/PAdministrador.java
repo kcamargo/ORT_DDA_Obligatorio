@@ -1,7 +1,6 @@
 package bl.persistencia;
 
 import bl.Administrador;
-import bl.Jugador;
 import dal.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ public class PAdministrador implements Persistente {
     public ArrayList<String> getInsertSQL() {
         ArrayList<String> ret = new ArrayList<>();
         String sql = "INSERT INTO administradores VALUES (";
-        sql += getOid() + "', ";
+        sql += getOid() + ", ";
         sql += "'" + administrador.getNombre() + "', ";
         sql += "'" + administrador.getApellido() + "', ";
         sql += "'" + administrador.getUsername() + "', ";

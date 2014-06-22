@@ -107,7 +107,6 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
         String nombre = txtNombre.getText();
 
         if (!nombre.equals("")) {
-            //Carrera c = new Carrera(nombre, fch);
             Carrera c = new Carrera(nombre, fch);
             c.setNumero(fac.getHipodromoActual().getSiguienteNroCarrera(fch));
             try {
