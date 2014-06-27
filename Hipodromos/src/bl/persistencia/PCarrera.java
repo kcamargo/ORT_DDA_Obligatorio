@@ -8,6 +8,7 @@ import dal.ManejadorBD;
 import dal.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class PCarrera implements Persistente {
@@ -31,6 +32,7 @@ public class PCarrera implements Persistente {
         //Inserto todos los caballos
         for (CaballoEnCarrera cec : carrera.getCaballos()) {
             PCaballoEnCarrera pCec = new PCaballoEnCarrera(cec, carrera);
+            pCec.setOid(ManejadorBD.getInstancia().proximoOid());
             ret.addAll(pCec.getInsertSQL());
         }
 
@@ -38,10 +40,11 @@ public class PCarrera implements Persistente {
         sqlCarrera += getOid() + ", ";
         sqlCarrera += "'" + carrera.getNombre() + "', ";
         sqlCarrera += carrera.getNumero() + ", ";
-        sqlCarrera += "'" + carrera.getFecha() + "', ";
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        sqlCarrera += "'" + sdf.format(carrera.getFecha()) + "', ";
         sqlCarrera += carrera.getEstado().ordinal() + ", ";
         sqlCarrera += carrera.getGanador() == null
-                ? "-1"
+                ? "0, "
                 : carrera.getGanador().getOid() + ", ";
         sqlCarrera += hipodromo.getOid();
         sqlCarrera += ");";
@@ -56,9 +59,9 @@ public class PCarrera implements Persistente {
                 ? null : "'" + carrera.getGanador().getOid() + "'";
 
         String sql = "UPDATE carreras SET ";
-        sql += "estado = " + carrera.getEstado() + ", ";
+        sql += "estado = " + carrera.getEstado().ordinal() + ", ";
         sql += "oidGanador = " + oidGanador;
-        sql += "WHERE oid = '" + getOid() + "'";
+        sql += " WHERE oid = '" + getOid() + "'";
         ret.add(sql);
         return ret;
     }

@@ -1,7 +1,6 @@
 package bl;
 
 import bl.enums.CambiosCarrera;
-import bl.enums.TiposApuestas;
 import java.util.ArrayList;
 import java.util.Date;
 import util.Fecha;
@@ -9,7 +8,6 @@ import util.Fecha;
 public class Carrera {
 
     public enum EstadoCarrera {
-
         DEFINIDA,
         ABIERTA,
         CERRADA,
@@ -19,16 +17,16 @@ public class Carrera {
     public static EstadoCarrera getEstado(int i) {
         EstadoCarrera ret = null;
         switch (i) {
-            case 1:
+            case 0:
                 ret = EstadoCarrera.DEFINIDA;
                 break;
-            case 2:
+            case 1:
                 ret = EstadoCarrera.ABIERTA;
                 break;
-            case 3:
+            case 2:
                 ret = EstadoCarrera.CERRADA;
                 break;
-            case 4:
+            case 3:
                 ret = EstadoCarrera.FINALIZADA;
                 break;
         }

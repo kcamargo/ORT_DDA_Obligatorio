@@ -1,12 +1,9 @@
 package bl.persistencia;
 
-import bl.ApuestaCuadruple;
-import bl.ApuestaSimple;
-import bl.ApuestaTriple;
 import bl.Caballo;
 import bl.CaballoEnCarrera;
 import bl.Carrera;
-import bl.TipoApuesta;
+import bl.enums.TiposApuestas;
 import dal.ManejadorBD;
 import dal.Persistente;
 import java.sql.ResultSet;
@@ -55,13 +52,8 @@ public class PCaballoEnCarrera implements Persistente {
     public ArrayList<String> getUpdateSQL() {
         ArrayList<String> ret = new ArrayList<>();
         String sql = "UPDATE caballoscarrera SET ";
-        sql += "oid = " + caballo.getOid() + ", ";
-        sql += "oidCaballo = " + caballo.getCaballo().getOid() + ", ";
-        sql += "oidCarrera = " + carrera != null ? "null, " : carrera.getOid() + ", ";
-        sql += "numero = " + caballo.getNumero() + ", ";
-        sql += "dividendo = " + caballo.getDividendo() + ", ";
-        sql += "tipoApuesta = " + caballo.getTipoApuesta().getCodigo() + ", ";
-        sql += "WHERE oid = " + getOid();
+        sql += "tipoApuesta = " + caballo.getTipoApuesta().getCodigo();
+        sql += " WHERE oid = " + getOid();
         ret.add(sql);
         return ret;
     }
@@ -115,20 +107,20 @@ public class PCaballoEnCarrera implements Persistente {
             caballo.setNumero(rs.getInt("numero"));
             caballo.setDividendo(rs.getDouble("dividendo"));
 
-            TipoApuesta tipo = null;
+            TiposApuestas tipo = null;
             switch (rs.getInt("tipoApuesta")) {
                 case 1:
-                    tipo = new ApuestaSimple();
+                    tipo = TiposApuestas.Simple;
                     break;
                 case 3:
-                    tipo = new ApuestaTriple();
+                    tipo = TiposApuestas.Triple;
                     break;
                 case 4:
-                    tipo = new ApuestaCuadruple();
+                    tipo = TiposApuestas.Cuadruple;
                     break;
             }
+            caballo.setTipoApuesta(tipo);
 
-           // caballo.setTipoApuesta(tipo);
             //Busco y seteo el caballo
             PCaballo pCab = new PCaballo(new Caballo());
             pCab.setOid(rs.getInt("oidCaballo"));

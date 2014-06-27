@@ -2,6 +2,9 @@ package bl;
 
 import bl.enums.ErroresApuesta;
 import bl.enums.TiposApuestas;
+import bl.persistencia.PAdministrador;
+import bl.persistencia.PCaballoEnCarrera;
+import dal.ManejadorBD;
 import java.util.ArrayList;
 
 public class CaballoEnCarrera {
@@ -63,20 +66,24 @@ public class CaballoEnCarrera {
     public Caballo getCaballo() {
         return caballo;
     }
+
     public TipoApuesta getTipoApuesta() {
         return tipoApuesta;
     }
 
-    public void setTipoApuesta(TiposApuestas tipoApuesta){
-       this.tipoApuesta = cambiarTipoApuesta(tipoApuesta);
+    public void setTipoApuesta(TiposApuestas tipoApuesta) {
+        this.tipoApuesta = cambiarTipoApuesta(tipoApuesta);
+    }
+
+    public void modificarTipoApuesta(TiposApuestas tipo) {
+        setTipoApuesta(tipo);
+        ManejadorBD.getInstancia().modificar(new PCaballoEnCarrera(this));
     }
 
     public ArrayList<Apuesta> getApuestas() {
         return apuestas;
     }
-
     //</editor-fold>
-    
 
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public CaballoEnCarrera() {
@@ -138,12 +145,14 @@ public class CaballoEnCarrera {
         tipoApuesta.pagar(apuestas, dividendo, getMontoApostado());
         return true;
     }
-    public boolean getCaballoSinApuesta(){
-        if(apuestas.size() > 0){
+
+    public boolean getCaballoSinApuesta() {
+        if (apuestas.size() > 0) {
             return false;
         }
         return true;
     }
+
     @Override
     public boolean equals(Object obj) {
         CaballoEnCarrera c = (CaballoEnCarrera) obj;
@@ -162,14 +171,14 @@ public class CaballoEnCarrera {
         return ret;
     }
 
-    public TipoApuesta cambiarTipoApuesta(TiposApuestas tipo)  {
+    public TipoApuesta cambiarTipoApuesta(TiposApuestas tipo) {
         switch (tipo) {
-            case Simple : return new SimpleFactory().crearTipoApuesta();
-                
-            case Triple : return new TripleFactory().crearTipoApuesta();
-                
-            case Cuadruple : return new CuadrupleFactory().crearTipoApuesta();
-
+            case Simple:
+                return new SimpleFactory().crearTipoApuesta();
+            case Triple:
+                return new TripleFactory().crearTipoApuesta();
+            case Cuadruple:
+                return new CuadrupleFactory().crearTipoApuesta();
         }
         return null;
     }

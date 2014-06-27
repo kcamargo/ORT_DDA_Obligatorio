@@ -110,11 +110,9 @@ public class DlgCrearCarrera extends javax.swing.JDialog {
             Carrera c = new Carrera(nombre, fch);
             c.setNumero(fac.getHipodromoActual().getSiguienteNroCarrera(fch));
             try {
-                if (fac.getHipodromoActual().agregarCarrera(c)) {
-                    limpiarCampos();
-                    Frame parent = (Frame) this.getParent();
-                    new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
-                }
+                limpiarCampos();
+                Frame parent = (Frame) this.getParent();
+                new DlgSeleccionarCaballosCarrera(parent, true, c).setVisible(true);
             } catch (Exception ex) {
                 lblMensaje.setText(ex.getMessage());
             }

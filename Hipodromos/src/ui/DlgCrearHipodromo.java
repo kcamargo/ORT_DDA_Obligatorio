@@ -1,12 +1,7 @@
 package ui;
 
 import bl.Hipodromo;
-import bl.enums.ErroresHipodromo;
 import bl.Fachada;
-import static bl.enums.ErroresHipodromo.DireccionDup;
-import static bl.enums.ErroresHipodromo.ErrorGenerico;
-import static bl.enums.ErroresHipodromo.NombreDup;
-import static bl.enums.ErroresHipodromo.OK;
 
 public class DlgCrearHipodromo extends javax.swing.JDialog {
 
@@ -74,7 +69,7 @@ public class DlgCrearHipodromo extends javax.swing.JDialog {
 
         if (h.validar()) {
             try {
-                fac.agregarHipodromo(h);
+                fac.guardarHipodromo(h);
                 lblMensajeCrear.setText("Hipodromo Creado");
             } catch (Exception e) {
                 lblMensajeCrear.setText(e.getMessage());

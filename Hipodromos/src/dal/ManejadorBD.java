@@ -93,8 +93,11 @@ public class ManejadorBD {
     }
 
     public void agregar(Persistente b) {
-        int oid = this.proximoOid();
-        b.setOid(oid);
+        if (b.getOid() == 0) {
+            int oid = this.proximoOid();
+            b.setOid(oid);
+        }
+        
         for (String s : b.getInsertSQL()) {
             this.ejecutar(s);
         }

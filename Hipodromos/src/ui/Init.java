@@ -8,7 +8,6 @@ import bl.Hipodromo;
 import bl.Jugador;
 import bl.persistencia.PAdministrador;
 import bl.persistencia.PCaballo;
-import bl.persistencia.PCaballoEnCarrera;
 import bl.persistencia.PCarrera;
 import bl.persistencia.PHipodromo;
 import bl.persistencia.PJugador;
@@ -32,7 +31,6 @@ public class Init {
             cargarUsuarios();
             cargarCaballos();
             cargarCarreras();
-            cargarCaballosCarrera();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -66,10 +64,6 @@ public class Init {
 
     private static void cargarCarreras() {
         ArrayList<Carrera> ca = bd.obtener(new PCarrera(null));
-    }
-
-    private static void cargarCaballosCarrera() {
-        bd.obtener(new PCaballoEnCarrera());
     }
     //</editor-fold>
 }

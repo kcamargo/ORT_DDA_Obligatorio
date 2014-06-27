@@ -105,7 +105,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         });
         menuCarreras.add(administrarCarreras);
 
-        cambiarTipoApuesta.setText("Camiar Tipo de Apuesta");
+        cambiarTipoApuesta.setText("Cambiar Tipo de Apuesta");
         cambiarTipoApuesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cambiarTipoApuestaActionPerformed(evt);

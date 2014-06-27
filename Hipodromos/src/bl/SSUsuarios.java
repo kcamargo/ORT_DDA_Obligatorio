@@ -35,16 +35,30 @@ public class SSUsuarios {
 
     public boolean agregarAdministrador(Administrador a) {
         if (!admins.contains(a)) {
-            ManejadorBD.getInstancia().agregar(new PAdministrador(a));
             return admins.add(a);
+        }
+        return false;
+    }
+
+    public boolean guardarAdministrador(Administrador a) {
+        if (agregarAdministrador(a)) {
+            ManejadorBD.getInstancia().agregar(new PAdministrador(a));
+            return true;
         }
         return false;
     }
 
     public boolean agregarJugador(Jugador j) {
         if (!jugadores.contains(j)) {
-            ManejadorBD.getInstancia().agregar(new PJugador(j));
             return jugadores.add(j);
+        }
+        return false;
+    }
+
+    public boolean guardarJugador(Jugador j) {
+        if (agregarJugador(j)) {
+            ManejadorBD.getInstancia().agregar(new PJugador(j));
+            return true;
         }
         return false;
     }

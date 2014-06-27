@@ -4,8 +4,6 @@ import bl.Caballo;
 import bl.CaballoEnCarrera;
 import bl.Carrera;
 import bl.Fachada;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
@@ -22,7 +20,6 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
         carrera = c;
         caballosDisponibles = Fachada.getInstancia().getCaballosDisponibles(carrera.getFecha());
         listarCaballosDisponibles();
-        CerrarVentana();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -124,6 +121,11 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
             lblMensaje.setText("Deberá seleccionar al menos 2 caballos.");
         } else {
             this.setVisible(false);
+            try {
+                Fachada.getInstancia().getHipodromoActual().guardarCarrera(carrera);
+            } catch (Exception ex) {
+                lblMensaje.setText("Error al guardar la carrera");
+            }
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -203,14 +205,6 @@ public class DlgSeleccionarCaballosCarrera extends javax.swing.JDialog {
 
     private void listarCaballosSeleccionados() {
         lstSeleccionados.setListData(caballosEnCarreraToArray(caballosCarrera));
-    }
-
-    private void CerrarVentana() {
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                Fachada.getInstancia().getHipodromoActual().borrarCarrera(carrera);
-            }
-        });
     }
 
     private void limpiarCampos() {

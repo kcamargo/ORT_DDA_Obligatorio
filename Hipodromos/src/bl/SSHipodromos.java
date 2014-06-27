@@ -1,10 +1,8 @@
 package bl;
 
-import bl.enums.ErroresHipodromo;
 import bl.persistencia.PCaballo;
 import bl.persistencia.PHipodromo;
 import dal.ManejadorBD;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -38,9 +36,17 @@ public class SSHipodromos {
 
         if (!hipodromos.add(hipodromo)) {
             throw new Exception("No se pudo agregar el hipodromo");
-            
         } else {
+        }
+    }
+
+    public boolean guardarHipodromo(Hipodromo hipodromo) throws Exception {
+        try {
+            agregarHipodromo(hipodromo);
             ManejadorBD.getInstancia().agregar(new PHipodromo(hipodromo));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -55,8 +61,15 @@ public class SSHipodromos {
 
     public boolean agregarCaballo(Caballo caballo) {
         if (!caballos.contains(caballo)) {
-            ManejadorBD.getInstancia().agregar(new PCaballo(caballo));
             return caballos.add(caballo);
+        }
+        return false;
+    }
+
+    public boolean guardarCaballo(Caballo caballo) {
+        if (agregarCaballo(caballo)) {
+            ManejadorBD.getInstancia().agregar(new PCaballo(caballo));
+            return true;
         }
         return false;
     }

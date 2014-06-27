@@ -89,7 +89,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="cambiarTipoApuesta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Camiar Tipo de Apuesta"/>
+                <Property name="text" type="java.lang.String" value="Cambiar Tipo de Apuesta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarTipoApuestaActionPerformed"/>

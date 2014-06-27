@@ -122,7 +122,11 @@ public class Hipodromo {
             j = new Jornada(c.getFecha());
             agregarJornada(j);
         }
-        if (j.agregarCarrera(c)) {
+        return j.agregarCarrera(c);
+    }
+
+    public boolean guardarCarrera(Carrera c) throws Exception {
+        if (agregarCarrera(c)) {
             ManejadorBD.getInstancia().agregar(new PCarrera(c, this));
             return true;
         }
@@ -235,14 +239,14 @@ public class Hipodromo {
         return nombre.equals(h.getNombre());
     }
 
-    public ArrayList<Carrera> getCarrerasDefinidasAbiertas(){
+    public ArrayList<Carrera> getCarrerasDefinidasAbiertas() {
         ArrayList<Carrera> lista = new ArrayList();
-        for(Jornada j :jornadas){
+        for (Jornada j : jornadas) {
             lista.addAll(j.getCarrerasDefinidasAbiertas());
-        }               
+        }
         return lista;
-   }
-    
+    }
+
     @Override
     public String toString() {
         return getNombre();
