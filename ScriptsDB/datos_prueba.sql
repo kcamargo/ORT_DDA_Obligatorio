@@ -43,10 +43,10 @@ TRUNCATE carreras;
 INSERT INTO carreras VALUES (25, 'Carrera_1', 1, CURDATE(), 3, 26, 14);
 INSERT INTO carreras VALUES (29, 'Carrera_2', 2, CURDATE(), 3, 30, 14);
 INSERT INTO carreras VALUES (33, 'Carrera_3', 3, CURDATE(), 3, 34, 14);
-INSERT INTO carreras VALUES (37, 'Carrera_4', 4, CURDATE(), 1, NULL, 14);
-INSERT INTO carreras VALUES (41, 'Carrera_5', 5, CURDATE(), 0, NULL, 14);
-INSERT INTO carreras VALUES (45, 'Carrera_6', 6, CURDATE(), 0, NULL, 14);
-INSERT INTO carreras VALUES (49, 'Carrera_7', 7, CURDATE(), 0, NULL, 14);
+INSERT INTO carreras VALUES (37, 'Carrera_4', 4, CURDATE(), 1, 0, 14);
+INSERT INTO carreras VALUES (41, 'Carrera_5', 5, CURDATE(), 0, 0, 14);
+INSERT INTO carreras VALUES (45, 'Carrera_6', 6, CURDATE(), 0, 0, 14);
+INSERT INTO carreras VALUES (49, 'Carrera_7', 7, CURDATE(), 0, 0, 14);
 
 /* CABALLOS CARRERA */
 TRUNCATE caballoscarrera;
